@@ -65,7 +65,7 @@ class Settings(BaseSettings):
 
     # Retention
     retention_raw_days: int = 7
-    retention_5m_days: int = 90
+    retention_5m_days: int = 30
     retention_incident_days: int = 365
 
     # Agents

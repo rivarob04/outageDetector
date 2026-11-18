@@ -32,3 +32,4 @@ Go would give a smaller image. That's not worth losing Apprise and slowing itera
 
 ## Product name
 The working name is **Pulse** (CLI `pulse`, env prefix `PULSE_`). The repo name `outageDetector` is unchanged. Renaming means a global search/replace of `Pulse`/`pulse`/`PULSE_`.
+| 10 | 5-minute rollups kept 90 days cost ~420 MB for 40 services (measured 163 B/row), while the 90-day uptime bars use daily rollups. | Default `PULSE_RETENTION_5M_DAYS=30`. See docs/DATABASE.md. |

@@ -121,7 +121,7 @@ async def run_probe(spec: ProbeSpec, ctx: ProbeContext) -> ProbeResult
 ## Retention and rollups
 
 - `rollup` aggregates finished 5-minute buckets from `probe_results` into `rollups(res='5m')`, and finished days into `rollups(res='1d')`. Percentiles are computed in Python per bucket so the SQL stays portable.
-- `retention` deletes raw `probe_results` older than `PULSE_RETENTION_RAW_DAYS` (7), 5-minute rollups older than `PULSE_RETENTION_5M_DAYS` (90), resolved incidents older than `PULSE_RETENTION_INCIDENT_DAYS` (365), and old state transitions and notification logs. Daily rollups are kept forever.
+- `retention` deletes raw `probe_results` older than `PULSE_RETENTION_RAW_DAYS` (7), 5-minute rollups older than `PULSE_RETENTION_5M_DAYS` (30), resolved incidents older than `PULSE_RETENTION_INCIDENT_DAYS` (365), and old state transitions and notification logs. Daily rollups are kept forever.
 - SQLite runs with `journal_mode=WAL`, `synchronous=NORMAL`, plus a weekly `VACUUM`-free `PRAGMA incremental_vacuum` (auto_vacuum=INCREMENTAL).
 
 ## Security model (summary; full version in docs/SECURITY.md)

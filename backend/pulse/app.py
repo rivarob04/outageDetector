@@ -43,8 +43,18 @@ def create_app(settings: Settings | None = None, *, start_background: bool = Tru
         openapi_url="/api/openapi.json",
     )
 
+    from starlette.middleware.sessions import SessionMiddleware
+
     from pulse.api import health
 
+    app.add_middleware(
+        SessionMiddleware,
+        secret_key=settings.ensure_secret_key(),
+        session_cookie="pulse_session",
+        max_age=30 * 24 * 3600,
+        same_site="lax",
+        https_only=settings.cookie_secure,
+    )
     app.include_router(health.router)
     _mount_routers(app)
     _mount_static(app, settings)
