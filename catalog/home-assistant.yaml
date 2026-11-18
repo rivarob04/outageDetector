@@ -5,8 +5,8 @@ icon: homeassistant
 homepage: https://www.nabucasa.com
 status_page: https://status.home-assistant.io
 feed:
-  adapter: instatus
-  url: https://status.home-assistant.io/summary.json
+  adapter: statuspage
+  url: https://status.home-assistant.io/api/v2/summary.json
 probes:
 - kind: http
   url: https://account.nabucasa.com

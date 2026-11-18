@@ -41,9 +41,7 @@ CATEGORY_LABELS: dict[str, str] = {
 
 AdapterKind = Literal[
     "statuspage",
-    "incidentio",
     "statusio",
-    "instatus",
     "aws",
     "gcp",
     "gworkspace",

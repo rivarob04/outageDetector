@@ -9,9 +9,7 @@ from pulse.catalog.schema import FeedConfig
 
 _MODULES = {
     "statuspage": "pulse.adapters.statuspage",
-    "incidentio": "pulse.adapters.incidentio",
     "statusio": "pulse.adapters.statusio",
-    "instatus": "pulse.adapters.instatus",
     "aws": "pulse.adapters.aws",
     "gcp": "pulse.adapters.gcp",
     "gworkspace": "pulse.adapters.gcp",

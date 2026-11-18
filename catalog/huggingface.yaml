@@ -5,8 +5,8 @@ icon: huggingface
 homepage: https://huggingface.co
 status_page: https://status.huggingface.co
 feed:
-  adapter: statuspage
-  url: https://status.huggingface.co/api/v2/summary.json
+  adapter: rss
+  url: https://status.huggingface.co/feed.rss
 probes:
 - kind: http
   url: https://huggingface.co
