@@ -156,6 +156,17 @@ jobs:
           PULSE_TAG=ci docker compose -f deploy/dockhand/compose.yaml up -d --pull never --wait --wait-timeout 120
           curl -fsS http://localhost:8080/readyz
           docker compose -f deploy/dockhand/compose.yaml logs pulse | grep -q "setup code"
+          docker compose -f deploy/dockhand/compose.yaml down
+      - name: Custom ports (host 3012 -> container 3000)
+        env:
+          PULSE_TAG: ci
+          PULSE_HOST_PORT: "3012"
+          PULSE_PORT: "3000"
+        run: |
+          docker compose -f deploy/dockhand/compose.yaml up -d --pull never --wait --wait-timeout 120
+          curl -fsS http://localhost:3012/readyz
+          docker inspect --format '{{.State.Health.Status}}' pulse | grep -q healthy
+          docker compose -f deploy/dockhand/compose.yaml down
       - name: Logs on failure
         if: failure()
         run: |

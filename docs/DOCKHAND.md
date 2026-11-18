@@ -39,7 +39,8 @@ All of them are optional. These are the ones worth setting:
 |---|---|---|
 | `PULSE_ADMIN_USERNAME` / `PULSE_ADMIN_PASSWORD` | `admin` / a long password | Creates the admin on first start. Without them, use the setup code from the container log. |
 | `PULSE_BASE_URL` | `https://pulse.example.com` | Links in alerts; needed for agents |
-| `PULSE_PORT` | `8080` | Host port |
+| `PULSE_HOST_PORT` | `3012` | Host port (left side of `host:container`, default 8080) |
+| `PULSE_PORT` | `3000` | Port Pulse listens on inside the container (right side, default 8080) |
 | `PULSE_ALLOW_PRIVATE_TARGETS` | `true` | Lets you check LAN services such as `192.168.x.x` |
 | `PULSE_COOKIE_SECURE` | `true` | When served over HTTPS |
 | `PULSE_HOST_LOCATION` | `43.65,-79.38` | Puts this hub on the map |
@@ -49,7 +50,7 @@ All of them are optional. These are the ones worth setting:
 Every other setting is listed in [CONFIGURATION.md](CONFIGURATION.md). Add any of them under `environment:` in the stack.
 
 ## 5. Deploy and sign in
-1. Deploy the stack, then open `http://<host>:8080`.
+1. Deploy the stack, then open `http://<host>:<PULSE_HOST_PORT>` (default 8080).
 2. If you didn't set the admin variables, open the stack's **Logs** and look for "use setup code …". Then click **Set up admin** in Pulse and enter that code.
 3. Go to **Add services** and watch what you depend on.
 
