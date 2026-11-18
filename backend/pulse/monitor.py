@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from collections import deque
-from collections.abc import Awaitable, Callable
-from dataclasses import dataclass, field
+import math
+from array import array
+from collections.abc import Awaitable, Callable, Iterator
+from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
@@ -43,27 +44,112 @@ log = logging.getLogger("pulse.monitor")
 HISTORY_MAX = 1600  # ~26h at 60s
 BASELINE_TTL = timedelta(minutes=10)
 Advisor = Callable[[str], list[str]]
-AnomalyFn = Callable[
-    [str, list[tuple[datetime, float]], float], tuple[bool, float | None, str | None]
-]
+# (probe id, [(epoch seconds, latency ms)] oldest first, current latency) -> (slow, ratio, basis)
+AnomalyFn = Callable[[str, list[tuple[float, float]], float], tuple[bool, float | None, str | None]]
 
 
-@dataclass
+ERRORS: tuple[str | None, ...] = (
+    None,
+    "dns",
+    "connect",
+    "tls",
+    "timeout",
+    "http_status",
+    "assertion",
+    "ssrf_blocked",
+    "other",
+)
+_ERR_INDEX = {e: i for i, e in enumerate(ERRORS)}
+_NAN = float("nan")
+
+
+class _Items:
+    """Read-only, tuple-shaped view of a ProbeHistory (kept for convenience and tests)."""
+
+    def __init__(self, h: ProbeHistory) -> None:
+        self.h = h
+
+    def __len__(self) -> int:
+        return len(self.h.ts)
+
+    def __bool__(self) -> bool:
+        return len(self.h.ts) > 0
+
+    def __getitem__(self, i: int) -> tuple[datetime, bool, float | None, str | None, bool | None]:
+        e, ok, lat, err, pub = self.h.raw(i)
+        return datetime.fromtimestamp(e, UTC), ok, lat, err, pub
+
+    def __iter__(self) -> Iterator[tuple[datetime, bool, float | None, str | None, bool | None]]:
+        for i in range(len(self.h.ts)):
+            yield self[i]
+
+
 class ProbeHistory:
-    items: deque[tuple[datetime, bool, float | None, str | None, bool | None]] = field(
-        default_factory=lambda: deque(maxlen=HISTORY_MAX)
-    )
-    baseline: Baseline | None = None
-    baseline_at: datetime | None = None
+    """Recent results of one probe in compact typed arrays (~15 bytes per sample).
+
+    Python tuples of datetime/float objects cost ~170 bytes per sample, which adds up to
+    hundreds of MB for a few hundred probes over 26 hours.
+    """
+
+    __slots__ = ("baseline", "baseline_at", "err", "lat", "ok", "pub", "ts")
+
+    def __init__(self) -> None:
+        self.ts = array("d")  # epoch seconds
+        self.ok = array("b")
+        self.lat = array("f")  # NaN = missing
+        self.err = array("B")
+        self.pub = array("b")  # -1 = unknown
+        self.baseline: Baseline | None = None
+        self.baseline_at: datetime | None = None
+
+    @property
+    def items(self) -> _Items:
+        return _Items(self)
 
     def add(self, r: ProbeResult) -> None:
         public_ok = r.detail.get("public_ok") if r.detail else None
-        self.items.append((r.ts, r.ok, r.latency_ms, r.error, public_ok))
+        self.add_raw(r.ts, r.ok, r.latency_ms, r.error, public_ok)
+
+    def add_raw(
+        self,
+        ts: datetime,
+        ok: bool,
+        latency: float | None,
+        error: str | None,
+        public_ok: bool | None,
+    ) -> None:
+        self.ts.append(ts.timestamp())
+        self.ok.append(1 if ok else 0)
+        self.lat.append(_NAN if latency is None else latency)
+        self.err.append(_ERR_INDEX.get(error, len(ERRORS) - 1))
+        self.pub.append(-1 if public_ok is None else int(bool(public_ok)))
+        if len(self.ts) > HISTORY_MAX + 200:  # trim in chunks (amortised O(1))
+            for arr in (self.ts, self.ok, self.lat, self.err, self.pub):
+                del arr[:200]
+
+    def raw(self, i: int) -> tuple[float, bool, float | None, str | None, bool | None]:
+        lat = self.lat[i]
+        pub = self.pub[i]
+        return (
+            self.ts[i],
+            bool(self.ok[i]),
+            None if math.isnan(lat) else float(lat),
+            ERRORS[self.err[i]],
+            None if pub < 0 else bool(pub),
+        )
+
+    def ok_latencies(self, since_epoch: float = 0.0) -> list[tuple[float, float]]:
+        """(epoch, latency) for successful checks, oldest first."""
+        return [
+            (t, float(lat))
+            for t, ok, lat in zip(self.ts, self.ok, self.lat, strict=True)
+            if ok and t >= since_epoch and not math.isnan(lat)
+        ]
 
     def consecutive_failures(self) -> int:
         n = 0
-        for item in reversed(self.items):
-            if item[1]:
+        for ok in reversed(self.ok):
+            if ok:
                 break
             n += 1
         return n
@@ -104,6 +190,8 @@ class Monitor:
             allow_private=settings.allow_private_targets,
         )
         self.canary = CanaryState()
+        self.public_ip: str | None = None
+        self._canary_rounds = 0
         self.canary_specs = canary_specs(settings.list_setting(settings.canary_targets))
         self.services: dict[str, ServiceDef] = {}
         self.sources: dict[str, str] = {}
@@ -179,14 +267,12 @@ class Monitor:
         for r in await self.store.recent_results(since):
             h = self.history.get(r["probe_id"])
             if h is not None:
-                h.items.append(
-                    (
-                        r["ts"],
-                        r["ok"],
-                        r["latency_ms"],
-                        r["error"],
-                        (r["detail"] or {}).get("public_ok"),
-                    )
+                h.add_raw(
+                    r["ts"],
+                    r["ok"],
+                    r["latency_ms"],
+                    r["error"],
+                    (r["detail"] or {}).get("public_ok"),
                 )
         for sid, row in (await self.store.feed_status()).items():
             self.feeds[sid] = FeedInfo(row["indicator"], row["last_ok_at"], error=row["error"])
@@ -340,6 +426,9 @@ class Monitor:
         self.dirty.add(sid)
 
     async def canary_job(self) -> None:
+        self._canary_rounds += 1
+        if self.settings.public_ip_lookup_url and (self._canary_rounds % 20 == 1):
+            await self._lookup_public_ip()
         if not self.canary_specs:
             return
         results = await run_canaries(self.canary_specs, self.probe_http)
@@ -476,44 +565,37 @@ class Monitor:
         return VerdictInputs(feed, probes, agents, self.canary.offline, adv)
 
     def _probe_signal(self, spec: ProbeSpec, now: datetime) -> ProbeSignal:
-        h = self.history.get(spec.id) or ProbeHistory()
-        if not h.items:
+        h = self.history.get(spec.id)
+        if h is None or not len(h.ts):
             return ProbeSignal(spec.id, spec.kind)
-        last = h.items[-1]
+        _ts, last_ok, last_lat, last_err, last_pub = h.raw(-1)
         degraded, ratio, basis = False, None, None
-        if last[1] and last[2] is not None:
+        if last_ok and last_lat is not None:
+            series = h.ok_latencies()
             if self.anomaly is not None:
-                series = [(t, lat) for t, ok, lat, _e, _p in h.items if ok and lat is not None]
-                degraded, ratio, basis = self.anomaly(spec.id, series, last[2])
+                degraded, ratio, basis = self.anomaly(spec.id, series, last_lat)
             else:
                 if h.baseline_at is None or now - h.baseline_at > BASELINE_TTL:
-                    cutoff = now - timedelta(hours=24)
-                    h.baseline = baseline(
-                        [
-                            lat
-                            for t, ok, lat, _e, _p in h.items
-                            if ok and lat is not None and t >= cutoff
-                        ]
-                    )
+                    cutoff = (now - timedelta(hours=24)).timestamp()
+                    h.baseline = baseline([lat for t, lat in series if t >= cutoff])
                     h.baseline_at = now
-                recent_ok = [lat for _t, ok, lat, _e, _p in h.items if ok and lat is not None]
                 degraded = consecutive_slow(
-                    recent_ok,
+                    [lat for _t, lat in series],
                     h.baseline,
                     self.settings.latency_factor,
                     self.settings.latency_min_ms,
                     self.settings.fail_threshold,
                 )
-                ratio = latency_ratio(last[2], h.baseline) if degraded else None
+                ratio = latency_ratio(last_lat, h.baseline) if degraded else None
         return ProbeSignal(
             spec.id,
             spec.kind,
             h.consecutive_failures(),
-            last[1],
+            last_ok,
             ratio,
             degraded,
-            last[3],
-            last[4],
+            last_err,
+            last_pub,
             basis,
         )
 
@@ -596,10 +678,24 @@ class Monitor:
             }
         return self._state_cache.get(sid)
 
+    async def _lookup_public_ip(self) -> None:
+        """Optional (off by default): ask a third-party service for our public IP."""
+        try:
+            res = await self.client.get(self.settings.public_ip_lookup_url, conditional=False)
+            text = res.content.decode(errors="replace").strip()
+            if res.ok and text.startswith("{"):
+                import json
+
+                text = str(json.loads(text).get("ip", ""))
+            self.public_ip = text[:64] if res.ok and text else None
+        except Exception:
+            self.public_ip = None
+
     # ---------------------------------------------------------------- views
     def connectivity(self) -> dict[str, Any]:
         c = self.canary
         return {
+            "public_ip": self.public_ip,
             "offline": c.offline,
             "offline_since": c.offline_since.isoformat() if c.offline_since else None,
             "checked_at": c.last_checked.isoformat() if c.last_checked else None,
@@ -617,15 +713,12 @@ class Monitor:
         h = self.history.get(specs[0].id)
         if not h:
             return [None] * points
-        now = datetime.now(UTC)
-        start = now - timedelta(hours=hours)
+        start = datetime.now(UTC).timestamp() - hours * 3600
         width = (hours * 3600) / points
         sums = [0.0] * points
         counts = [0] * points
-        for ts, ok, lat, _e, _p in h.items:
-            if ts < start or not ok or lat is None:
-                continue
-            i = min(points - 1, int((ts - start).total_seconds() / width))
+        for ts, lat in h.ok_latencies(start):
+            i = min(points - 1, int((ts - start) / width))
             sums[i] += lat
             counts[i] += 1
         return [round(sums[i] / counts[i], 1) if counts[i] else None for i in range(points)]

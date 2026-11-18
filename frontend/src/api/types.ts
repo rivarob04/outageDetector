@@ -55,6 +55,7 @@ export interface Canary {
 }
 
 export interface Connectivity {
+  public_ip?: string | null;
   offline: boolean;
   offline_since: string | null;
   checked_at: string | null;

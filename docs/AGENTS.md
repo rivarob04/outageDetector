@@ -7,7 +7,7 @@ A Pulse **agent** runs your hub's checks from somewhere else and pushes the resu
 
 ## Set one up
 1. In the hub, open **Settings → Vantage agents → Create agent**. Give it a name and, optionally, coordinates for the map. Copy the token: it's shown once.
-2. On the remote machine, run `deploy/docker-compose.agent.yml` (or the snippet the UI shows) with `PULSE_HUB_URL` set to the hub's public URL and `PULSE_AGENT_TOKEN` set to the token.
+2. On the remote machine (with the repo cloned; if no release image is published yet, first run `docker build -t ghcr.io/rivarob04/outagedetector:latest .`), run `deploy/docker-compose.agent.yml` (or the snippet the UI shows) with `PULSE_HUB_URL` set to the hub's public URL and `PULSE_AGENT_TOKEN` set to the token.
 3. The agent appears as **reporting** within a minute and shows up on the map.
 
 The hub must be reachable from the agent over HTTPS (a reverse proxy or Cloudflare Tunnel works; see docs/REVERSE_PROXY.md). The agent never needs inbound ports.

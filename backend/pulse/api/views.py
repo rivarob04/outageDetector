@@ -48,9 +48,10 @@ class UptimeCache:
             if not h:
                 continue
             cell = [0, 0]
-            for ts, ok, *_ in h.items:
-                if ts >= start:
-                    cell[0] += 1 if ok else 0
+            start_e = start.timestamp()
+            for ts, ok in zip(h.ts, h.ok, strict=True):
+                if ts >= start_e:
+                    cell[0] += ok
                     cell[1] += 1
             if cell[1]:
                 agg[sid][today.isoformat()] = cell

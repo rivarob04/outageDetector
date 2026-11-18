@@ -214,3 +214,19 @@ def test_probe_spec_roundtrip() -> None:
     assert ProbeSpec.from_dict(s.to_dict()) == s
     r = ProbeResult("p", datetime(2026, 1, 1, tzinfo=UTC), True, 12.5, detail={"a": 1})
     assert ProbeResult.from_dict(r.to_dict()) == r
+
+
+async def test_guarded_probe_blocks_dns_rebinding() -> None:
+    """The name resolves to a public IP at check time, but the connection lands on a private one."""
+
+    class FakeStream:
+        def get_extra_info(self, key: str) -> object:
+            return ("10.0.0.7", 443) if key == "server_addr" else None
+
+    def handler(r: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, extensions={"network_stream": FakeStream()})
+
+    res = await run_http(spec(guarded=True), client_for(handler), resolver=fake_resolver)
+    assert res.error == "ssrf_blocked" and "private" in res.detail["message"]
+    res = await run_http(spec(guarded=False), client_for(handler), resolver=fake_resolver)
+    assert res.ok  # catalog probes aren't guarded

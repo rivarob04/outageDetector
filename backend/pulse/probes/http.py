@@ -62,6 +62,10 @@ async def run_http(
             )
             for k, v in trace.durations().items():
                 timings.setdefault(k, v)
+            if spec.guarded and not allow_private and _peer_is_private(resp):
+                # DNS rebinding: the name resolved publicly, but we connected to a private address.
+                await resp.aclose()
+                raise SSRFBlocked(f"{parts.hostname} connected to a private address")
             status = resp.status_code
             if resp.is_redirect and "location" in resp.headers:
                 url = urljoin(url, resp.headers["location"])
@@ -104,6 +108,24 @@ async def run_http(
         return _fail(spec, now, start, kind, {"message": str(exc)[:200]})
     except httpx.HTTPError as exc:
         return _fail(spec, now, start, "other", {"message": f"{type(exc).__name__}: {exc}"[:200]})
+
+
+def _peer_is_private(resp: httpx.Response) -> bool:
+    stream = resp.extensions.get("network_stream")
+    if stream is None:
+        return False
+    try:
+        addr = stream.get_extra_info("server_addr")
+    except Exception:
+        return False
+    if not addr:
+        return False
+    from pulse.probes.ssrf import is_blocked_ip
+
+    try:
+        return is_blocked_ip(str(addr[0]))
+    except ValueError:
+        return False
 
 
 def _r(v: float | None) -> float | None:

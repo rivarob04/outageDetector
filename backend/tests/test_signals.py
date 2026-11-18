@@ -120,12 +120,12 @@ async def test_anomaly_detector_hourly_baseline(client: httpx.AsyncClient) -> No
     det = AnomalyDetector(rt)
     await det.refresh()
     assert now.hour in det.hourly[pid]
-    normal = [(now - timedelta(minutes=6 - i), 100.0) for i in range(6)]
+    normal = [((now - timedelta(minutes=6 - i)).timestamp(), 100.0) for i in range(6)]
     assert det(pid, normal, 100.0) == (False, None, None)
-    slow = [(now - timedelta(minutes=6 - i), 600.0) for i in range(6)]
+    slow = [((now - timedelta(minutes=6 - i)).timestamp(), 600.0) for i in range(6)]
     flag, ratio, basis = det(pid, slow, 600.0)
     assert flag and ratio == pytest.approx(6.0, rel=0.05) and basis == "for this hour"
-    spike = [*normal[:-1], (now, 900.0)]
+    spike = [*normal[:-1], (now.timestamp(), 900.0)]
     assert det(pid, spike, 900.0)[0] is False  # one slow request isn't enough
 
 
@@ -134,8 +134,8 @@ async def test_anomaly_fallback_without_hourly_history(client: httpx.AsyncClient
     rt = rt_of(client)
     det = AnomalyDetector(rt)
     now = datetime.now(UTC)
-    series = [(now - timedelta(minutes=200 - i), 100.0 + (i % 5)) for i in range(194)]
-    series += [(now - timedelta(minutes=6 - i), 900.0) for i in range(6)]
+    series = [((now - timedelta(minutes=200 - i)).timestamp(), 100.0 + (i % 5)) for i in range(194)]
+    series += [((now - timedelta(minutes=6 - i)).timestamp(), 900.0) for i in range(6)]
     flag, ratio, basis = det("github:http:0", series, 900.0)
     assert flag and basis is None and ratio and ratio > 8
     assert det("github:http:0", series[-10:], 900.0) == (False, None, None)  # too little history

@@ -85,6 +85,7 @@ function Hero({ s }: { s: Summary }) {
                 {median !== null && !s.connectivity.offline ? ` (${Math.round(median)} ms to ${okCan.length} test sites)` : ""}
               </span>
             </span>
+            {s.connectivity.public_ip && <span>Public IP {s.connectivity.public_ip}</span>}
             <span>Updated {timeAgo(s.generated_at)}</span>
           </p>
         </div>

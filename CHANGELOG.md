@@ -4,7 +4,13 @@ All notable changes to this project are documented here. Format: [Keep a Changel
 
 ## [Unreleased]
 
+### Changed
+- `PULSE_TRUSTED_PROXIES` default no longer includes `10.0.0.0/8` and `192.168.0.0/16` (security).
+- `PULSE_RETENTION_5M_DAYS` default is 30 (was 90 in the spec) after measuring storage.
+- Removed the unused `PULSE_AGENT_NAME` (the hub names agents).
+
 ### Added
+- Phase 9: security headers (strict CSP, frame denial, nosniff, referrer and permissions policy, HSTS when secure), DNS-rebinding protection for user-defined checks, narrower default trusted-proxy ranges, Trivy image scan + pip-audit + npm audit in CI, the MapLibre 6 / React Router 7 upgrades (fixing published advisories), compact in-memory check history (10× less memory), a load test (`tools/perf_test.py`, docs/PERFORMANCE.md), portable `pulse backup`/`pulse restore` (SQLite ↔ Postgres), `pulse migrate --downgrade`, the optional public-IP header, full README, configuration reference (with a drift test), security threat model, reverse-proxy guide, FAQ, CONTRIBUTING, issue/PR templates, MIT license and GitHub release notes from this changelog.
 - Phase 8: upstream correlation advisories (`depends_on`, region-aware), a time-of-day latency anomaly detector (EWMA vs. hourly median/MAD from 7 days of rollups, with fallback), community chatter spike detection (Hacker News, Reddit, Bluesky; off by default, advisory only) and the "before they admit it" lead-time metric, all behind feature flags with tests. See docs/SIGNALS.md.
 - Phase 7: alerts through Apprise (80+ services) and HMAC-signed webhooks, with rules for severity, scope, services/categories, quiet hours with time zones, cooldown, recovery messages and a daily digest. Alerts pause while offline and send one summary afterwards; there's a test button and a notification log. Integrations: Prometheus `/metrics` (optional token) with a Grafana dashboard, MQTT bridge with Home Assistant discovery (compose `mqtt` profile; live-tested against Mosquitto in CI), Atom incident feed, iCal maintenance feed, SVG badges, and an optional public `/status` page.
 - Phase 6: outage map (MapLibre with a bundled offline Natural Earth basemap, optional `PULSE_MAP_STYLE_URL`), with provider regions colored by state, problem regions as shape glyphs, agents and this hub (`PULSE_HOST_LOCATION`), a details panel, provider filter and a 24-hour replay slider. Vantage agents: `pulse agent`, HMAC-signed push with timestamp/nonce replay protection, derived per-agent secrets, admin UI with a one-time token and compose snippet, revoke/delete, offline/stale handling, results feeding the verdict engine, and `deploy/docker-compose.agent.yml`.

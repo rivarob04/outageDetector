@@ -1,4 +1,7 @@
-import maplibregl, { type GeoJSONSource, type Map as MLMap, type StyleSpecification } from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
+import type { GeoJSONSource, Map as MLMap, StyleSpecification } from "maplibre-gl";
+// MapLibre 6 runs its tile parser in a module worker; let Vite bundle it as a same-origin file.
+import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot, type Root } from "react-dom/client";
@@ -42,6 +45,8 @@ interface MapData {
   agents: MapAgent[];
   host: { lat: number; lon: number; name: string; offline: boolean } | null;
 }
+
+maplibregl.setWorkerUrl(workerUrl);
 
 const PROVIDER_LABEL: Record<string, string> = { aws: "AWS", gcp: "Google Cloud", cloudflare: "Cloudflare" };
 /** Unwrap rings that cross the antimeridian so they don't smear across the map; drop Antarctica. */

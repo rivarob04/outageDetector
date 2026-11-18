@@ -55,6 +55,9 @@ def create_app(settings: Settings | None = None, *, start_background: bool = Tru
         same_site="lax",
         https_only=settings.cookie_secure,
     )
+    from pulse.api.security import SecurityHeaders
+
+    app.add_middleware(SecurityHeaders, settings=settings)
     app.include_router(health.router)
     _mount_routers(app)
     _mount_static(app, settings)

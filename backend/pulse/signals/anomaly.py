@@ -70,20 +70,21 @@ class AnomalyDetector:
         self.refreshed_at = datetime.now(UTC)
 
     def __call__(
-        self, probe_id: str, series: list[tuple[datetime, float]], current: float
+        self, probe_id: str, series: list[tuple[float, float]], current: float
     ) -> tuple[bool, float | None, str | None]:
+        """``series``: (epoch seconds, latency ms) of successful checks, oldest first."""
         if not series:
             return False, None, None
         s = self.rt.settings
         recent = [v for _t, v in series[-EWMA_WINDOW:]]
         level = ewma(recent)
         # All of the recent window must be elevated: one slow request isn't an incident.
-        now = series[-1][0]
+        now = datetime.fromtimestamp(series[-1][0], UTC)
         hour_base = self.hourly.get(probe_id, {}).get(now.hour)
         if hour_base is not None:
             base, basis = hour_base, "for this hour"
         else:
-            cutoff = now - timedelta(hours=24)
+            cutoff = series[-1][0] - 24 * 3600
             history = [v for t, v in series[:-EWMA_WINDOW] if t >= cutoff]
             if len(history) < MIN_FALLBACK:
                 return False, None, None

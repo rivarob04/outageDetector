@@ -42,12 +42,67 @@ def agent() -> None:
 
 
 @app.command()
-def migrate() -> None:
-    """Apply database migrations."""
-    from pulse.db.migrate import upgrade
+def migrate(
+    downgrade_to: str = typer.Option(
+        None, "--downgrade", help="Revision to downgrade to, e.g. 0002"
+    ),
+) -> None:
+    """Apply database migrations (they also run automatically on start)."""
+    from pulse.db.migrate import downgrade, upgrade
 
-    upgrade(get_settings())
-    typer.echo("migrations applied")
+    if downgrade_to:
+        downgrade(get_settings(), downgrade_to)
+        typer.echo(f"downgraded to {downgrade_to}")
+    else:
+        upgrade(get_settings())
+        typer.echo("migrations applied")
+
+
+@app.command()
+def backup(
+    path: Path = typer.Argument(..., help="Output file, e.g. pulse-backup.tar.gz"),
+    skip_raw: bool = typer.Option(False, help="Leave out raw check results (much smaller)"),
+) -> None:
+    """Write a portable backup (works for SQLite and Postgres, and across them)."""
+    import asyncio
+
+    from pulse.backup import backup as do_backup
+    from pulse.db.engine import make_engine
+    from pulse.db.store import Store
+
+    async def run() -> dict[str, int]:
+        engine = make_engine(get_settings())
+        try:
+            return await do_backup(Store(engine), path, include_raw=not skip_raw)
+        finally:
+            await engine.dispose()
+
+    counts = asyncio.run(run())
+    typer.echo(f"wrote {path} ({sum(counts.values()):,} rows)")
+
+
+@app.command()
+def restore(path: Path = typer.Argument(..., help="Backup file from `pulse backup`")) -> None:
+    """Restore a backup into an empty data directory / database (stop the hub first)."""
+    import asyncio
+
+    from pulse.backup import restore as do_restore
+    from pulse.db.engine import make_engine
+    from pulse.db.migrate import upgrade
+    from pulse.db.store import Store
+
+    s = get_settings()
+    upgrade(s)
+
+    async def run() -> dict[str, int]:
+        engine = make_engine(s)
+        try:
+            return await do_restore(Store(engine), path)
+        finally:
+            await engine.dispose()
+
+    counts = asyncio.run(run())
+    typer.echo(f"restored {sum(counts.values()):,} rows from {path}")
 
 
 catalog_app = typer.Typer(help="Catalog tools", no_args_is_help=True)

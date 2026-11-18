@@ -1,6 +1,6 @@
 # Roadmap
 
-Each phase is a branch (`phase-N`) stacked on the previous one. "Done" always includes the definition of done in SPEC §8.
+Each phase is a branch (`phase-N`) stacked on the previous one. **Status: phases 0–9 are implemented** (see CHANGELOG.md). "Done" always includes the definition of done in SPEC §8.
 
 | Phase | Milestone | Acceptance criteria |
 |---|---|---|

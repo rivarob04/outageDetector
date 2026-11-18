@@ -41,7 +41,9 @@ class Settings(BaseSettings):
     admin_username: str = ""
     admin_password: str = ""
     trusted_auth_header: str = ""  # e.g. Remote-User
-    trusted_proxies: str = "127.0.0.1/32,::1/128,172.16.0.0/12,10.0.0.0/8,192.168.0.0/16"
+    # Only these peers may set the trusted auth header. Keep it to your reverse proxy:
+    # LAN ranges are deliberately not included (anyone on the LAN could forge the header).
+    trusted_proxies: str = "127.0.0.1/32,::1/128,172.16.0.0/12"
     cookie_secure: bool = False
 
     # Polling
@@ -84,7 +86,6 @@ class Settings(BaseSettings):
     # Agent mode (`pulse agent`)
     hub_url: str = ""
     agent_token: str = ""
-    agent_name: str = ""
     agent_location: str = ""
     public_ip_lookup_url: str = ""  # off by default (privacy)
 
