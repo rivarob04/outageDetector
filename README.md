@@ -58,6 +58,7 @@ Everything is optional. Common settings, in `deploy/.env`:
 | `PULSE_DATABASE_URL` | Use Postgres (`--profile postgres`) |
 | `PULSE_MQTT_URL` | Home Assistant via MQTT (`--profile mqtt`) |
 | `PULSE_HOST_LOCATION=lat,lon` | Show this hub on the map |
+| `PULSE_HOST_PORT` / `PULSE_PORT` | Host and container ports, e.g. `3012` / `3000` for `3012:3000` (both default to 8080) |
 
 The full list is in **[docs/CONFIGURATION.md](docs/CONFIGURATION.md)**.
 

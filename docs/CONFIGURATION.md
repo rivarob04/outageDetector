@@ -10,7 +10,7 @@ Settings marked **UI** can also be changed in **Settings → Monitoring** or in 
 | `PULSE_DATA_DIR` | `/data` | Where the SQLite database, the generated secret key and `pulse.yaml` live. |
 | `PULSE_DATABASE_URL` | *(SQLite in the data dir)* | Use Postgres instead: `postgresql://user:pass@host:5432/db` (`postgres://` also works). |
 | `PULSE_HOST` | `0.0.0.0` | Listen address. |
-| `PULSE_PORT` | `8080` | Listen port. |
+| `PULSE_PORT` | `8080` | Port Pulse listens on inside the container. |
 | `PULSE_BASE_URL` | | Public URL of this instance, used for links in alerts, feeds and agent setup. |
 | `PULSE_SECRET_KEY` | *(generated, saved in the data dir)* | Signs sessions and derives agent secrets. Rotating it signs everyone out and invalidates all agent tokens. |
 | `PULSE_LOG_LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARNING`, `ERROR`. |
@@ -84,3 +84,13 @@ Settings marked **UI** can also be changed in **Settings → Monitoring** or in 
 | `PULSE_FEATURE_CORRELATION` | `true` | Upstream dependency advisories. |
 | `PULSE_FEATURE_ANOMALY` | `true` | Time-of-day latency anomaly detection (otherwise a simple p95 rule). |
 | `PULSE_FEATURE_CHATTER` | `false` | Community chatter spike advisories (calls Hacker News, Reddit and Bluesky search). |
+
+## Compose-file variables
+These are read by the compose files, not by Pulse itself.
+
+| Variable | Default | Description |
+|---|---|---|
+| `PULSE_HOST_PORT` | `8080` | Host port published for Pulse (the left side of `host:container`). For example, `PULSE_HOST_PORT=3012` with `PULSE_PORT=3000` gives `3012:3000`. |
+| `PULSE_TAG` | `edge` | Image tag in `deploy/dockhand/*.yaml`. |
+| `PULSE_MEM_LIMIT` | `512m` | Container memory limit. |
+| `MQTT_PORT` | `1883` | Host port for the bundled Mosquitto broker. |

@@ -9,6 +9,7 @@ from pulse.config import Settings
 
 DOC = Path(__file__).resolve().parents[2] / "docs" / "CONFIGURATION.md"
 INTERNAL = {"version"}
+COMPOSE_ONLY = {"HOST_PORT", "TAG", "MEM_LIMIT"}  # read by compose files, not Settings
 
 
 def test_every_setting_is_documented() -> None:
@@ -24,5 +25,7 @@ def test_every_setting_is_documented() -> None:
 def test_no_documented_setting_is_stale() -> None:
     documented = set(re.findall(r"`PULSE_([A-Z0-9_]+)`", DOC.read_text()))
     known = {n.upper() for n in Settings.model_fields}
-    stale = sorted(d for d in documented if d not in known and not d.endswith("_FILE"))
+    stale = sorted(
+        d for d in documented if d not in known | COMPOSE_ONLY and not d.endswith("_FILE")
+    )
     assert not stale, f"documented but not a setting: {stale}"

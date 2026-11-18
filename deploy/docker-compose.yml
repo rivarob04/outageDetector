@@ -12,11 +12,13 @@ services:
       dockerfile: Dockerfile
     container_name: pulse
     restart: unless-stopped
+    environment:
+      PULSE_PORT: ${PULSE_PORT:-8080}
     env_file:
       - path: .env
         required: false
     ports:
-      - "${PULSE_PORT:-8080}:8080"
+      - "${PULSE_HOST_PORT:-8080}:${PULSE_PORT:-8080}"
     volumes:
       - pulse-data:/data
     read_only: true
@@ -27,7 +29,7 @@ services:
       - no-new-privileges:true
     mem_limit: ${PULSE_MEM_LIMIT:-512m}
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=4).status == 200 else 1)"]
+      test: ["CMD", "python", "-c", "import os,urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:%s/healthz' % os.environ.get('PULSE_PORT', '8080'), timeout=4).status == 200 else 1)"]
       interval: 30s
       timeout: 5s
       retries: 3

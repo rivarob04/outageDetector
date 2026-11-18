@@ -5,6 +5,7 @@ All notable changes to this project are documented here. Format: [Keep a Changel
 ## [Unreleased]
 
 ### Changed
+- Compose files: `PULSE_HOST_PORT` now sets the published host port and `PULSE_PORT` the port Pulse listens on inside the container (e.g. `3012:3000`). Healthchecks follow `PULSE_PORT`. Previously `PULSE_PORT` set the host port.
 - `PULSE_TRUSTED_PROXIES` default no longer includes `10.0.0.0/8` and `192.168.0.0/16` (security).
 - `PULSE_RETENTION_5M_DAYS` default is 30 (was 90 in the spec) after measuring storage.
 - Removed the unused `PULSE_AGENT_NAME` (the hub names agents).
