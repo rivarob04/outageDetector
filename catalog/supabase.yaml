@@ -1,0 +1,18 @@
+id: supabase
+name: Supabase
+category: cloud
+icon: supabase
+homepage: https://supabase.com
+status_page: https://status.supabase.com
+feed:
+  adapter: statuspage
+  url: https://status.supabase.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://supabase.com
+- kind: dns
+  host: supabase.co
+depends_on:
+- aws
+depends_on_sources:
+- https://supabase.com/docs/guides/platform/regions (projects run on AWS)

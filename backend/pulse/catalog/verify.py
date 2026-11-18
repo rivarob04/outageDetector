@@ -1,0 +1,159 @@
+"""`pulse catalog verify`: re-check catalog endpoints live and record results."""
+
+from __future__ import annotations
+
+import asyncio
+import json
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Any
+
+import httpx
+
+from pulse.adapters import get_parser
+from pulse.catalog.loader import VERIFICATION_FILE, Catalog
+from pulse.catalog.schema import ServiceDef, VerificationEntry
+from pulse.http import PoliteClient
+
+MAX_FIXTURE_BYTES = 400_000
+
+
+async def verify_service(
+    svc: ServiceDef, client: PoliteClient, record_dir: Path | None
+) -> VerificationEntry:
+    now = datetime.now(UTC).isoformat(timespec="seconds")
+    entry = VerificationEntry(service_id=svc.id, checked_at=now)
+    feed_ok = True
+    if svc.feed:
+        entry.feed_url = svc.feed.url
+        try:
+            res = await client.get(svc.feed.url, conditional=False)
+            entry.feed_status = res.status
+            entry.feed_ok = res.ok
+            if record_dir is not None and res.content:
+                _record(record_dir, svc, res.content, res.content_type)
+            parser = get_parser(svc.feed.adapter)
+            if res.ok and parser is not None:
+                try:
+                    snap = parser(res.content, svc.feed)
+                    entry.feed_parsed = True
+                    entry.feed_error = (
+                        f"indicator={snap.indicator}, components={len(snap.components)}, "
+                        f"incidents={len(snap.incidents)}"
+                    )
+                except Exception as exc:
+                    entry.feed_parsed = False
+                    entry.feed_error = f"parse: {exc}"[:300]
+            elif not res.ok:
+                entry.feed_error = f"HTTP {res.status}"
+        except httpx.HTTPError as exc:
+            entry.feed_ok = False
+            entry.feed_error = f"{type(exc).__name__}: {exc}"[:300]
+        feed_ok = bool(entry.feed_ok and entry.feed_parsed)
+
+    probes_ok = True
+    for p in svc.probes:
+        if p.kind != "http" or not p.url:
+            continue
+        result: dict[str, Any] = {"url": p.url}
+        try:
+            r = await client.raw.request(p.method, p.url, headers=p.headers)
+            result["status"] = r.status_code
+            result["ok"] = 200 <= r.status_code < 400 or r.status_code in p.accept_status
+        except httpx.HTTPError as exc:
+            result["ok"] = False
+            result["error"] = f"{type(exc).__name__}"
+        probes_ok = probes_ok and bool(result["ok"])
+        entry.probes.append(result)
+    entry.verified = feed_ok and probes_ok
+    return entry
+
+
+def _record(record_dir: Path, svc: ServiceDef, content: bytes, ctype: str) -> None:
+    record_dir.mkdir(parents=True, exist_ok=True)
+    ext = "json" if "json" in ctype or content.lstrip()[:1] in (b"{", b"[") else "txt"
+    if "xml" in ctype or content.lstrip().startswith(b"<"):
+        ext = "xml"
+    data = content
+    if len(data) > MAX_FIXTURE_BYTES and ext == "json":
+        data = _trim_json(content)
+    if len(data) > MAX_FIXTURE_BYTES:
+        data = data[:MAX_FIXTURE_BYTES]
+    (record_dir / f"{svc.id}.{ext}").write_bytes(data)
+
+
+def _trim_json(content: bytes) -> bytes:
+    from pulse.adapters.base import load_json
+
+    try:
+        obj = load_json(content)
+    except ValueError:
+        return content
+    if isinstance(obj, list):
+        obj = obj[:25]
+    elif isinstance(obj, dict):
+        obj = {k: (v[:25] if isinstance(v, list) else v) for k, v in obj.items()}
+    return json.dumps(obj, indent=1).encode()
+
+
+async def verify_catalog(
+    catalog: Catalog,
+    user_agent: str,
+    only: list[str] | None = None,
+    record_dir: Path | None = None,
+) -> list[VerificationEntry]:
+    client = PoliteClient(user_agent, timeout_s=15, min_host_gap_s=0.5, retries=1)
+    sem = asyncio.Semaphore(8)
+
+    async def one(svc: ServiceDef) -> VerificationEntry:
+        async with sem:
+            return await verify_service(svc, client, record_dir)
+
+    try:
+        services = [s for s in catalog.services.values() if not only or s.id in only]
+        return list(await asyncio.gather(*(one(s) for s in services)))
+    finally:
+        await client.aclose()
+
+
+def write_results(catalog_dir: Path, results: list[VerificationEntry], merge: bool) -> None:
+    path = catalog_dir / VERIFICATION_FILE
+    existing: dict[str, Any] = {}
+    if merge and path.is_file():
+        existing = {r["service_id"]: r for r in json.loads(path.read_text()).get("results", [])}
+    for r in results:
+        existing[r.service_id] = r.model_dump()
+    payload = {
+        "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
+        "results": sorted(existing.values(), key=lambda r: r["service_id"]),
+    }
+    path.write_text(json.dumps(payload, indent=1) + "\n")
+
+
+def render_markdown(catalog: Catalog, results: list[VerificationEntry]) -> str:
+    lines = [
+        "# Catalog verification",
+        "",
+        "Generated by `pulse catalog verify` (the `catalog-verify` GitHub Actions workflow).",
+        "A service is **verified** when its feed returns HTTP 2xx *and* parses with its adapter,",
+        "and every HTTP probe returns an accepted status. Results are point-in-time and",
+        "may differ by region; some sites block requests from cloud IP ranges.",
+        "",
+        "| Service | Signal | Adapter | Feed | Parsed | Probes | Verified | Checked | Notes |",
+        "|---|---|---|---|---|---|---|---|---|",
+    ]
+    for r in sorted(results, key=lambda r: r.service_id):
+        svc = catalog.services.get(r.service_id)
+        if svc is None:
+            continue
+        probes = ", ".join(
+            f"{p.get('status', p.get('error', '?'))}{'' if p.get('ok') else ' ✗'}" for p in r.probes
+        )
+        feed = "—" if r.feed_url is None else f"[{r.feed_status or 'err'}]({r.feed_url})"
+        parsed = "—" if r.feed_parsed is None else ("yes" if r.feed_parsed else "**no**")
+        lines.append(
+            f"| {svc.name} | {svc.signal} | {svc.feed.adapter if svc.feed else '—'} | {feed} | "
+            f"{parsed} | {probes or '—'} | {'✅' if r.verified else '❌'} | {r.checked_at[:10]} | "
+            f"{(r.feed_error or '').replace('|', '/')} |"
+        )
+    return "\n".join(lines) + "\n"

@@ -1,0 +1,14 @@
+id: linode
+name: Akamai Cloud (Linode)
+category: cloud
+icon: linode
+homepage: https://www.linode.com
+status_page: https://status.linode.com
+feed:
+  adapter: statuspage
+  url: https://status.linode.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://cloud.linode.com
+- kind: dns
+  host: linode.com

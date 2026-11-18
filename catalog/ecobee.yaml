@@ -1,0 +1,15 @@
+id: ecobee
+name: ecobee
+category: smarthome
+homepage: https://www.ecobee.com
+status_page: https://status.ecobee.com
+feed:
+  adapter: statuspage
+  url: https://status.ecobee.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://www.ecobee.com
+  accept_status:
+  - 403
+- kind: dns
+  host: api.ecobee.com

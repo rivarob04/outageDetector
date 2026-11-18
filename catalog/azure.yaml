@@ -1,0 +1,16 @@
+id: azure
+name: Microsoft Azure
+category: cloud
+icon: microsoftazure
+homepage: https://azure.microsoft.com
+status_page: https://azure.status.microsoft
+feed:
+  adapter: rss
+  url: https://azure.status.microsoft/en-us/status/feed/
+probes:
+- kind: http
+  url: https://portal.azure.com
+- kind: http
+  url: https://login.microsoftonline.com/common/.well-known/openid-configuration
+- kind: dns
+  host: azure.com

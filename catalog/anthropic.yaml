@@ -1,0 +1,25 @@
+id: anthropic
+name: Anthropic (Claude)
+category: ai
+icon: anthropic
+homepage: https://claude.ai
+status_page: https://status.claude.com
+feed:
+  adapter: statuspage
+  url: https://status.claude.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://claude.ai
+  accept_status:
+  - 403
+- kind: http
+  url: https://api.anthropic.com
+  accept_status:
+  - 401
+  - 404
+  - 405
+- kind: dns
+  host: api.anthropic.com
+chatter_keywords:
+- claude down
+- anthropic outage

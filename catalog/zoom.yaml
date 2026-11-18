@@ -1,0 +1,14 @@
+id: zoom
+name: Zoom
+category: comms
+icon: zoom
+homepage: https://zoom.us
+status_page: https://status.zoom.us
+feed:
+  adapter: statuspage
+  url: https://status.zoom.us/api/v2/summary.json
+probes:
+- kind: http
+  url: https://zoom.us
+- kind: dns
+  host: zoom.us

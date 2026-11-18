@@ -1,0 +1,14 @@
+id: plex
+name: Plex
+category: streaming
+icon: plex
+homepage: https://www.plex.tv
+status_page: https://status.plex.tv
+feed:
+  adapter: statuspage
+  url: https://status.plex.tv/api/v2/summary.json
+probes:
+- kind: http
+  url: https://app.plex.tv
+- kind: dns
+  host: plex.tv

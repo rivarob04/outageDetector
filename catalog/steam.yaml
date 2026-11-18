@@ -1,0 +1,13 @@
+id: steam
+name: Steam
+category: gaming
+icon: steam
+homepage: https://store.steampowered.com
+probes:
+- kind: http
+  url: https://store.steampowered.com
+- kind: http
+  url: https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v1/
+- kind: dns
+  host: steampowered.com
+notes: Valve publishes no official status feed; checks only.

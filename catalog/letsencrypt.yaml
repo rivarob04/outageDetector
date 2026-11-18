@@ -1,0 +1,14 @@
+id: letsencrypt
+name: Let's Encrypt
+category: network
+icon: letsencrypt
+homepage: https://letsencrypt.org
+status_page: https://letsencrypt.status.io
+feed:
+  adapter: statusio
+  url: https://api.status.io/1.0/status/55957a99e800baa4470002da
+probes:
+- kind: http
+  url: https://acme-v02.api.letsencrypt.org/directory
+- kind: dns
+  host: acme-v02.api.letsencrypt.org

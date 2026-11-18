@@ -1,0 +1,16 @@
+id: spotify
+name: Spotify
+category: streaming
+icon: spotify
+homepage: https://open.spotify.com
+status_page: https://x.com/SpotifyStatus
+probes:
+- kind: http
+  url: https://open.spotify.com
+- kind: http
+  url: https://api.spotify.com/v1/
+  accept_status:
+  - 401
+  - 404
+- kind: dns
+  host: spotify.com

@@ -1,0 +1,19 @@
+id: google
+name: Google (Search & Workspace)
+category: productivity
+icon: google
+homepage: https://www.google.com
+status_page: https://www.google.com/appsstatus/dash/
+feed:
+  adapter: gworkspace
+  url: https://www.google.com/appsstatus/dash/incidents.json
+probes:
+- kind: http
+  url: https://www.google.com/generate_204
+- kind: http
+  url: https://mail.google.com
+- kind: dns
+  host: google.com
+chatter_keywords:
+- gmail down
+- google down

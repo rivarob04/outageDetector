@@ -1,0 +1,14 @@
+id: dropbox
+name: Dropbox
+category: productivity
+icon: dropbox
+homepage: https://www.dropbox.com
+status_page: https://status.dropbox.com
+feed:
+  adapter: statuspage
+  url: https://status.dropbox.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://www.dropbox.com
+- kind: dns
+  host: dropbox.com

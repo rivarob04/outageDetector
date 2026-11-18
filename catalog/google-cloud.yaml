@@ -1,0 +1,15 @@
+id: google-cloud
+name: Google Cloud
+category: cloud
+icon: googlecloud
+homepage: https://cloud.google.com
+status_page: https://status.cloud.google.com
+feed:
+  adapter: gcp
+  url: https://status.cloud.google.com/incidents.json
+  regions: auto
+probes:
+- kind: http
+  url: https://console.cloud.google.com
+- kind: dns
+  host: googleapis.com

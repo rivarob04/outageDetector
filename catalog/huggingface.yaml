@@ -1,0 +1,14 @@
+id: huggingface
+name: Hugging Face
+category: ai
+icon: huggingface
+homepage: https://huggingface.co
+status_page: https://status.huggingface.co
+feed:
+  adapter: statuspage
+  url: https://status.huggingface.co/api/v2/summary.json
+probes:
+- kind: http
+  url: https://huggingface.co
+- kind: dns
+  host: huggingface.co

@@ -1,0 +1,16 @@
+id: ring
+name: Ring
+category: smarthome
+icon: ring
+homepage: https://ring.com
+status_page: https://status.ring.com
+feed:
+  adapter: statuspage
+  url: https://status.ring.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://ring.com
+  accept_status:
+  - 403
+- kind: dns
+  host: ring.com

@@ -1,0 +1,13 @@
+id: netflix
+name: Netflix
+category: streaming
+icon: netflix
+homepage: https://www.netflix.com
+status_page: https://help.netflix.com/en/is-netflix-down
+probes:
+- kind: http
+  url: https://www.netflix.com
+  accept_status:
+  - 403
+- kind: dns
+  host: netflix.com

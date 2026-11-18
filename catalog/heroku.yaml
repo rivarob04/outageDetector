@@ -1,0 +1,18 @@
+id: heroku
+name: Heroku
+category: cloud
+icon: heroku
+homepage: https://www.heroku.com
+status_page: https://status.heroku.com
+feed:
+  adapter: heroku
+  url: https://status.heroku.com/api/v4/current-status
+probes:
+- kind: http
+  url: https://dashboard.heroku.com
+- kind: dns
+  host: herokuapp.com
+depends_on:
+- aws
+depends_on_sources:
+- https://devcenter.heroku.com/articles/regions (Heroku runs on AWS)

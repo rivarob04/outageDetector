@@ -1,0 +1,18 @@
+id: smartthings
+name: SmartThings
+category: smarthome
+icon: smartthings
+homepage: https://www.smartthings.com
+status_page: https://status.smartthings.com
+feed:
+  adapter: statuspage
+  url: https://status.smartthings.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://api.smartthings.com
+  accept_status:
+  - 401
+  - 403
+  - 404
+- kind: dns
+  host: api.smartthings.com

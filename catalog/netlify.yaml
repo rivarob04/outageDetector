@@ -1,0 +1,14 @@
+id: netlify
+name: Netlify
+category: cloud
+icon: netlify
+homepage: https://www.netlify.com
+status_page: https://www.netlifystatus.com
+feed:
+  adapter: statuspage
+  url: https://www.netlifystatus.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://app.netlify.com
+- kind: dns
+  host: netlify.app

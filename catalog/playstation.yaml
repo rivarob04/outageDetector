@@ -1,0 +1,14 @@
+id: playstation
+name: PlayStation Network
+category: gaming
+icon: playstation
+homepage: https://www.playstation.com
+status_page: https://status.playstation.com
+probes:
+- kind: http
+  url: https://www.playstation.com
+  accept_status:
+  - 403
+- kind: dns
+  host: playstation.com
+notes: PSN status page is a JS app without a documented feed; checks only.

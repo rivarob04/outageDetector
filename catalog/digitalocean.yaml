@@ -1,0 +1,14 @@
+id: digitalocean
+name: DigitalOcean
+category: cloud
+icon: digitalocean
+homepage: https://www.digitalocean.com
+status_page: https://status.digitalocean.com
+feed:
+  adapter: statuspage
+  url: https://status.digitalocean.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://cloud.digitalocean.com
+- kind: dns
+  host: digitalocean.com

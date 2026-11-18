@@ -1,0 +1,14 @@
+id: paypal
+name: PayPal
+category: payments
+icon: paypal
+homepage: https://www.paypal.com
+status_page: https://www.paypal-status.com
+feed:
+  adapter: statuspage
+  url: https://www.paypal-status.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://www.paypal.com
+- kind: dns
+  host: paypal.com

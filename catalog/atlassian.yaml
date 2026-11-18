@@ -1,0 +1,14 @@
+id: atlassian
+name: Atlassian (Jira)
+category: productivity
+icon: jira
+homepage: https://www.atlassian.com
+status_page: https://jira-software.status.atlassian.com
+feed:
+  adapter: statuspage
+  url: https://jira-software.status.atlassian.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://id.atlassian.com
+- kind: dns
+  host: atlassian.net

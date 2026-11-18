@@ -1,0 +1,18 @@
+id: docker-hub
+name: Docker Hub
+category: devtools
+icon: docker
+homepage: https://hub.docker.com
+status_page: https://www.dockerstatus.com
+feed:
+  adapter: statuspage
+  url: https://www.dockerstatus.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://hub.docker.com
+- kind: http
+  url: https://registry-1.docker.io/v2/
+  accept_status:
+  - 401
+- kind: dns
+  host: registry-1.docker.io

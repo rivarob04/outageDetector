@@ -1,0 +1,14 @@
+id: twitch
+name: Twitch
+category: streaming
+icon: twitch
+homepage: https://www.twitch.tv
+status_page: https://status.twitch.com
+feed:
+  adapter: statuspage
+  url: https://status.twitch.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://www.twitch.tv
+- kind: dns
+  host: twitch.tv
