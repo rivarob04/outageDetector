@@ -36,10 +36,10 @@ may differ by region; some sites block requests from cloud IP ranges.
 | Microsoft 365 | checks | — | — | — | 200, 200, 200 | ✅ | 2026-11-18 |  |
 | Netflix | checks | — | — | — | 200 | ✅ | 2026-11-18 |  |
 | Netlify | feed+checks | statuspage | [200](https://www.netlifystatus.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-18 | indicator=none, components=42, incidents=0 |
-| Notion | feed+checks | statuspage | [200](https://www.notion-status.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-18 | indicator=none, components=19, incidents=1 |
+| Notion | feed+checks | statuspage | [200](https://www.notion-status.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-18 | indicator=none, components=19, incidents=0 |
 | npm | feed+checks | statuspage | [200](https://status.npmjs.org/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-18 | indicator=none, components=6, incidents=0 |
 | OpenAI (ChatGPT) | feed+checks | statuspage | [200](https://status.openai.com/api/v2/summary.json) | yes | 200, 401 | ✅ | 2026-11-18 | indicator=none, components=25, incidents=0 |
-| PayPal | feed+checks | rss | [200](https://www.paypal-status.com/feed/rss) | yes | 403 ✗ | ❌ | 2026-11-18 | indicator=none, components=0, incidents=20 |
+| PayPal | feed+checks | rss | [200](https://www.paypal-status.com/feed/rss) | yes | 403 | ✅ | 2026-11-18 | indicator=none, components=0, incidents=20 |
 | PlayStation Network | checks | — | — | — | 200 | ✅ | 2026-11-18 |  |
 | Plex | feed+checks | statuspage | [200](https://status.plex.tv/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-18 | indicator=none, components=25, incidents=0 |
 | PyPI | feed+checks | statuspage | [200](https://status.python.org/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-18 | indicator=none, components=122, incidents=0 |
@@ -59,4 +59,4 @@ may differ by region; some sites block requests from cloud IP ranges.
 | Vercel | feed+checks | statuspage | [200](https://www.vercel-status.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-18 | indicator=none, components=59, incidents=0 |
 | Xbox Live | checks | — | — | — | 200 | ✅ | 2026-11-18 |  |
 | YouTube | checks | — | — | — | 200 | ✅ | 2026-11-18 |  |
-| Zoom | feed+checks | statuspage | [200](https://status.zoom.us/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-18 | indicator=maintenance, components=306, incidents=9 |
+| Zoom | feed+checks | statuspage | [200](https://status.zoom.us/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-18 | indicator=maintenance, components=306, incidents=10 |
