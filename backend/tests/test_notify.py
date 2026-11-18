@@ -306,13 +306,12 @@ async def test_metrics_token(tmp_path: Path) -> None:
 
     s = Settings(data_dir=tmp_path, secret_key="k", log_json=False, metrics_token="t0k")
     app = create_app(s, start_background=False)
-    async with app.router.lifespan_context(app), httpx.AsyncClient(
-        transport=httpx.ASGITransport(app=app), base_url="http://t"
-    ) as c:
+    async with (
+        app.router.lifespan_context(app),
+        httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://t") as c,
+    ):
         assert (await c.get("/metrics")).status_code == 401
-        assert (
-            await c.get("/metrics", headers={"Authorization": "Bearer t0k"})
-        ).status_code == 200
+        assert (await c.get("/metrics", headers={"Authorization": "Bearer t0k"})).status_code == 200
         assert (await c.get("/metrics?token=t0k")).status_code == 200
 
 
