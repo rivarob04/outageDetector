@@ -800,6 +800,48 @@ class Store:
                 for r in await c.execute(select(notify_rules_t).order_by(notify_rules_t.c.id))
             ]
 
+    async def get_channel(self, channel_id: int) -> dict[str, Any] | None:
+        async with self.engine.connect() as c:
+            r = (
+                await c.execute(
+                    select(notify_channels_t).where(notify_channels_t.c.id == channel_id)
+                )
+            ).first()
+        return dict(r._mapping) if r else None
+
+    async def save_channel(self, values: dict[str, Any], channel_id: int | None = None) -> int:
+        async with self.engine.begin() as c:
+            if channel_id is None:
+                res = await c.execute(
+                    notify_channels_t.insert().values(created_at=utcnow(), **values)
+                )
+                return int(res.inserted_primary_key[0])  # type: ignore[index]
+            await c.execute(
+                update(notify_channels_t)
+                .where(notify_channels_t.c.id == channel_id)
+                .values(**values)
+            )
+            return channel_id
+
+    async def delete_channel(self, channel_id: int) -> None:
+        async with self.engine.begin() as c:
+            await c.execute(delete(notify_rules_t).where(notify_rules_t.c.channel_id == channel_id))
+            await c.execute(delete(notify_channels_t).where(notify_channels_t.c.id == channel_id))
+
+    async def save_rule(self, values: dict[str, Any], rule_id: int | None = None) -> int:
+        async with self.engine.begin() as c:
+            if rule_id is None:
+                res = await c.execute(notify_rules_t.insert().values(**values))
+                return int(res.inserted_primary_key[0])  # type: ignore[index]
+            await c.execute(
+                update(notify_rules_t).where(notify_rules_t.c.id == rule_id).values(**values)
+            )
+            return rule_id
+
+    async def delete_rule(self, rule_id: int) -> None:
+        async with self.engine.begin() as c:
+            await c.execute(delete(notify_rules_t).where(notify_rules_t.c.id == rule_id))
+
     async def log_notification(
         self,
         channel_id: int | None,

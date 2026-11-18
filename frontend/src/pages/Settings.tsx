@@ -263,8 +263,15 @@ function Appearance() {
 }
 
 import AgentsSettings from "../components/AgentsSettings";
+import AlertsSettings from "../components/AlertsSettings";
+import { IntegrationsInfo, StatusPageSettings } from "../components/IntegrationsSettings";
 
-export const adminSections: { id: string; render: () => ReactNode }[] = [{ id: "agents", render: () => <AgentsSettings /> }];
+export const adminSections: { id: string; render: () => ReactNode }[] = [
+  { id: "alerts", render: () => <AlertsSettings /> },
+  { id: "agents", render: () => <AgentsSettings /> },
+  { id: "status-page", render: () => <StatusPageSettings /> },
+  { id: "integrations", render: () => <IntegrationsInfo /> },
+];
 
 export default function Settings() {
   const { isAdmin, me } = usePulse();

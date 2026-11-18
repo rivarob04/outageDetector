@@ -1,0 +1,9 @@
+# Example Prometheus scrape config for Pulse.
+scrape_configs:
+  - job_name: pulse
+    scrape_interval: 60s
+    static_configs:
+      - targets: ["pulse:8080"]
+    # If PULSE_METRICS_TOKEN is set:
+    # authorization:
+    #   credentials: your-metrics-token

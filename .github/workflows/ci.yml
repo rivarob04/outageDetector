@@ -25,6 +25,10 @@ jobs:
         ports: ["5432:5432"]
         options: >-
           --health-cmd "pg_isready -U pulse" --health-interval 5s --health-retries 10
+      mosquitto:
+        # 1.6 accepts anonymous connections on 1883 without a config file.
+        image: eclipse-mosquitto:1.6
+        ports: ["1883:1883"]
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
@@ -39,8 +43,10 @@ jobs:
       - name: Mypy
         working-directory: backend
         run: uv run mypy pulse
-      - name: Tests (SQLite)
+      - name: Tests (SQLite, with a live MQTT broker)
         working-directory: backend
+        env:
+          PULSE_TEST_MQTT_URL: mqtt://localhost:1883
         run: uv run pytest -q
       - name: Tests (Postgres)
         working-directory: backend
