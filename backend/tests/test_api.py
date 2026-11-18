@@ -234,9 +234,10 @@ async def test_private_view_requires_login(tmp_path: Path) -> None:
         admin_password="correct horse battery",
     )
     app = create_app(s, start_background=False)
-    async with app.router.lifespan_context(app), httpx.AsyncClient(
-        transport=httpx.ASGITransport(app=app), base_url="http://t"
-    ) as c:
+    async with (
+        app.router.lifespan_context(app),
+        httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://t") as c,
+    ):
         assert (await c.get("/api/v1/summary")).status_code == 401
         assert (await c.get("/healthz")).status_code == 200
         r = await c.post(
