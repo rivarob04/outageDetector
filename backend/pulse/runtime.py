@@ -76,7 +76,7 @@ class Runtime:
 
     async def _start_extras(self, background: bool) -> None:
         """Hook for integrations added in later phases."""
-        for name in ("pulse.integrations.bootstrap",):
+        for name in ("pulse.integrations.bootstrap", "pulse.signals.bootstrap"):
             try:
                 module = __import__(name, fromlist=["start"])
             except ModuleNotFoundError as exc:

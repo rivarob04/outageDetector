@@ -139,6 +139,11 @@ export default function ServiceDetail() {
               {d.signal === "feed+checks" ? "Status feed and checks" : d.signal === "feed" ? "Status feed only" : "Checks only"}
               {d.source !== "catalog" ? ", your own service" : ""}
             </span>
+            {d.depends_on.length > 0 && (
+              <span style={{ color: "var(--muted)" }} title="Pulse adds an advisory when a watched upstream has problems">
+                Depends on {d.depends_on.map((dep) => dep.replace(/^aws:/, "AWS ").replace(/^gcp:/, "Google Cloud ")).join(", ")}
+              </span>
+            )}
           </p>
         </div>
         {isAdmin && (

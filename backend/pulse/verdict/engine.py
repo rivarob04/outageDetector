@@ -53,6 +53,8 @@ class ProbeSignal:
     error: str | None = None
     # For DNS probes: did the public resolvers succeed while the system one failed?
     public_dns_ok: bool | None = None
+    # What "normal" means for latency_ratio, e.g. "for this hour" (time-of-day baseline).
+    latency_basis: str | None = None
 
 
 @dataclass(frozen=True)
@@ -242,8 +244,10 @@ def _candidate(inp: VerdictInputs, cfg: VerdictConfig) -> _Candidate:
         c = _Candidate("degraded", scope)
         for p in slow:
             if p.latency_ratio:
+                basis = f" {p.latency_basis}" if p.latency_basis else ""
                 c.reasons.append(
-                    f"{p.kind.upper()} check latency is {p.latency_ratio:.1f}× its normal level."
+                    f"{p.kind.upper()} check latency is {p.latency_ratio:.1f}× "
+                    f"its normal level{basis}."
                 )
             else:
                 c.reasons.append(f"{p.kind.upper()} check is slower than normal.")

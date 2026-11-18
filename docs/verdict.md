@@ -43,7 +43,11 @@ Notes:
 - The baseline is the p50/p95 of successful latencies for the probe over the last 24 h, from at least 20 samples.
 - A probe is **slow** when each of its last `fail_threshold` latencies is above `latency_factor` × p95 (default 3) **and** above `latency_min_ms` (default 300 ms).
 - The reason shows the ratio to p50 ("latency is 4.2× its normal level").
-- Phase 8 replaces this with an EWMA + MAD detector per time-of-day bucket (`PULSE_FEATURE_ANOMALY`).
+- **Phase 8 detector (default, `PULSE_FEATURE_ANOMALY=true`).** The baseline per probe and **hour of day** is the median and MAD of 5-minute medians over the last 7 days. With fewer than 12 samples for that hour, the detector falls back to the last 24 h with no hour split. The current latency is an EWMA (α = 0.4) of recent successful checks. A probe is slow when **all** of these hold:
+  - the robust z-score `(ewma − median) / (1.4826 × MAD)` ≥ 4;
+  - `ewma ≥ latency_factor × median`;
+  - `ewma − median ≥ latency_min_ms`.
+  The reason then says, e.g., "HTTP check latency is 4.2× its normal level for this hour".
 
 ## Advisories
 

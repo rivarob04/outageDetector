@@ -97,7 +97,7 @@ export default function Incidents() {
         <section className="panel rounded-lg p-4">
           <h2 className="mb-1 mt-0 text-base font-bold">Time to recover</h2>
           <p className="mb-3 mt-0 text-sm" style={{ color: "var(--muted)" }}>
-            Mean time from the start of a provider incident to its resolution, over the selected period.
+            Mean time from the start of a provider incident to its resolution. Lead time is how long after Pulse saw widespread failures the provider posted an incident.
           </p>
           {!stats?.providers.length ? (
             <p className="m-0 text-sm" style={{ color: "var(--muted)" }}>
@@ -123,7 +123,9 @@ export default function Incidents() {
                     </td>
                     <td className="py-1.5 text-right">{p.count}</td>
                     <td className="py-1.5 text-right">{p.mttr_s != null ? duration(p.mttr_s * 1000) : "–"}</td>
-                    <td className="py-1.5 text-right">{p.lead?.median_lead_s != null ? duration(p.lead.median_lead_s * 1000) : "–"}</td>
+                    <td className="py-1.5 text-right" title={p.lead ? `${p.lead.confirmed} confirmed by the provider, ${p.lead.unconfirmed} never confirmed` : undefined}>
+                      {p.lead?.median_lead_s != null ? duration(p.lead.median_lead_s * 1000) : p.lead?.unconfirmed ? `${p.lead.unconfirmed} unconfirmed` : "–"}
+                    </td>
                   </tr>
                 ))}
               </tbody>

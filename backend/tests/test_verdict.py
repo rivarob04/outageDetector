@@ -239,6 +239,24 @@ CASES = [
         "4.2× its normal level",
     ),
     Case(
+        "slow with time-of-day basis",
+        VerdictInputs(
+            probes=(
+                ProbeSignal(
+                    "s:http:0",
+                    "http",
+                    last_ok=True,
+                    degraded=True,
+                    latency_ratio=3.1,
+                    latency_basis="for this hour",
+                ),
+            )
+        ),
+        "degraded",
+        "local_only",
+        "3.1× its normal level for this hour",
+    ),
+    Case(
         "slow locally and at an agent",
         VerdictInputs(probes=(slow(),), agents=(agent("a", degraded=True),)),
         "degraded",

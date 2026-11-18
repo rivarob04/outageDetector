@@ -43,7 +43,9 @@ log = logging.getLogger("pulse.monitor")
 HISTORY_MAX = 1600  # ~26h at 60s
 BASELINE_TTL = timedelta(minutes=10)
 Advisor = Callable[[str], list[str]]
-AnomalyFn = Callable[[str, list[tuple[datetime, float]], float], tuple[bool, float | None]]
+AnomalyFn = Callable[
+    [str, list[tuple[datetime, float]], float], tuple[bool, float | None, str | None]
+]
 
 
 @dataclass
@@ -74,6 +76,7 @@ class FeedInfo:
     incident_titles: tuple[str, ...] = ()
     maintenance_titles: tuple[str, ...] = ()
     error: str | None = None
+    bad_regions: frozenset[str] = frozenset()  # regions with partial/major problems
 
 
 @dataclass
@@ -194,6 +197,12 @@ class Monitor:
                     fi.maintenance_titles += (inc["title"],)
             else:
                 fi.incident_titles += (inc["title"],)
+                if inc["impact"] in ("major", "critical") and inc.get("regions"):
+                    fi.bad_regions = fi.bad_regions | frozenset(inc["regions"])
+        for comp in await self.store.region_components():
+            if comp["status"] in ("partial_outage", "major_outage"):
+                fi = self.feeds.setdefault(comp["service_id"], FeedInfo())
+                fi.bad_regions = fi.bad_regions | {comp["region"]}
         for sid, row in (await self.store.get_states()).items():
             self.prev[sid] = PrevState(
                 row["state"],
@@ -284,6 +293,19 @@ class Monitor:
         fi.error = None
         fi.incident_titles = tuple(i.title for i in snap.active_incidents)
         fi.maintenance_titles = tuple(i.title for i in snap.active_maintenance)
+        fi.bad_regions = frozenset(
+            [
+                c.region
+                for c in snap.components
+                if c.region and c.status in ("partial_outage", "major_outage")
+            ]
+            + [
+                r
+                for i in snap.active_incidents
+                if i.impact in ("major", "critical")
+                for r in i.regions
+            ]
+        )
         name = self.services[sid].name if sid in self.services else sid
         for inc in change.new_incidents:
             self.bus.publish("incident", _incident_event(sid, name, "new", inc))
@@ -458,11 +480,11 @@ class Monitor:
         if not h.items:
             return ProbeSignal(spec.id, spec.kind)
         last = h.items[-1]
-        degraded, ratio = False, None
+        degraded, ratio, basis = False, None, None
         if last[1] and last[2] is not None:
             if self.anomaly is not None:
                 series = [(t, lat) for t, ok, lat, _e, _p in h.items if ok and lat is not None]
-                degraded, ratio = self.anomaly(spec.id, series, last[2])
+                degraded, ratio, basis = self.anomaly(spec.id, series, last[2])
             else:
                 if h.baseline_at is None or now - h.baseline_at > BASELINE_TTL:
                     cutoff = now - timedelta(hours=24)
@@ -484,7 +506,15 @@ class Monitor:
                 )
                 ratio = latency_ratio(last[2], h.baseline) if degraded else None
         return ProbeSignal(
-            spec.id, spec.kind, h.consecutive_failures(), last[1], ratio, degraded, last[3], last[4]
+            spec.id,
+            spec.kind,
+            h.consecutive_failures(),
+            last[1],
+            ratio,
+            degraded,
+            last[3],
+            last[4],
+            basis,
         )
 
     def _agent_signals(self, sid: str, now: datetime) -> tuple[AgentSignal, ...]:
