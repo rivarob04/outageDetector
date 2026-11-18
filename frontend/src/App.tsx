@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useSearchParams } from "react-router-dom";
 import { PulseProvider, usePulse } from "./api/store";
 import { Shell, Wordmark } from "./components/Shell";
@@ -7,9 +7,18 @@ import { isProblem } from "./lib/status";
 import Catalog from "./pages/Catalog";
 import Dashboard from "./pages/Dashboard";
 import Incidents from "./pages/Incidents";
-import MapPage from "./pages/MapPage";
 import ServiceDetail from "./pages/ServiceDetail";
 import Settings from "./pages/Settings";
+
+const MapPage = lazy(() => import("./pages/MapPage"));
+
+function LazyMap({ kiosk = false }: { kiosk?: boolean }) {
+  return (
+    <Suspense fallback={<p style={{ color: "var(--muted)" }}>Loading map…</p>}>
+      <MapPage kiosk={kiosk} />
+    </Suspense>
+  );
+}
 
 function ThemeSync() {
   const { theme } = usePrefs();
@@ -51,7 +60,7 @@ function Kiosk() {
           {problems ? `, ${problems} with problems` : ""}
         </span>
       </div>
-      {views[i] === "map" ? <MapPage kiosk /> : <Dashboard kiosk />}
+      {views[i] === "map" ? <LazyMap kiosk /> : <Dashboard kiosk />}
     </div>
   );
 }
@@ -64,7 +73,7 @@ function Routed() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/service/:id" element={<ServiceDetail />} />
-        <Route path="/map" element={<MapPage />} />
+        <Route path="/map" element={<LazyMap />} />
         <Route path="/incidents" element={<Incidents />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/settings" element={<Settings />} />

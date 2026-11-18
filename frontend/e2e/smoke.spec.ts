@@ -40,3 +40,12 @@ test("keyboard shortcut opens incidents", async ({ page }) => {
   await expect(page).toHaveURL(/\/incidents/);
   await expect(page.getByRole("heading", { name: "Incidents" })).toBeVisible();
 });
+
+test("map shows affected regions and agents", async ({ page }) => {
+  await page.goto("/map");
+  await expect(page.getByRole("heading", { name: "Affected regions" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /AWS N. Virginia/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Agent Frankfurt Pi" })).toBeVisible();
+  await page.locator("aside").getByRole("button", { name: /AWS N. Virginia/ }).click();
+  await expect(page.getByText(/Increased error rates in US-EAST-1/)).toBeVisible();
+});

@@ -129,6 +129,8 @@ class Monitor:
         for row in rows:
             await self._load_service(row)
         await self._load_state()
+        await self.load_agents()
+        await self._load_agent_views()
         if run_jobs:
             self._schedule_global()
             for sid in self.services:
@@ -147,6 +149,7 @@ class Monitor:
         self.sched.add("verdict:all", self.verdict_all_job, 30, initial_delay=10)
         self.sched.add("rollup", self.rollup_job, 300, initial_delay=60)
         self.sched.add("retention", self.retention_job, 3600, initial_delay=120)
+        self.sched.add("agent-stale", self.agent_stale_job, 60, initial_delay=30)
 
     def _schedule_service(self, sid: str) -> None:
         svc = self.services[sid]
@@ -344,6 +347,95 @@ class Monitor:
         )
         log.info("retention", extra={"extra_fields": counts})
 
+    # ---------------------------------------------------------------- agents
+    async def load_agents(self) -> None:
+        old = self.agents
+        self.agents = {}
+        for a in await self.store.list_agents():
+            a["offline"] = old.get(a["id"], {}).get("offline", False)
+            self.agents[a["id"]] = a
+        for key in [k for k in self.agent_views if k[0] not in self.agents]:
+            del self.agent_views[key]
+
+    async def _load_agent_views(self) -> None:
+        since = datetime.now(UTC) - timedelta(minutes=30)
+        for r in await self.store.recent_results(since, agent=True):
+            self._apply_agent_result(
+                r["agent_id"], r["probe_id"], r["ts"], r["ok"], r["latency_ms"]
+            )
+
+    def _apply_agent_result(
+        self, agent_id: str, probe_id: str, ts: datetime, ok: bool, latency: float | None
+    ) -> None:
+        prev = self.agent_views.get((agent_id, probe_id))
+        if prev is not None and ts < prev.ts:
+            return
+        fails = 0 if ok else (prev.consecutive_failures + 1 if prev else 1)
+        self.agent_views[(agent_id, probe_id)] = AgentView(ts, ok, latency, fails)
+
+    def agent_fresh(self, agent: dict[str, Any], now: datetime | None = None) -> bool:
+        now = now or datetime.now(UTC)
+        seen = agent.get("last_seen_at")
+        stale_after = timedelta(seconds=3 * self.settings.agent_push_interval_s + 30)
+        return (
+            not agent.get("revoked")
+            and not agent.get("offline")
+            and seen is not None
+            and now - seen <= stale_after
+        )
+
+    async def record_agent_results(
+        self,
+        agent_id: str,
+        results: list[ProbeResult],
+        offline: bool = False,
+        version: str | None = None,
+        location: str | None = None,
+    ) -> None:
+        now = datetime.now(UTC)
+        agent = self.agents.get(agent_id)
+        if agent is None:
+            await self.load_agents()
+            agent = self.agents.get(agent_id)
+            if agent is None:
+                return
+        was_fresh = self.agent_fresh(agent, now)
+        updates: dict[str, Any] = {"last_seen_at": now}
+        if version:
+            updates["version"] = version
+        if location and not agent.get("location"):
+            updates["location"] = str(location)[:200]
+        await self.store.update_agent(agent_id, **updates)
+        agent.update(updates)
+        agent["offline"] = offline
+        if not offline and results:
+            await self.store.insert_results(results, agent_id=agent_id)
+            sids = {s.id: sid for sid, specs in self.specs.items() for s in specs}
+            for r in sorted(results, key=lambda r: r.ts):
+                self._apply_agent_result(agent_id, r.probe_id, r.ts, r.ok, r.latency_ms)
+                if r.probe_id in sids:
+                    self.dirty.add(sids[r.probe_id])
+        if was_fresh != self.agent_fresh(agent, now):
+            self.bus.publish(
+                "agent",
+                {
+                    "agent_id": agent_id,
+                    "name": agent["name"],
+                    "fresh": not was_fresh,
+                    "offline": offline,
+                },
+            )
+            self.dirty.update(self.services)
+
+    async def agent_stale_job(self) -> None:
+        now = datetime.now(UTC)
+        for aid, agent in self.agents.items():
+            fresh = self.agent_fresh(agent, now)
+            if agent.get("_fresh") is not None and agent["_fresh"] != fresh:
+                self.bus.publish("agent", {"agent_id": aid, "name": agent["name"], "fresh": fresh})
+                self.dirty.update(self.services)
+            agent["_fresh"] = fresh
+
     # ---------------------------------------------------------------- verdicts
     def inputs_for(self, sid: str, now: datetime) -> VerdictInputs:
         svc = self.services[sid]
@@ -399,13 +491,11 @@ class Monitor:
         if not self.agents:
             return ()
         probe_ids = [s.id for s in self.specs.get(sid, []) if s.kind != "tls"]
-        stale_after = timedelta(seconds=3 * self.settings.agent_push_interval_s + 30)
         out = []
         for aid, agent in self.agents.items():
             if agent.get("revoked"):
                 continue
-            seen = agent.get("last_seen_at")
-            fresh = seen is not None and now - seen <= stale_after
+            fresh = self.agent_fresh(agent, now)
             views = [self.agent_views[(aid, p)] for p in probe_ids if (aid, p) in self.agent_views]
             if not views:
                 continue

@@ -1,0 +1,27 @@
+# Pulse vantage agent: run Pulse's checks from another network and report to your hub.
+#
+#   1. In the hub UI: Settings > Vantage agents > Create agent (copy the token).
+#   2. On the remote machine (VPS, a friend's Raspberry Pi, ...):
+#        PULSE_HUB_URL=https://pulse.example.com PULSE_AGENT_TOKEN=... \
+#          docker compose -f docker-compose.agent.yml up -d
+#
+# The agent only makes outbound HTTPS requests; it never listens on a port.
+name: pulse-agent
+
+services:
+  agent:
+    image: ${PULSE_IMAGE:-ghcr.io/rivarob04/outagedetector:latest}
+    command: ["agent"]
+    restart: unless-stopped
+    environment:
+      PULSE_HUB_URL: ${PULSE_HUB_URL:?set PULSE_HUB_URL to your hub's public URL}
+      PULSE_AGENT_TOKEN: ${PULSE_AGENT_TOKEN:?set PULSE_AGENT_TOKEN from the hub UI}
+      PULSE_AGENT_LOCATION: ${PULSE_AGENT_LOCATION:-}
+      PULSE_LOG_JSON: "true"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 128m
+    healthcheck:
+      disable: true

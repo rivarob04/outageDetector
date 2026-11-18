@@ -29,6 +29,19 @@ def serve(host: str | None = None, port: int | None = None, reload: bool = False
 
 
 @app.command()
+def agent() -> None:
+    """Run as a remote vantage agent (needs PULSE_HUB_URL and PULSE_AGENT_TOKEN)."""
+    import asyncio
+
+    from pulse.agent.runner import run_agent
+    from pulse.logging import setup_logging
+
+    s = get_settings()
+    setup_logging(s.log_level, s.log_json)
+    asyncio.run(run_agent(s))
+
+
+@app.command()
 def migrate() -> None:
     """Apply database migrations."""
     from pulse.db.migrate import upgrade

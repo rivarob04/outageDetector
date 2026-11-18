@@ -16,7 +16,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from pulse import __version__
 
-_SECRET_FIELDS = ("secret_key", "admin_password", "mqtt_password", "metrics_token")
+_SECRET_FIELDS = ("secret_key", "admin_password", "mqtt_password", "metrics_token", "agent_token")
 
 
 class Settings(BaseSettings):
@@ -80,6 +80,12 @@ class Settings(BaseSettings):
     mqtt_discovery_prefix: str = "homeassistant"
     mqtt_base_topic: str = "pulse"
     map_style_url: str = ""
+    host_location: str = ""  # "lat,lon" of this hub for the map (optional)
+    # Agent mode (`pulse agent`)
+    hub_url: str = ""
+    agent_token: str = ""
+    agent_name: str = ""
+    agent_location: str = ""
     public_ip_lookup_url: str = ""  # off by default (privacy)
 
     # Advanced signals

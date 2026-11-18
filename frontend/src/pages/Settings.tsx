@@ -262,7 +262,9 @@ function Appearance() {
   );
 }
 
-export const adminSections: { id: string; render: () => ReactNode }[] = [];
+import AgentsSettings from "../components/AgentsSettings";
+
+export const adminSections: { id: string; render: () => ReactNode }[] = [{ id: "agents", render: () => <AgentsSettings /> }];
 
 export default function Settings() {
   const { isAdmin, me } = usePulse();

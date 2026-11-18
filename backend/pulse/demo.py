@@ -115,6 +115,8 @@ def _result(
 
 async def seed_demo(rt: Any) -> None:
     store = rt.store
+    if not rt.settings.host_location:
+        rt.settings.host_location = "45.50,-73.57"  # demo hub in Montreal
     if await store.get_setting("demo_seeded"):
         return
     log.info("seeding demo data")
