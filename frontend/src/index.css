@@ -85,13 +85,18 @@ body {
   border-radius: 4px;
 }
 
-a {
-  color: inherit;
-  text-underline-offset: 2px;
-}
-main a:not(.btn, .no-underline) {
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+/* In @layer base so component classes (.btn-primary) and utilities can recolour links.
+   Unlayered rules always beat layered ones, which made link-styled buttons inherit
+   the surrounding text colour (invisible text on .btn-primary). */
+@layer base {
+  a {
+    color: inherit;
+    text-underline-offset: 2px;
+  }
+  main a:not(.btn, .no-underline) {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  }
 }
 
 /* Width axis is the typographic identity: expanded for the verdict, condensed for dense data. */
