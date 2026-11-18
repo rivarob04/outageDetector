@@ -1,0 +1,51 @@
+# Pulse + a Mosquitto broker for Home Assistant discovery, for Dockhand.
+# Point Home Assistant's MQTT integration at this host, port ${MQTT_PORT:-1883}.
+name: pulse
+
+services:
+  pulse:
+    image: ghcr.io/rivarob04/outagedetector:${PULSE_TAG:-edge}
+    pull_policy: always
+    container_name: pulse
+    restart: unless-stopped
+    depends_on: [mosquitto]
+    ports:
+      - "${PULSE_PORT:-8080}:8080"
+    environment:
+      PULSE_BASE_URL: ${PULSE_BASE_URL:-}
+      PULSE_ADMIN_USERNAME: ${PULSE_ADMIN_USERNAME:-}
+      PULSE_ADMIN_PASSWORD: ${PULSE_ADMIN_PASSWORD:-}
+      PULSE_SECRET_KEY: ${PULSE_SECRET_KEY:-}
+      PULSE_PUBLIC_VIEW: ${PULSE_PUBLIC_VIEW:-true}
+      PULSE_ALLOW_PRIVATE_TARGETS: ${PULSE_ALLOW_PRIVATE_TARGETS:-false}
+      PULSE_HOST_LOCATION: ${PULSE_HOST_LOCATION:-}
+      PULSE_MQTT_URL: mqtt://mosquitto:1883
+      TZ: ${TZ:-UTC}
+    volumes:
+      - pulse-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=4).status == 200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    # The image ships this config: a listener on 1883 that allows anonymous clients.
+    command: ["/usr/sbin/mosquitto", "-c", "/mosquitto-no-auth.conf"]
+    ports:
+      - "${MQTT_PORT:-1883}:1883"
+    volumes:
+      - pulse-mqtt:/mosquitto/data
+
+volumes:
+  pulse-data:
+  pulse-mqtt:

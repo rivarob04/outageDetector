@@ -32,6 +32,8 @@ Open **http://localhost:8080**, select **Set up admin**, enter the setup code fr
 >
 > Prefer not to use the setup code? Put `PULSE_ADMIN_USERNAME` and `PULSE_ADMIN_PASSWORD` in `deploy/.env` (copy `deploy/.env.example`).
 
+**Using Dockhand, Portainer or another compose UI?** Use the image-only files in `deploy/dockhand/` and follow [docs/DOCKHAND.md](docs/DOCKHAND.md).
+
 Requirements: Docker with Compose v2. Images are multi-arch (amd64, arm64), so a Raspberry Pi 4/5 works. Pulse uses about 100–150 MB of RAM (see docs/PERFORMANCE.md).
 
 ## What you get
@@ -96,6 +98,7 @@ See [docs/AGENTS.md](docs/AGENTS.md). Until a release image is published to GHCR
 | Restore | Stop Pulse, then into an empty data volume containing the file: `docker compose -f deploy/docker-compose.yml run --rm pulse restore /data/backup.tar.gz` (works across SQLite ↔ Postgres) |
 | Upgrade | `git pull && docker compose -f deploy/docker-compose.yml up -d --build`. Migrations run automatically on start. |
 | Roll back | Take a backup first. Then `pulse migrate --downgrade <revision>` with the new image and start the previous image (see `CHANGELOG.md`). |
+| Dockhand / compose UIs | [docs/DOCKHAND.md](docs/DOCKHAND.md) |
 | HTTPS / reverse proxy | [docs/REVERSE_PROXY.md](docs/REVERSE_PROXY.md) (Traefik, Caddy, Nginx Proxy Manager, Cloudflare Tunnel, Authelia/Authentik) |
 
 ## Documentation

@@ -142,6 +142,22 @@ jobs:
           docker image ls pulse:ci --format 'image size: {{.Size}}' | tee -a "$GITHUB_STEP_SUMMARY"
           sleep 30
           docker stats --no-stream --format 'idle memory: {{.MemUsage}}' pulse | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Dockhand compose files (image-only, as Dockhand deploys them)
+        run: |
+          docker compose -f deploy/docker-compose.yml down
+          docker tag pulse:ci ghcr.io/rivarob04/outagedetector:ci
+          docker pull -q eclipse-mosquitto:2
+          PULSE_TAG=ci docker compose -f deploy/dockhand/compose.mqtt.yaml up -d --pull never --wait --wait-timeout 120
+          curl -fsS http://localhost:8080/readyz
+          sleep 10
+          docker compose -f deploy/dockhand/compose.mqtt.yaml logs pulse | grep -q "connected to MQTT" \
+            || { docker compose -f deploy/dockhand/compose.mqtt.yaml logs; exit 1; }
+          docker compose -f deploy/dockhand/compose.mqtt.yaml down
+          PULSE_TAG=ci docker compose -f deploy/dockhand/compose.yaml up -d --pull never --wait --wait-timeout 120
+          curl -fsS http://localhost:8080/readyz
+          docker compose -f deploy/dockhand/compose.yaml logs pulse | grep -q "setup code"
       - name: Logs on failure
         if: failure()
-        run: docker compose -f deploy/docker-compose.yml logs
+        run: |
+          docker compose -f deploy/docker-compose.yml logs || true
+          docker compose -f deploy/dockhand/compose.yaml logs || true
