@@ -1,1 +1,228 @@
 @import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+
+/* ---------------------------------------------------------------- tokens */
+:root,
+[data-theme="dark"] {
+  --bg: #0e1726;
+  --panel: #152238;
+  --panel-2: #1a2a44;
+  --line: #24344f;
+  --text: #e6edf7;
+  --muted: #8a9bb5;
+  --faint: #5a6b86;
+  --focus: #9cc2ff;
+  --ok: #3ccb8e;
+  --degraded: #f2b636;
+  --partial: #f07a35;
+  --major: #f0475b;
+  --maint: #5b9df5;
+  --unknown: #7d8ba3;
+  --trace: #6f8fbf;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f3f6fa;
+  --panel: #ffffff;
+  --panel-2: #eef2f8;
+  --line: #d8e0eb;
+  --text: #142034;
+  --muted: #55657e;
+  --faint: #8894a8;
+  --focus: #1f5fd1;
+  --ok: #138a5a;
+  --degraded: #a86f00;
+  --partial: #c2510f;
+  --major: #c81e37;
+  --maint: #1f62c9;
+  --unknown: #6b7890;
+  --trace: #4867a0;
+  color-scheme: light;
+}
+
+[data-theme="contrast"] {
+  --bg: #000000;
+  --panel: #000000;
+  --panel-2: #121212;
+  --line: #ffffff;
+  --text: #ffffff;
+  --muted: #e0e0e0;
+  --faint: #c0c0c0;
+  --focus: #ffff00;
+  --ok: #00ff88;
+  --degraded: #ffd400;
+  --partial: #ff9500;
+  --major: #ff4d6d;
+  --maint: #66b3ff;
+  --unknown: #d0d0d0;
+  --trace: #ffffff;
+  color-scheme: dark;
+}
+
+@theme {
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+main a:not(.btn, .no-underline) {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+/* Width axis is the typographic identity: expanded for the verdict, condensed for dense data. */
+.wide {
+  font-stretch: 122%;
+  letter-spacing: -0.01em;
+}
+.narrow {
+  font-stretch: 82%;
+}
+
+.st-operational { --st: var(--ok); }
+.st-degraded { --st: var(--degraded); }
+.st-partial_outage { --st: var(--partial); }
+.st-major_outage { --st: var(--major); }
+.st-maintenance { --st: var(--maint); }
+.st-unknown { --st: var(--unknown); }
+
+@layer components {
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 550;
+  cursor: pointer;
+}
+.btn:hover {
+  border-color: var(--muted);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+.btn-danger {
+  color: var(--major);
+}
+
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+}
+.chip[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.field {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  font: inherit;
+}
+.field:focus-visible {
+  border-color: var(--focus);
+}
+
+.label {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+}
+
+/* A tile flashes its outline once when its state changes (the only ambient motion). */
+@keyframes flash {
+  0% { box-shadow: 0 0 0 0 var(--st); }
+  40% { box-shadow: 0 0 0 3px var(--st); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.flash {
+  animation: flash 1.6s ease-out 2;
+}
+@media (prefers-reduced-motion: reduce) {
+  .flash {
+    animation: none;
+    outline: 2px solid var(--st);
+  }
+}
+
+.prose-updates p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.monogram {
+  background: hsl(var(--mh) 45% 45% / 0.18);
+  color: hsl(var(--mh) 70% 72%);
+  border: 1px solid hsl(var(--mh) 45% 55% / 0.35);
+}
+[data-theme="light"] .monogram {
+  background: hsl(var(--mh) 60% 92%);
+  color: hsl(var(--mh) 55% 30%);
+  border-color: hsl(var(--mh) 40% 80%);
+}
+[data-theme="contrast"] .monogram {
+  background: #000;
+  color: #fff;
+  border-color: #fff;
+}
