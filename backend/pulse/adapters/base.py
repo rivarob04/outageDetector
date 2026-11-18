@@ -162,8 +162,10 @@ def map_region(name: str, feed: FeedConfig, provider_prefix: str | None = None) 
 
 
 def strip_html(text: str) -> str:
-    text = re.sub(r"<br\s*/?>|</p>", "\n", text, flags=re.I)
-    text = re.sub(r"<[^>]+>", "", text)
     import html
 
+    if re.search(r"&(lt|#60|#x3c);", text, re.I):  # entity-escaped markup
+        text = html.unescape(text)
+    text = re.sub(r"<br\s*/?>|</p>", "\n", text, flags=re.I)
+    text = re.sub(r"<[^>]+>", "", text)
     return re.sub(r"\n{3,}", "\n\n", html.unescape(text)).strip()

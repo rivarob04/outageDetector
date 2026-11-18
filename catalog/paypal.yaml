@@ -10,5 +10,7 @@ feed:
 probes:
 - kind: http
   url: https://www.paypal.com
+  accept_status:
+  - 403
 - kind: dns
   host: paypal.com
