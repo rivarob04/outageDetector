@@ -234,18 +234,17 @@ async def test_private_view_requires_login(tmp_path: Path) -> None:
         admin_password="correct horse battery",
     )
     app = create_app(s, start_background=False)
-    async with app.router.lifespan_context(app):
-        async with httpx.AsyncClient(
-            transport=httpx.ASGITransport(app=app), base_url="http://t"
-        ) as c:
-            assert (await c.get("/api/v1/summary")).status_code == 401
-            assert (await c.get("/healthz")).status_code == 200
-            r = await c.post(
-                "/api/v1/auth/login",
-                json={"username": "admin", "password": "correct horse battery"},
-            )
-            assert r.status_code == 200
-            assert (await c.get("/api/v1/summary")).status_code == 200
+    async with app.router.lifespan_context(app), httpx.AsyncClient(
+        transport=httpx.ASGITransport(app=app), base_url="http://t"
+    ) as c:
+        assert (await c.get("/api/v1/summary")).status_code == 401
+        assert (await c.get("/healthz")).status_code == 200
+        r = await c.post(
+            "/api/v1/auth/login",
+            json={"username": "admin", "password": "correct horse battery"},
+        )
+        assert r.status_code == 200
+        assert (await c.get("/api/v1/summary")).status_code == 200
 
 
 async def test_trusted_header_auth(tmp_path: Path) -> None:
