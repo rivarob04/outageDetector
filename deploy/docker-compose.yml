@@ -1,0 +1,78 @@
+# Pulse: self-hosted outage map.
+#   cp deploy/.env.example deploy/.env   (optional)
+#   docker compose -f deploy/docker-compose.yml up -d
+# Optional profiles: --profile postgres | --profile mqtt | --profile agent
+name: pulse
+
+services:
+  pulse:
+    image: ${PULSE_IMAGE:-ghcr.io/rivarob04/outagedetector:latest}
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: pulse
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    ports:
+      - "${PULSE_PORT:-8080}:8080"
+    volumes:
+      - pulse-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: ${PULSE_MEM_LIMIT:-512m}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=4).status == 200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  postgres:
+    profiles: [postgres]
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pulse
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pulse}
+      POSTGRES_DB: pulse
+    volumes:
+      - pulse-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pulse"]
+      interval: 10s
+      retries: 5
+
+  mosquitto:
+    profiles: [mqtt]
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    ports:
+      - "${MQTT_PORT:-1883}:1883"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - pulse-mqtt:/mosquitto/data
+
+  agent:
+    profiles: [agent]
+    image: ${PULSE_IMAGE:-ghcr.io/rivarob04/outagedetector:latest}
+    command: ["agent"]
+    restart: unless-stopped
+    environment:
+      PULSE_HUB_URL: ${PULSE_HUB_URL:-http://pulse:8080}
+      PULSE_AGENT_TOKEN: ${PULSE_AGENT_TOKEN:-}
+      PULSE_AGENT_LOCATION: ${PULSE_AGENT_LOCATION:-}
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  pulse-data:
+  pulse-pg:
+  pulse-mqtt:

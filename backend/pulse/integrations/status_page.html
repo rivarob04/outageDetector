@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="60">
+<title>$title</title><style>
+:root{--bg:#f3f6fa;--panel:#fff;--line:#d8e0eb;--text:#142034;--muted:#55657e;--ok:#138a5a;--degraded:#a86f00;--partial_outage:#c2510f;--major_outage:#c81e37;--maintenance:#1f62c9;--unknown:#6b7890}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1726;--panel:#152238;--line:#24344f;--text:#e6edf7;--muted:#8a9bb5;--ok:#3ccb8e;--degraded:#f2b636;--partial_outage:#f07a35;--major_outage:#f0475b;--maintenance:#5b9df5;--unknown:#7d8ba3}}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,sans-serif}
+main{max-width:44rem;margin:0 auto;padding:3rem 1.25rem}h1{font-size:clamp(1.6rem,4vw,2.4rem);margin:0 0 .25rem}
+p{color:var(--muted);margin:.25rem 0 1.5rem}ul{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+li{display:flex;gap:.75rem;align-items:center;padding:.85rem 1rem;border-top:1px solid var(--line)}li:first-child{border-top:0}
+.n{flex:1;font-weight:600}.g,.s{color:var(--c)}.s{font-size:.9rem}
+.st-operational{--c:var(--ok)}.st-degraded{--c:var(--degraded)}.st-partial_outage{--c:var(--partial_outage)}.st-major_outage{--c:var(--major_outage)}.st-maintenance{--c:var(--maintenance)}.st-unknown{--c:var(--unknown)}
+footer{margin-top:1.5rem;font-size:.8rem;color:var(--muted)}</style></head>
+<body><main><h1>$title</h1><p>$intro</p>
+$headline_block
+<ul>$rows</ul>
+<footer>Updated $updated UTC. Powered by Pulse.</footer></main></body></html>

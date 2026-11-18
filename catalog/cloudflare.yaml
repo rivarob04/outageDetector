@@ -1,0 +1,20 @@
+id: cloudflare
+name: Cloudflare
+category: cdn
+icon: cloudflare
+homepage: https://www.cloudflare.com
+status_page: https://www.cloudflarestatus.com
+feed:
+  adapter: statuspage
+  url: https://www.cloudflarestatus.com/api/v2/summary.json
+  regions: auto
+probes:
+- kind: http
+  url: https://www.cloudflare.com
+- kind: http
+  url: https://1.1.1.1/cdn-cgi/trace
+- kind: dns
+  host: cloudflare.com
+chatter_keywords:
+- cloudflare down
+- cloudflare outage

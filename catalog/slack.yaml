@@ -1,0 +1,16 @@
+id: slack
+name: Slack
+category: comms
+icon: slack
+homepage: https://slack.com
+status_page: https://slack-status.com
+feed:
+  adapter: slack
+  url: https://slack-status.com/api/v2.0.0/current
+probes:
+- kind: http
+  url: https://slack.com/api/api.test
+- kind: dns
+  host: slack.com
+chatter_keywords:
+- slack down

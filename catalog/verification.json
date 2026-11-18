@@ -1,0 +1,966 @@
+{
+ "generated_at": "2026-11-18T19:40:45+00:00",
+ "results": [
+  {
+   "service_id": "1password",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.1password.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=84, incidents=0",
+   "probes": [
+    {
+     "url": "https://my.1password.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "akamai",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://www.akamaistatus.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=minor, components=46, incidents=4",
+   "probes": [
+    {
+     "url": "https://www.akamai.com",
+     "status": 403,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "anthropic",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.claude.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=minor, components=9, incidents=1",
+   "probes": [
+    {
+     "url": "https://claude.ai",
+     "status": 403,
+     "ok": true
+    },
+    {
+     "url": "https://api.anthropic.com",
+     "status": 404,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "apple",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://www.apple.com/support/systemstatus/data/system_status_en_US.js",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=28, incidents=3",
+   "probes": [
+    {
+     "url": "https://www.icloud.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "atlassian",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://jira-software.status.atlassian.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=12, incidents=0",
+   "probes": [
+    {
+     "url": "https://id.atlassian.com",
+     "status": 202,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "aws",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://health.aws.amazon.com/public/currentevents",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=critical, components=0, incidents=2",
+   "probes": [
+    {
+     "url": "https://aws.amazon.com",
+     "status": 200,
+     "ok": true
+    },
+    {
+     "url": "https://s3.amazonaws.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "azure",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://azure.status.microsoft/en-us/status/feed/",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=0, incidents=0",
+   "probes": [
+    {
+     "url": "https://portal.azure.com",
+     "status": 200,
+     "ok": true
+    },
+    {
+     "url": "https://login.microsoftonline.com/common/.well-known/openid-configuration",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "bitbucket",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://bitbucket.status.atlassian.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=13, incidents=0",
+   "probes": [
+    {
+     "url": "https://bitbucket.org",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "cloudflare",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://www.cloudflarestatus.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=minor, components=477, incidents=26",
+   "probes": [
+    {
+     "url": "https://www.cloudflare.com",
+     "status": 200,
+     "ok": true
+    },
+    {
+     "url": "https://1.1.1.1/cdn-cgi/trace",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "digitalocean",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.digitalocean.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=239, incidents=0",
+   "probes": [
+    {
+     "url": "https://cloud.digitalocean.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "discord",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://discordstatus.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=30, incidents=0",
+   "probes": [
+    {
+     "url": "https://discord.com/api/v10/gateway",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "docker-hub",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://www.dockerstatus.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=21, incidents=0",
+   "probes": [
+    {
+     "url": "https://hub.docker.com",
+     "status": 200,
+     "ok": true
+    },
+    {
+     "url": "https://registry-1.docker.io/v2/",
+     "status": 401,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "dropbox",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.dropbox.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=12, incidents=0",
+   "probes": [
+    {
+     "url": "https://www.dropbox.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "ecobee",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.ecobee.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=11, incidents=1",
+   "probes": [
+    {
+     "url": "https://www.ecobee.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "epic-games",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.epicgames.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=79, incidents=0",
+   "probes": [
+    {
+     "url": "https://store.epicgames.com",
+     "status": 403,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "fastly",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": null,
+   "feed_status": null,
+   "feed_ok": null,
+   "feed_parsed": null,
+   "feed_error": null,
+   "probes": [
+    {
+     "url": "https://www.fastly.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "figma",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.figma.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=17, incidents=0",
+   "probes": [
+    {
+     "url": "https://www.figma.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "github",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://www.githubstatus.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=12, incidents=0",
+   "probes": [
+    {
+     "url": "https://github.com",
+     "status": 200,
+     "ok": true
+    },
+    {
+     "url": "https://api.github.com/zen",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "gitlab",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://api.status.io/1.0/status/5b36dc6502d06804c08349f7",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=24, incidents=0",
+   "probes": [
+    {
+     "url": "https://gitlab.com/users/sign_in",
+     "status": 403,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "google",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://www.google.com/appsstatus/dashboard/incidents.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=0, incidents=31",
+   "probes": [
+    {
+     "url": "https://www.google.com/generate_204",
+     "status": 204,
+     "ok": true
+    },
+    {
+     "url": "https://mail.google.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "google-cloud",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.cloud.google.com/incidents.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=0, incidents=8",
+   "probes": [
+    {
+     "url": "https://console.cloud.google.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "heroku",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.heroku.com/api/v4/current-status",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=3, incidents=3",
+   "probes": [
+    {
+     "url": "https://dashboard.heroku.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "home-assistant",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.home-assistant.io/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=28, incidents=0",
+   "probes": [
+    {
+     "url": "https://account.nabucasa.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "huggingface",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.huggingface.co/feed.rss",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=0, incidents=25",
+   "probes": [
+    {
+     "url": "https://huggingface.co",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "letsencrypt",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://api.status.io/1.0/status/55957a99e800baa4470002da",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=12, incidents=0",
+   "probes": [
+    {
+     "url": "https://acme-v02.api.letsencrypt.org/directory",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "linode",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": "https://status.linode.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=243, incidents=2",
+   "probes": [
+    {
+     "url": "https://cloud.linode.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "microsoft-365",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": null,
+   "feed_status": null,
+   "feed_ok": null,
+   "feed_parsed": null,
+   "feed_error": null,
+   "probes": [
+    {
+     "url": "https://outlook.office.com",
+     "status": 200,
+     "ok": true
+    },
+    {
+     "url": "https://login.microsoftonline.com/common/.well-known/openid-configuration",
+     "status": 200,
+     "ok": true
+    },
+    {
+     "url": "https://teams.microsoft.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "netflix",
+   "checked_at": "2026-11-18T19:40:43+00:00",
+   "feed_url": null,
+   "feed_status": null,
+   "feed_ok": null,
+   "feed_parsed": null,
+   "feed_error": null,
+   "probes": [
+    {
+     "url": "https://www.netflix.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "netlify",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://www.netlifystatus.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=42, incidents=0",
+   "probes": [
+    {
+     "url": "https://app.netlify.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "notion",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://www.notion-status.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=19, incidents=0",
+   "probes": [
+    {
+     "url": "https://www.notion.so",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "npm",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.npmjs.org/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=6, incidents=0",
+   "probes": [
+    {
+     "url": "https://registry.npmjs.org/-/ping",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "openai",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.openai.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=25, incidents=0",
+   "probes": [
+    {
+     "url": "https://chatgpt.com",
+     "status": 200,
+     "ok": true
+    },
+    {
+     "url": "https://api.openai.com/v1/models",
+     "status": 401,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "paypal",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://www.paypal-status.com/feed/rss",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=0, incidents=20",
+   "probes": [
+    {
+     "url": "https://www.paypal.com",
+     "status": 403,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "playstation",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": null,
+   "feed_status": null,
+   "feed_ok": null,
+   "feed_parsed": null,
+   "feed_error": null,
+   "probes": [
+    {
+     "url": "https://www.playstation.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "plex",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.plex.tv/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=25, incidents=0",
+   "probes": [
+    {
+     "url": "https://app.plex.tv",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "pypi",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.python.org/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=122, incidents=0",
+   "probes": [
+    {
+     "url": "https://pypi.org/simple/pip/",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "reddit",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://www.redditstatus.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=9, incidents=0",
+   "probes": [
+    {
+     "url": "https://www.reddit.com",
+     "status": 403,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "ring",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.ring.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=17, incidents=0",
+   "probes": [
+    {
+     "url": "https://ring.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "sentry",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.sentry.io/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=41, incidents=0",
+   "probes": [
+    {
+     "url": "https://sentry.io",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "slack",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://slack-status.com/api/v2.0.0/current",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=0, incidents=0",
+   "probes": [
+    {
+     "url": "https://slack.com/api/api.test",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "smartthings",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.smartthings.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=15, incidents=0",
+   "probes": [
+    {
+     "url": "https://api.smartthings.com",
+     "status": 404,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "sonos",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.sonos.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=128, incidents=0",
+   "probes": [
+    {
+     "url": "https://www.sonos.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "spotify",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": null,
+   "feed_status": null,
+   "feed_ok": null,
+   "feed_parsed": null,
+   "feed_error": null,
+   "probes": [
+    {
+     "url": "https://open.spotify.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "steam",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": null,
+   "feed_status": null,
+   "feed_ok": null,
+   "feed_parsed": null,
+   "feed_error": null,
+   "probes": [
+    {
+     "url": "https://store.steampowered.com",
+     "status": 200,
+     "ok": true
+    },
+    {
+     "url": "https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v1/",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "stripe",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": null,
+   "feed_status": null,
+   "feed_ok": null,
+   "feed_parsed": null,
+   "feed_error": null,
+   "probes": [
+    {
+     "url": "https://api.stripe.com/v1/charges",
+     "status": 401,
+     "ok": true
+    },
+    {
+     "url": "https://dashboard.stripe.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "supabase",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.supabase.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=1, incidents=1",
+   "probes": [
+    {
+     "url": "https://supabase.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "tailscale",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.tailscale.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=18, incidents=0",
+   "probes": [
+    {
+     "url": "https://login.tailscale.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "twilio",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.twilio.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=minor, components=172, incidents=36",
+   "probes": [
+    {
+     "url": "https://api.twilio.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "twitch",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.twitch.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=7, incidents=0",
+   "probes": [
+    {
+     "url": "https://www.twitch.tv",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "vercel",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://www.vercel-status.com/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=none, components=59, incidents=0",
+   "probes": [
+    {
+     "url": "https://vercel.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "xbox",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": null,
+   "feed_status": null,
+   "feed_ok": null,
+   "feed_parsed": null,
+   "feed_error": null,
+   "probes": [
+    {
+     "url": "https://www.xbox.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "youtube",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": null,
+   "feed_status": null,
+   "feed_ok": null,
+   "feed_parsed": null,
+   "feed_error": null,
+   "probes": [
+    {
+     "url": "https://www.youtube.com",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  },
+  {
+   "service_id": "zoom",
+   "checked_at": "2026-11-18T19:40:44+00:00",
+   "feed_url": "https://status.zoom.us/api/v2/summary.json",
+   "feed_status": 200,
+   "feed_ok": true,
+   "feed_parsed": true,
+   "feed_error": "indicator=maintenance, components=306, incidents=10",
+   "probes": [
+    {
+     "url": "https://zoom.us",
+     "status": 200,
+     "ok": true
+    }
+   ],
+   "verified": true
+  }
+ ]
+}

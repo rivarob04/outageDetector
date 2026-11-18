@@ -1,0 +1,16 @@
+id: epic-games
+name: Epic Games
+category: gaming
+icon: epicgames
+homepage: https://store.epicgames.com
+status_page: https://status.epicgames.com
+feed:
+  adapter: statuspage
+  url: https://status.epicgames.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://store.epicgames.com
+  accept_status:
+  - 403
+- kind: dns
+  host: epicgames.com

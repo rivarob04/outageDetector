@@ -1,0 +1,14 @@
+id: tailscale
+name: Tailscale
+category: network
+icon: tailscale
+homepage: https://tailscale.com
+status_page: https://status.tailscale.com
+feed:
+  adapter: statuspage
+  url: https://status.tailscale.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://login.tailscale.com
+- kind: dns
+  host: controlplane.tailscale.com

@@ -1,0 +1,14 @@
+id: huggingface
+name: Hugging Face
+category: ai
+icon: huggingface
+homepage: https://huggingface.co
+status_page: https://status.huggingface.co
+feed:
+  adapter: rss
+  url: https://status.huggingface.co/feed.rss
+probes:
+- kind: http
+  url: https://huggingface.co
+- kind: dns
+  host: huggingface.co

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>PayPal Status - Event History</title>
+        <link>https://www.paypal-status.com</link>
+        <description>PayPal Incidents, bullens and scheduled maintenance</description>
+        <lastBuildDate>Wed, 18 Nov 2026 19:40:47 GMT</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>PayPal Status Feed Generator</generator>
+        <item>
+            <title><![CDATA[Detected Resolved: Impact to Checkout and Multiple API's (PP-LIVE-110644)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/110644</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/110644</guid>
+            <pubDate>Thu, 12 Nov 2026 08:45:37 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Detected Resolved: </strong> <p>We were experiencing outage affecting Refunds, Authorizations, Billing Agreements, Captures, Orders, Express Checkout APIs, Online Checkout, Retail Checkout, Crypto. Our engineers have resolved the issue, and the impact has been mitigated.</p> <span data-affected-regions="Global">Affected Regions: Global</span>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Detected Resolved: Impact to Online Checkout (PP-LIVE-110567)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/110567</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/110567</guid>
+            <pubDate>Fri, 06 Nov 2026 09:46:09 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Detected Resolved: </strong> <p>We were experiencing outage affecting Online Checkout. Our engineers have resolved the issue, and the impact has been mitigated.</p> <span data-affected-regions="Global">Affected Regions: Global</span>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Detected Resolved: Impact to Braintree (PP-LIVE-110566)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/110566</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/110566</guid>
+            <pubDate>Fri, 06 Nov 2026 09:43:53 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Detected Resolved: </strong> <p>We were experiencing outage affecting Braintree. Our engineers have resolved the issue,</p><p>and the impact has been mitigated.</p> <span data-affected-regions="Global">Affected Regions: Global</span>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Initial Notification: PayPal Live Site Maintenance (PP-LIVE-110458)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/110458</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/110458</guid>
+            <pubDate>Thu, 05 Nov 2026 11:00:04 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Initial Notification: </strong> <br /> <p>On Wednesday November 4th PayPal's Venmo brand will be performing routine maintenance activity. There is a possibility some users could experience service interruption for up to 60 seconds during the maintenance period.</p><p><br /></p><p><strong>Impact Window:</strong> Thursday November 5th at 9:00am to 9:30am GMT.</p><br /><small>Oct 30, 00:33 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Resolved: Impact to  Venmo Crypto services (PP-LIVE-103873)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/103873</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/103873</guid>
+            <pubDate>Fri, 30 Oct 2026 07:43:11 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Resolved: </strong> <p>The issue has been resolved as of 19:22 PT</p> <br /> <br /> Affected Regions: North America<br /><small>Feb 2, 03:50 UTC</small><br /><br /><strong>Initial Notification: </strong> <p>We are experiencing a system issue that may be impacting Venmo Crypto services , Open Wallet and some credit flow in our production Environment.</p><p><br /></p><p>Our technical teams are actively working towards resolving the issue.</p><br /><small>Feb 2, 03:27 UTC</small><br /> <span data-affected-regions="">Affected Regions: </span>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Completed: Hyperwallet (PP-LIVE-110014)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/110014</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/110014</guid>
+            <pubDate>Wed, 28 Oct 2026 06:09:52 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Completed: </strong> <br /> <p>We would like to inform you that Hyperwallet scheduled maintenance in Production environment has completed successfully.</p><p><br /></p><p>All Hyperwallet Payout Services are back online and available.</p><br /><small>Oct 25, 09:25 UTC</small><br /><br /><strong>Rescheduled: </strong> <p>This is to inform you that the previously communicated Hyperwallet maintenance has been changed to 11:00 PM Saturday, 24 October up to 5:00 AM PDT Sunday, 25 October (06:00 UTC up to 12:00 UTC on Sunday, 25 October 2026). You will be notified once the maintenance is complete.</p><p><br /></p><p>During this scheduled maintenance, all Hyperwallet Payout Services in Production will be offline and unavailable. This will impact API calls, Control Panel, Pay Portal and batch file upload and processing.</p><p><br /></p><p>We sincerely apologize for any inconvenience this may cause.</p><br /><small>Oct 15, 16:18 UTC</small><br /><br /><strong>Initial Notification: </strong> <p>On <strong>Saturday, Oct 17th, 2026 (2:00PM to 8:00PM PDT)</strong>, Hyperwallet will be undergoing a 6-hour scheduled maintenance in our Production environment.</p><p><br /></p><p>During this scheduled maintenance, all Hyperwallet Payout Services in Production will be offline and unavailable. This will impact API calls, Control Panel, Web Portal and batch file upload and processing.</p><p><br /></p><p>We sincerely apologize for any inconveniences this may cause.</p><br /><small>Sep 28, 23:32 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Resolved: Impact to PayPal Checkout (PP-LIVE-109937)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/109937</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/109937</guid>
+            <pubDate>Mon, 26 Oct 2026 12:32:06 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Resolved: </strong> <p>The issue has been resolved.</p><p> </p> <br /><strong>Initial Notification: </strong> <p>We are currently experiencing degraded performance affecting PayPal Checkout and customer checkout experiences. Our team is actively investigating and working to mitigate the impact.</p> <span data-affected-regions="Global">Affected Regions: Global</span>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Detected Resolved: Impact to  Online Checkout (PP-LIVE-110330)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/110330</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/110330</guid>
+            <pubDate>Mon, 26 Oct 2026 12:31:54 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Detected Resolved: </strong> <p>We were experiencing outage affecting Online Checkout. Our engineers have resolved the issue, and the impact has been mitigated.</p> <span data-affected-regions="Global">Affected Regions: Global</span>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Initial Notification: PayPal Live Site Maintenance (PP-LIVE-110012)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/110012</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/110012</guid>
+            <pubDate>Fri, 16 Oct 2026 08:00:01 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Initial Notification: </strong> <br /> <p>On Thursday October 15th PayPal will performing routine maintenance activity. There is a possibility some users could experience errors for approximately 120 seconds during the maintenance period.</p><br /><small>Sep 28, 21:25 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Rescheduled: PayPal Live Site Maintenance (PP-LIVE-109965)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/109965</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/109965</guid>
+            <pubDate>Tue, 13 Oct 2026 10:00:05 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Rescheduled: </strong> <br /> <p>This maintenance scheduled for October 8th has been rescheduled for October 13th.</p><p><br /></p><p><strong>Impact Window:</strong> Thursday October 13th at 8:00 am to 8:30 am GMT.</p><br /><small>Oct 8, 01:34 UTC</small><br /><br /><strong>Initial Notification: </strong> <p>On Thursday October 8th PayPal's Venmo brand will be performing routine maintenance activity. There is a possibility some users could experience service interruption for up to 60 seconds during the maintenance period.</p><p><br /></p><p><strong>Impact Window:</strong> Thursday October 8th at 8:00 am to 8:30 am GMT.</p><br /><small>Sep 24, 21:55 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Resolved: Impact to BNPL (Pay Later) authorizations (PP-LIVE-110179)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/110179</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/110179</guid>
+            <pubDate>Mon, 12 Oct 2026 03:39:14 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Resolved: </strong> <p>The issue has been resolved.</p><p> </p> <br /><strong>Initial Notification: </strong> <p>We are currently experiencing an issue affecting Buy Now, Pay Later (BNPL) authorizations, and customers may see declines and checkout errors. Our team is working on resolving the issue and mitigating the impact.</p> <span data-affected-regions="Global">Affected Regions: Global</span>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Initial Notification: PayPal Live Site Maintenance (PP-LIVE-110005)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/110005</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/110005</guid>
+            <pubDate>Fri, 09 Oct 2026 06:29:59 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Initial Notification: </strong> <br /> <p>On Thursday October 8th PayPal will be performing routine maintenance activity. There is a possibility some users could experience errors for no more than 120 seconds during the maintenance period.</p><br /><small>Sep 28, 17:17 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Initial Notification: PayPal Live Site Maintenance (PP-LIVE-109883)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/109883</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/109883</guid>
+            <pubDate>Fri, 02 Oct 2026 06:30:00 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Initial Notification: </strong> <br /> <p>On Thursday October 1st PayPal will be performing routine maintenance activity. There is a possibility some users could experience errors for no more than 120 seconds during the maintenance period.</p><br /><small>Sep 16, 22:23 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Initial Notification: Initial Notification: Initial Notification: PayPal Live Site Maintenance (PP-LIVE-108337)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/108337</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/108337</guid>
+            <pubDate>Fri, 25 Sep 2026 06:30:00 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Initial Notification: </strong> <br /> <p><span>On Thursday September 24th PayPal will be performing routine maintenance activity. There is a possibility some users could experience errors for no more than 120 seconds during the maintenance period.</span></p><br /><small>Sep 9, 15:43 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Detected Resolved: Impact to Braintree Apple Pay Tokenization (PP-LIVE-109944)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/109944</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/109944</guid>
+            <pubDate>Wed, 23 Sep 2026 12:43:04 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Detected Resolved: </strong> <p>We experienced an outage affecting Apple Pay transactions. Our engineers have resolved the issue, and the impact has been mitigated.</p> <span data-affected-regions="North America">Affected Regions: North America</span>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Detected Resolved: Impacted Productions to Multiple Venmo products (PP-LIVE-109929)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/109929</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/109929</guid>
+            <pubDate>Mon, 21 Sep 2026 14:58:56 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Detected Resolved: </strong> <p>We were experiencing an issue affecting multiple Venmo products, Our engineers have resolved the issue, and the impact has been mitigated.</p> <span data-affected-regions="Global">Affected Regions: Global</span>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Initial Notification: PayPal Live Site Maintenance (PP-LIVE-108260)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/108260</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/108260</guid>
+            <pubDate>Fri, 11 Sep 2026 06:32:01 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Initial Notification: </strong> <br /> <p><span>On Thursday September 10th PayPal will be performing routine maintenance activity. There is a possibility some users could experience errors for no more than 120 seconds during the maintenance period.</span></p><br /><small>Aug 31, 12:12 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Postponed: Venmo Maintenance (PP-LIVE-107523)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/107523</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/107523</guid>
+            <pubDate>Fri, 17 Jul 2026 09:00:03 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Postponed: </strong> <br /> <p>Venmo maintenance activity has been postponed to next week. <span>We apologize for the inconvenience and appreciate your understanding.</span></p><br /><small>Jul 9, 22:29 UTC</small><br /><br /><strong>Initial Notification: </strong> <p><span>On Thursday July 9th Venmo will be performing a maintenance activity. There is a possibility some users could experience errors for no more than 180 seconds during the maintenance period.</span></p><br /><small>Jun 25, 23:15 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Initial Notification: Venmo Maintenance (PP-LIVE-107344)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/107344</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/107344</guid>
+            <pubDate>Thu, 25 Jun 2026 23:14:59 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Initial Notification: </strong> <br /> <p><span>On Thursday June 11th Venmo will be performing a maintenance activity. There is a possibility some users could experience errors for no more than 180 seconds during the maintenance period.</span></p><br /><small>Jun 10, 18:54 UTC</small><br />]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Initial Notification: PayPal Live Site Maintenance (PP-LIVE-105649)]]></title>
+            <link>https://www.paypal-status.com/history/eventdetails/105649</link>
+            <guid>https://www.paypal-status.com/history/eventdetails/105649</guid>
+            <pubDate>Tue, 12 May 2026 10:00:06 GMT</pubDate>
+            <content:encoded><![CDATA[<br /><strong>Initial Notification: </strong> <br /> <p>On Tuesday May 12th PayPal's Venmo brand will be performing routine maintenance activity. There is a possibility some users could experience service interruption for up to 60 seconds during the maintenance period.</p><br /><small>May 1, 00:03 UTC</small><br />]]></content:encoded>
+        </item>
+    </channel>
+</rss>

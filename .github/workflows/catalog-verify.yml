@@ -1,0 +1,46 @@
+name: Catalog verify
+
+# Re-checks every catalog endpoint live from GitHub's network, records the raw
+# feed payloads as test fixtures and publishes the results to the
+# `catalog-verify-results` branch (never to main directly) for review.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * 1"  # weekly, Monday 06:17 UTC
+  push:
+    branches: ["verify/**"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-verify
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - working-directory: backend
+        run: uv sync --frozen
+      - name: Verify catalog
+        working-directory: backend
+        env:
+          PULSE_CATALOG_DIR: ${{ github.workspace }}/catalog
+        run: |
+          uv run pulse catalog verify --write \
+            --record "${GITHUB_WORKSPACE}/backend/tests/fixtures/feeds/live" \
+            --report "${GITHUB_WORKSPACE}/docs/catalog-verification.md" | tee verify.log
+          tail -1 verify.log >> "$GITHUB_STEP_SUMMARY"
+      - name: Publish results branch
+        run: |
+          git config user.name "pulse-catalog-bot"
+          git config user.email "pulse-catalog-bot@users.noreply.github.com"
+          git checkout -B catalog-verify-results
+          git add catalog/verification.json docs/catalog-verification.md backend/tests/fixtures/feeds/live
+          git commit -m "chore(catalog): verification results $(date -u +%Y-%m-%d)" || exit 0
+          git push -f origin catalog-verify-results

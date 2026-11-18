@@ -1,0 +1,166 @@
+# Region coordinates for the map. Approximate city-level locations.
+- {id: 'aws:us-east-1', name: AWS N. Virginia (us-east-1), provider: aws, lat: 38.95, lon: -77.45}
+- {id: 'aws:us-east-2', name: AWS Ohio (us-east-2), provider: aws, lat: 39.96, lon: -83.0}
+- {id: 'aws:us-west-1', name: AWS N. California (us-west-1), provider: aws, lat: 37.35, lon: -121.96}
+- {id: 'aws:us-west-2', name: AWS Oregon (us-west-2), provider: aws, lat: 45.84, lon: -119.7}
+- {id: 'aws:af-south-1', name: AWS Cape Town (af-south-1), provider: aws, lat: -33.92, lon: 18.42}
+- {id: 'aws:ap-east-1', name: AWS Hong Kong (ap-east-1), provider: aws, lat: 22.32, lon: 114.17}
+- {id: 'aws:ap-south-1', name: AWS Mumbai (ap-south-1), provider: aws, lat: 19.08, lon: 72.88}
+- {id: 'aws:ap-south-2', name: AWS Hyderabad (ap-south-2), provider: aws, lat: 17.39, lon: 78.49}
+- {id: 'aws:ap-southeast-1', name: AWS Singapore (ap-southeast-1), provider: aws, lat: 1.35, lon: 103.82}
+- {id: 'aws:ap-southeast-2', name: AWS Sydney (ap-southeast-2), provider: aws, lat: -33.87, lon: 151.21}
+- {id: 'aws:ap-southeast-3', name: AWS Jakarta (ap-southeast-3), provider: aws, lat: -6.2, lon: 106.85}
+- {id: 'aws:ap-southeast-4', name: AWS Melbourne (ap-southeast-4), provider: aws, lat: -37.81, lon: 144.96}
+- {id: 'aws:ap-southeast-5', name: AWS Malaysia (ap-southeast-5), provider: aws, lat: 3.14, lon: 101.69}
+- {id: 'aws:ap-southeast-7', name: AWS Thailand (ap-southeast-7), provider: aws, lat: 13.76, lon: 100.5}
+- {id: 'aws:ap-northeast-1', name: AWS Tokyo (ap-northeast-1), provider: aws, lat: 35.68, lon: 139.69}
+- {id: 'aws:ap-northeast-2', name: AWS Seoul (ap-northeast-2), provider: aws, lat: 37.57, lon: 126.98}
+- {id: 'aws:ap-northeast-3', name: AWS Osaka (ap-northeast-3), provider: aws, lat: 34.69, lon: 135.5}
+- {id: 'aws:ca-central-1', name: AWS Canada Central (ca-central-1), provider: aws, lat: 45.5, lon: -73.57}
+- {id: 'aws:ca-west-1', name: AWS Calgary (ca-west-1), provider: aws, lat: 51.05, lon: -114.07}
+- {id: 'aws:eu-central-1', name: AWS Frankfurt (eu-central-1), provider: aws, lat: 50.11, lon: 8.68}
+- {id: 'aws:eu-central-2', name: AWS Zurich (eu-central-2), provider: aws, lat: 47.38, lon: 8.54}
+- {id: 'aws:eu-west-1', name: AWS Ireland (eu-west-1), provider: aws, lat: 53.35, lon: -6.26}
+- {id: 'aws:eu-west-2', name: AWS London (eu-west-2), provider: aws, lat: 51.51, lon: -0.13}
+- {id: 'aws:eu-west-3', name: AWS Paris (eu-west-3), provider: aws, lat: 48.86, lon: 2.35}
+- {id: 'aws:eu-south-1', name: AWS Milan (eu-south-1), provider: aws, lat: 45.46, lon: 9.19}
+- {id: 'aws:eu-south-2', name: AWS Spain (eu-south-2), provider: aws, lat: 41.65, lon: -0.88}
+- {id: 'aws:eu-north-1', name: AWS Stockholm (eu-north-1), provider: aws, lat: 59.33, lon: 18.07}
+- {id: 'aws:il-central-1', name: AWS Tel Aviv (il-central-1), provider: aws, lat: 32.09, lon: 34.78}
+- {id: 'aws:me-south-1', name: AWS Bahrain (me-south-1), provider: aws, lat: 26.07, lon: 50.56}
+- {id: 'aws:me-central-1', name: AWS UAE (me-central-1), provider: aws, lat: 25.2, lon: 55.27}
+- {id: 'aws:mx-central-1', name: AWS Mexico (mx-central-1), provider: aws, lat: 20.59, lon: -100.39}
+- {id: 'aws:sa-east-1', name: AWS São Paulo (sa-east-1), provider: aws, lat: -23.55, lon: -46.63}
+- {id: 'aws:us-gov-west-1', name: AWS GovCloud (US-West) (us-gov-west-1), provider: aws, lat: 45.6, lon: -121.2}
+- {id: 'aws:us-gov-east-1', name: AWS GovCloud (US-East) (us-gov-east-1), provider: aws, lat: 40.0, lon: -83.0}
+- {id: 'gcp:us-central1', name: Google Cloud Iowa (us-central1), provider: gcp, lat: 41.26, lon: -95.86}
+- {id: 'gcp:us-east1', name: Google Cloud South Carolina (us-east1), provider: gcp, lat: 33.2, lon: -80.01}
+- {id: 'gcp:us-east4', name: Google Cloud N. Virginia (us-east4), provider: gcp, lat: 39.04, lon: -77.49}
+- {id: 'gcp:us-east5', name: Google Cloud Columbus (us-east5), provider: gcp, lat: 39.96, lon: -83.0}
+- {id: 'gcp:us-south1', name: Google Cloud Dallas (us-south1), provider: gcp, lat: 32.78, lon: -96.8}
+- {id: 'gcp:us-west1', name: Google Cloud Oregon (us-west1), provider: gcp, lat: 45.6, lon: -121.18}
+- {id: 'gcp:us-west2', name: Google Cloud Los Angeles (us-west2), provider: gcp, lat: 34.05, lon: -118.24}
+- {id: 'gcp:us-west3', name: Google Cloud Salt Lake City (us-west3), provider: gcp, lat: 40.76, lon: -111.89}
+- {id: 'gcp:us-west4', name: Google Cloud Las Vegas (us-west4), provider: gcp, lat: 36.17, lon: -115.14}
+- {id: 'gcp:northamerica-northeast1', name: Google Cloud Montréal (northamerica-northeast1), provider: gcp, lat: 45.5, lon: -73.57}
+- {id: 'gcp:northamerica-northeast2', name: Google Cloud Toronto (northamerica-northeast2), provider: gcp, lat: 43.65, lon: -79.38}
+- {id: 'gcp:northamerica-south1', name: Google Cloud Querétaro (northamerica-south1), provider: gcp, lat: 20.59, lon: -100.39}
+- {id: 'gcp:southamerica-east1', name: Google Cloud São Paulo (southamerica-east1), provider: gcp, lat: -23.55, lon: -46.63}
+- {id: 'gcp:southamerica-west1', name: Google Cloud Santiago (southamerica-west1), provider: gcp, lat: -33.45, lon: -70.67}
+- {id: 'gcp:europe-west1', name: Google Cloud Belgium (europe-west1), provider: gcp, lat: 50.45, lon: 3.82}
+- {id: 'gcp:europe-west2', name: Google Cloud London (europe-west2), provider: gcp, lat: 51.51, lon: -0.13}
+- {id: 'gcp:europe-west3', name: Google Cloud Frankfurt (europe-west3), provider: gcp, lat: 50.11, lon: 8.68}
+- {id: 'gcp:europe-west4', name: Google Cloud Netherlands (europe-west4), provider: gcp, lat: 53.44, lon: 6.84}
+- {id: 'gcp:europe-west6', name: Google Cloud Zurich (europe-west6), provider: gcp, lat: 47.38, lon: 8.54}
+- {id: 'gcp:europe-west8', name: Google Cloud Milan (europe-west8), provider: gcp, lat: 45.46, lon: 9.19}
+- {id: 'gcp:europe-west9', name: Google Cloud Paris (europe-west9), provider: gcp, lat: 48.86, lon: 2.35}
+- {id: 'gcp:europe-west10', name: Google Cloud Berlin (europe-west10), provider: gcp, lat: 52.52, lon: 13.4}
+- {id: 'gcp:europe-west12', name: Google Cloud Turin (europe-west12), provider: gcp, lat: 45.07, lon: 7.69}
+- {id: 'gcp:europe-southwest1', name: Google Cloud Madrid (europe-southwest1), provider: gcp, lat: 40.42, lon: -3.7}
+- {id: 'gcp:europe-north1', name: Google Cloud Finland (europe-north1), provider: gcp, lat: 60.57, lon: 27.19}
+- {id: 'gcp:europe-north2', name: Google Cloud Stockholm (europe-north2), provider: gcp, lat: 59.33, lon: 18.07}
+- {id: 'gcp:europe-central2', name: Google Cloud Warsaw (europe-central2), provider: gcp, lat: 52.23, lon: 21.01}
+- {id: 'gcp:me-west1', name: Google Cloud Tel Aviv (me-west1), provider: gcp, lat: 32.09, lon: 34.78}
+- {id: 'gcp:me-central1', name: Google Cloud Doha (me-central1), provider: gcp, lat: 25.29, lon: 51.53}
+- {id: 'gcp:me-central2', name: Google Cloud Dammam (me-central2), provider: gcp, lat: 26.43, lon: 50.1}
+- {id: 'gcp:africa-south1', name: Google Cloud Johannesburg (africa-south1), provider: gcp, lat: -26.2, lon: 28.05}
+- {id: 'gcp:asia-east1', name: Google Cloud Taiwan (asia-east1), provider: gcp, lat: 24.05, lon: 120.52}
+- {id: 'gcp:asia-east2', name: Google Cloud Hong Kong (asia-east2), provider: gcp, lat: 22.32, lon: 114.17}
+- {id: 'gcp:asia-northeast1', name: Google Cloud Tokyo (asia-northeast1), provider: gcp, lat: 35.68, lon: 139.69}
+- {id: 'gcp:asia-northeast2', name: Google Cloud Osaka (asia-northeast2), provider: gcp, lat: 34.69, lon: 135.5}
+- {id: 'gcp:asia-northeast3', name: Google Cloud Seoul (asia-northeast3), provider: gcp, lat: 37.57, lon: 126.98}
+- {id: 'gcp:asia-south1', name: Google Cloud Mumbai (asia-south1), provider: gcp, lat: 19.08, lon: 72.88}
+- {id: 'gcp:asia-south2', name: Google Cloud Delhi (asia-south2), provider: gcp, lat: 28.61, lon: 77.21}
+- {id: 'gcp:asia-southeast1', name: Google Cloud Singapore (asia-southeast1), provider: gcp, lat: 1.35, lon: 103.82}
+- {id: 'gcp:asia-southeast2', name: Google Cloud Jakarta (asia-southeast2), provider: gcp, lat: -6.2, lon: 106.85}
+- {id: 'gcp:australia-southeast1', name: Google Cloud Sydney (australia-southeast1), provider: gcp, lat: -33.87, lon: 151.21}
+- {id: 'gcp:australia-southeast2', name: Google Cloud Melbourne (australia-southeast2), provider: gcp, lat: -37.81, lon: 144.96}
+- {id: 'cf:ATL', name: Cloudflare Atlanta (ATL), provider: cloudflare, lat: 33.64, lon: -84.43}
+- {id: 'cf:BOS', name: Cloudflare Boston (BOS), provider: cloudflare, lat: 42.36, lon: -71.01}
+- {id: 'cf:ORD', name: Cloudflare Chicago (ORD), provider: cloudflare, lat: 41.98, lon: -87.9}
+- {id: 'cf:DFW', name: Cloudflare Dallas (DFW), provider: cloudflare, lat: 32.9, lon: -97.04}
+- {id: 'cf:DEN', name: Cloudflare Denver (DEN), provider: cloudflare, lat: 39.86, lon: -104.67}
+- {id: 'cf:IAH', name: Cloudflare Houston (IAH), provider: cloudflare, lat: 29.99, lon: -95.34}
+- {id: 'cf:LAX', name: Cloudflare Los Angeles (LAX), provider: cloudflare, lat: 33.94, lon: -118.41}
+- {id: 'cf:MIA', name: Cloudflare Miami (MIA), provider: cloudflare, lat: 25.79, lon: -80.29}
+- {id: 'cf:MSP', name: Cloudflare Minneapolis (MSP), provider: cloudflare, lat: 44.88, lon: -93.22}
+- {id: 'cf:EWR', name: Cloudflare Newark (EWR), provider: cloudflare, lat: 40.69, lon: -74.17}
+- {id: 'cf:PHX', name: Cloudflare Phoenix (PHX), provider: cloudflare, lat: 33.43, lon: -112.01}
+- {id: 'cf:SJC', name: Cloudflare San Jose (SJC), provider: cloudflare, lat: 37.36, lon: -121.93}
+- {id: 'cf:SEA', name: Cloudflare Seattle (SEA), provider: cloudflare, lat: 47.45, lon: -122.31}
+- {id: 'cf:IAD', name: Cloudflare Ashburn (IAD), provider: cloudflare, lat: 38.95, lon: -77.45}
+- {id: 'cf:SLC', name: Cloudflare Salt Lake City (SLC), provider: cloudflare, lat: 40.79, lon: -111.98}
+- {id: 'cf:PDX', name: Cloudflare Portland (PDX), provider: cloudflare, lat: 45.59, lon: -122.6}
+- {id: 'cf:LAS', name: Cloudflare Las Vegas (LAS), provider: cloudflare, lat: 36.08, lon: -115.15}
+- {id: 'cf:SAN', name: Cloudflare San Diego (SAN), provider: cloudflare, lat: 32.73, lon: -117.19}
+- {id: 'cf:YYZ', name: Cloudflare Toronto (YYZ), provider: cloudflare, lat: 43.68, lon: -79.63}
+- {id: 'cf:YUL', name: Cloudflare Montréal (YUL), provider: cloudflare, lat: 45.47, lon: -73.74}
+- {id: 'cf:YVR', name: Cloudflare Vancouver (YVR), provider: cloudflare, lat: 49.19, lon: -123.18}
+- {id: 'cf:YYC', name: Cloudflare Calgary (YYC), provider: cloudflare, lat: 51.13, lon: -114.01}
+- {id: 'cf:YOW', name: Cloudflare Ottawa (YOW), provider: cloudflare, lat: 45.32, lon: -75.67}
+- {id: 'cf:YWG', name: Cloudflare Winnipeg (YWG), provider: cloudflare, lat: 49.91, lon: -97.24}
+- {id: 'cf:MEX', name: Cloudflare Mexico City (MEX), provider: cloudflare, lat: 19.44, lon: -99.07}
+- {id: 'cf:GRU', name: Cloudflare São Paulo (GRU), provider: cloudflare, lat: -23.43, lon: -46.47}
+- {id: 'cf:GIG', name: Cloudflare Rio de Janeiro (GIG), provider: cloudflare, lat: -22.81, lon: -43.25}
+- {id: 'cf:EZE', name: Cloudflare Buenos Aires (EZE), provider: cloudflare, lat: -34.82, lon: -58.54}
+- {id: 'cf:SCL', name: Cloudflare Santiago (SCL), provider: cloudflare, lat: -33.39, lon: -70.79}
+- {id: 'cf:BOG', name: Cloudflare Bogotá (BOG), provider: cloudflare, lat: 4.7, lon: -74.15}
+- {id: 'cf:LIM', name: Cloudflare Lima (LIM), provider: cloudflare, lat: -12.02, lon: -77.11}
+- {id: 'cf:LHR', name: Cloudflare London (LHR), provider: cloudflare, lat: 51.47, lon: -0.45}
+- {id: 'cf:MAN', name: Cloudflare Manchester (MAN), provider: cloudflare, lat: 53.35, lon: -2.27}
+- {id: 'cf:DUB', name: Cloudflare Dublin (DUB), provider: cloudflare, lat: 53.42, lon: -6.27}
+- {id: 'cf:AMS', name: Cloudflare Amsterdam (AMS), provider: cloudflare, lat: 52.31, lon: 4.76}
+- {id: 'cf:FRA', name: Cloudflare Frankfurt (FRA), provider: cloudflare, lat: 50.03, lon: 8.57}
+- {id: 'cf:CDG', name: Cloudflare Paris (CDG), provider: cloudflare, lat: 49.01, lon: 2.55}
+- {id: 'cf:MAD', name: Cloudflare Madrid (MAD), provider: cloudflare, lat: 40.47, lon: -3.56}
+- {id: 'cf:BCN', name: Cloudflare Barcelona (BCN), provider: cloudflare, lat: 41.3, lon: 2.08}
+- {id: 'cf:LIS', name: Cloudflare Lisbon (LIS), provider: cloudflare, lat: 38.77, lon: -9.13}
+- {id: 'cf:MXP', name: Cloudflare Milan (MXP), provider: cloudflare, lat: 45.63, lon: 8.72}
+- {id: 'cf:FCO', name: Cloudflare Rome (FCO), provider: cloudflare, lat: 41.8, lon: 12.25}
+- {id: 'cf:ZRH', name: Cloudflare Zurich (ZRH), provider: cloudflare, lat: 47.46, lon: 8.55}
+- {id: 'cf:VIE', name: Cloudflare Vienna (VIE), provider: cloudflare, lat: 48.11, lon: 16.57}
+- {id: 'cf:PRG', name: Cloudflare Prague (PRG), provider: cloudflare, lat: 50.1, lon: 14.26}
+- {id: 'cf:WAW', name: Cloudflare Warsaw (WAW), provider: cloudflare, lat: 52.17, lon: 20.97}
+- {id: 'cf:BRU', name: Cloudflare Brussels (BRU), provider: cloudflare, lat: 50.9, lon: 4.48}
+- {id: 'cf:CPH', name: Cloudflare Copenhagen (CPH), provider: cloudflare, lat: 55.62, lon: 12.66}
+- {id: 'cf:ARN', name: Cloudflare Stockholm (ARN), provider: cloudflare, lat: 59.65, lon: 17.92}
+- {id: 'cf:OSL', name: Cloudflare Oslo (OSL), provider: cloudflare, lat: 60.19, lon: 11.1}
+- {id: 'cf:HEL', name: Cloudflare Helsinki (HEL), provider: cloudflare, lat: 60.32, lon: 24.96}
+- {id: 'cf:HAM', name: Cloudflare Hamburg (HAM), provider: cloudflare, lat: 53.63, lon: 9.99}
+- {id: 'cf:MUC', name: Cloudflare Munich (MUC), provider: cloudflare, lat: 48.35, lon: 11.79}
+- {id: 'cf:DUS', name: Cloudflare Düsseldorf (DUS), provider: cloudflare, lat: 51.29, lon: 6.77}
+- {id: 'cf:TXL', name: Cloudflare Berlin (TXL), provider: cloudflare, lat: 52.56, lon: 13.29}
+- {id: 'cf:BER', name: Cloudflare Berlin (BER), provider: cloudflare, lat: 52.36, lon: 13.5}
+- {id: 'cf:ATH', name: Cloudflare Athens (ATH), provider: cloudflare, lat: 37.94, lon: 23.94}
+- {id: 'cf:IST', name: Cloudflare Istanbul (IST), provider: cloudflare, lat: 41.26, lon: 28.74}
+- {id: 'cf:OTP', name: Cloudflare Bucharest (OTP), provider: cloudflare, lat: 44.57, lon: 26.08}
+- {id: 'cf:SOF', name: Cloudflare Sofia (SOF), provider: cloudflare, lat: 42.7, lon: 23.41}
+- {id: 'cf:BUD', name: Cloudflare Budapest (BUD), provider: cloudflare, lat: 47.44, lon: 19.26}
+- {id: 'cf:KBP', name: Cloudflare Kyiv (KBP), provider: cloudflare, lat: 50.35, lon: 30.89}
+- {id: 'cf:TLV', name: Cloudflare Tel Aviv (TLV), provider: cloudflare, lat: 32.01, lon: 34.89}
+- {id: 'cf:DXB', name: Cloudflare Dubai (DXB), provider: cloudflare, lat: 25.25, lon: 55.36}
+- {id: 'cf:DOH', name: Cloudflare Doha (DOH), provider: cloudflare, lat: 25.27, lon: 51.61}
+- {id: 'cf:JNB', name: Cloudflare Johannesburg (JNB), provider: cloudflare, lat: -26.14, lon: 28.25}
+- {id: 'cf:CPT', name: Cloudflare Cape Town (CPT), provider: cloudflare, lat: -33.97, lon: 18.6}
+- {id: 'cf:LOS', name: Cloudflare Lagos (LOS), provider: cloudflare, lat: 6.58, lon: 3.32}
+- {id: 'cf:NBO', name: Cloudflare Nairobi (NBO), provider: cloudflare, lat: -1.32, lon: 36.93}
+- {id: 'cf:CAI', name: Cloudflare Cairo (CAI), provider: cloudflare, lat: 30.12, lon: 31.41}
+- {id: 'cf:BOM', name: Cloudflare Mumbai (BOM), provider: cloudflare, lat: 19.09, lon: 72.87}
+- {id: 'cf:DEL', name: Cloudflare New Delhi (DEL), provider: cloudflare, lat: 28.56, lon: 77.1}
+- {id: 'cf:MAA', name: Cloudflare Chennai (MAA), provider: cloudflare, lat: 12.99, lon: 80.17}
+- {id: 'cf:BLR', name: Cloudflare Bangalore (BLR), provider: cloudflare, lat: 13.2, lon: 77.71}
+- {id: 'cf:SIN', name: Cloudflare Singapore (SIN), provider: cloudflare, lat: 1.36, lon: 103.99}
+- {id: 'cf:HKG', name: Cloudflare Hong Kong (HKG), provider: cloudflare, lat: 22.31, lon: 113.92}
+- {id: 'cf:NRT', name: Cloudflare Tokyo (NRT), provider: cloudflare, lat: 35.77, lon: 140.39}
+- {id: 'cf:KIX', name: Cloudflare Osaka (KIX), provider: cloudflare, lat: 34.43, lon: 135.24}
+- {id: 'cf:ICN', name: Cloudflare Seoul (ICN), provider: cloudflare, lat: 37.46, lon: 126.44}
+- {id: 'cf:TPE', name: Cloudflare Taipei (TPE), provider: cloudflare, lat: 25.08, lon: 121.23}
+- {id: 'cf:MNL', name: Cloudflare Manila (MNL), provider: cloudflare, lat: 14.51, lon: 121.02}
+- {id: 'cf:BKK', name: Cloudflare Bangkok (BKK), provider: cloudflare, lat: 13.69, lon: 100.75}
+- {id: 'cf:KUL', name: Cloudflare Kuala Lumpur (KUL), provider: cloudflare, lat: 2.75, lon: 101.71}
+- {id: 'cf:CGK', name: Cloudflare Jakarta (CGK), provider: cloudflare, lat: -6.13, lon: 106.66}
+- {id: 'cf:SYD', name: Cloudflare Sydney (SYD), provider: cloudflare, lat: -33.95, lon: 151.18}
+- {id: 'cf:MEL', name: Cloudflare Melbourne (MEL), provider: cloudflare, lat: -37.67, lon: 144.84}
+- {id: 'cf:BNE', name: Cloudflare Brisbane (BNE), provider: cloudflare, lat: -27.38, lon: 153.12}
+- {id: 'cf:PER', name: Cloudflare Perth (PER), provider: cloudflare, lat: -31.94, lon: 115.97}
+- {id: 'cf:AKL', name: Cloudflare Auckland (AKL), provider: cloudflare, lat: -37.01, lon: 174.79}

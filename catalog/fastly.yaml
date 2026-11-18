@@ -1,0 +1,12 @@
+id: fastly
+name: Fastly
+category: cdn
+icon: fastly
+homepage: https://www.fastly.com
+status_page: https://www.fastlystatus.com
+probes:
+- kind: http
+  url: https://www.fastly.com
+- kind: dns
+  host: fastly.com
+notes: fastlystatus.com blocks automated requests from cloud IP ranges; checks only.

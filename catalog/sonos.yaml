@@ -1,0 +1,16 @@
+id: sonos
+name: Sonos
+category: smarthome
+icon: sonos
+homepage: https://www.sonos.com
+status_page: https://status.sonos.com
+feed:
+  adapter: statuspage
+  url: https://status.sonos.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://www.sonos.com
+  accept_status:
+  - 403
+- kind: dns
+  host: sonos.com

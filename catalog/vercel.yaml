@@ -1,0 +1,18 @@
+id: vercel
+name: Vercel
+category: cloud
+icon: vercel
+homepage: https://vercel.com
+status_page: https://www.vercel-status.com
+feed:
+  adapter: statuspage
+  url: https://www.vercel-status.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://vercel.com
+- kind: dns
+  host: vercel.com
+depends_on:
+- aws:us-east-1
+depends_on_sources:
+- https://vercel.com/docs/regions (Vercel functions default to AWS iad1 / us-east-1)

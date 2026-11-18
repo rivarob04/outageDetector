@@ -1,0 +1,10 @@
+id: youtube
+name: YouTube
+category: streaming
+icon: youtube
+homepage: https://www.youtube.com
+probes:
+- kind: http
+  url: https://www.youtube.com
+- kind: dns
+  host: youtube.com

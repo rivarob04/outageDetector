@@ -1,0 +1,16 @@
+id: stripe
+name: Stripe
+category: payments
+icon: stripe
+homepage: https://stripe.com
+status_page: https://status.stripe.com
+probes:
+- kind: http
+  url: https://api.stripe.com/v1/charges
+  accept_status:
+  - 401
+- kind: http
+  url: https://dashboard.stripe.com
+- kind: dns
+  host: api.stripe.com
+notes: Stripe's status page has no documented machine-readable feed; checks only.

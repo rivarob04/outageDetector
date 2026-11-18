@@ -1,0 +1,190 @@
+{
+  "result": {
+    "status_overall": {
+      "updated": "2026-11-16T18:18:52.256Z",
+      "status": "Operational",
+      "status_code": 100
+    },
+    "status": [
+      {
+        "id": "5aa8056d14d0a40560057874",
+        "name": "acme-v02.api.letsencrypt.org (Production)",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957a99e800baa4470002e9",
+            "name": "High Assurance Datacenter 1",
+            "updated": "2026-11-16T18:18:52.249Z",
+            "status": "Operational",
+            "status_code": 100
+          },
+          {
+            "id": "55957b1c0b10966b48000309",
+            "name": "High Assurance Datacenter 2",
+            "updated": "2026-11-10T22:00:09.200Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2026-11-16T18:18:52.249Z"
+      },
+      {
+        "id": "5a4fb3b724542523a2d704cc",
+        "name": "acme-staging-v02.api.letsencrypt.org (Staging)",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957a99e800baa4470002e9",
+            "name": "High Assurance Datacenter 1",
+            "updated": "2026-11-16T18:18:52.249Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2026-11-16T18:18:52.249Z"
+      },
+      {
+        "id": "68b07053a9e7720525d50e12",
+        "name": "portal.letsencrypt.org (Production)",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957a99e800baa4470002e9",
+            "name": "High Assurance Datacenter 1",
+            "updated": "2026-11-04T22:43:04.613Z",
+            "status": "Operational",
+            "status_code": 100
+          },
+          {
+            "id": "55957b1c0b10966b48000309",
+            "name": "High Assurance Datacenter 2",
+            "updated": "2026-09-02T23:28:32.615Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2026-11-04T22:43:04.613Z"
+      },
+      {
+        "id": "68b07079c58818058c8be396",
+        "name": "portal-staging.letsencrypt.org (Staging)",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957a99e800baa4470002e9",
+            "name": "High Assurance Datacenter 1",
+            "updated": "2026-11-04T22:43:04.614Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2026-11-04T22:43:04.614Z"
+      },
+      {
+        "id": "684b0c1467999d05d50fae56",
+        "name": "*.c.lencr.org (Production)",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957b4f0b10966b4800030a",
+            "name": "Public Data Center",
+            "updated": "2025-11-18T19:09:14.725Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2025-11-18T19:09:14.725Z"
+      },
+      {
+        "id": "684b0c1ad3c2b405d193fda8",
+        "name": "stg-*.c.lencr.org (Staging)",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957b4f0b10966b4800030a",
+            "name": "Public Data Center",
+            "updated": "2026-03-04T23:03:52.554Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2026-03-04T23:03:52.554Z"
+      },
+      {
+        "id": "55957a99e800baa4470002ea",
+        "name": "Website",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957b4f0b10966b4800030a",
+            "name": "Public Data Center",
+            "updated": "2025-08-28T00:55:26.813Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2025-08-28T00:55:26.813Z"
+      },
+      {
+        "id": "6977ea6351c5f004e2e1d182",
+        "name": "log.twig.ct.letsencrypt.org",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957b4f0b10966b4800030a",
+            "name": "Public Data Center",
+            "updated": "2026-01-26T22:27:47.883Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2026-01-26T22:27:47.883Z"
+      },
+      {
+        "id": "6977ea77867f7304f3ae4194",
+        "name": "log.sycamore.ct.letsencrypt.org",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957b4f0b10966b4800030a",
+            "name": "Public Data Center",
+            "updated": "2026-01-26T22:28:07.220Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2026-01-26T22:28:07.220Z"
+      },
+      {
+        "id": "6977ea82b4db2704d6ca41c1",
+        "name": "log.willow.ct.letsencrypt.org",
+        "status": "Operational",
+        "status_code": 100,
+        "containers": [
+          {
+            "id": "55957b4f0b10966b4800030a",
+            "name": "Public Data Center",
+            "updated": "2026-01-26T22:28:18.252Z",
+            "status": "Operational",
+            "status_code": 100
+          }
+        ],
+        "updated": "2026-01-26T22:28:18.252Z"
+      }
+    ],
+    "incidents": [],
+    "maintenance": {
+      "active": [],
+      "upcoming": []
+    }
+  }
+}

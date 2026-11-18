@@ -1,0 +1,23 @@
+# A Pulse vantage agent, for Dockhand on another machine/network.
+# Stack variables: PULSE_HUB_URL (your hub's public URL) and PULSE_AGENT_TOKEN
+# (Settings > Vantage agents > Create agent in the hub).
+name: pulse-agent
+
+services:
+  agent:
+    image: ghcr.io/rivarob04/outagedetector:${PULSE_TAG:-edge}
+    pull_policy: always
+    command: ["agent"]
+    restart: unless-stopped
+    environment:
+      PULSE_HUB_URL: ${PULSE_HUB_URL:?set PULSE_HUB_URL}
+      PULSE_AGENT_TOKEN: ${PULSE_AGENT_TOKEN:?set PULSE_AGENT_TOKEN}
+      PULSE_AGENT_LOCATION: ${PULSE_AGENT_LOCATION:-}
+      PULSE_LOG_JSON: "true"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 128m

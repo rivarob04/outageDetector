@@ -1,0 +1,48 @@
+# Pulse for Dockhand (or any UI that deploys a single compose file).
+# Image-only: no build step, no files next to the compose file.
+# Every setting is a stack variable with a sensible default; see docs/DOCKHAND.md.
+name: pulse
+
+services:
+  pulse:
+    image: ghcr.io/rivarob04/outagedetector:${PULSE_TAG:-edge}
+    pull_policy: always
+    container_name: pulse
+    restart: unless-stopped
+    ports:
+      - "${PULSE_PORT:-8080}:8080"
+    environment:
+      PULSE_BASE_URL: ${PULSE_BASE_URL:-}
+      PULSE_ADMIN_USERNAME: ${PULSE_ADMIN_USERNAME:-}
+      PULSE_ADMIN_PASSWORD: ${PULSE_ADMIN_PASSWORD:-}
+      PULSE_SECRET_KEY: ${PULSE_SECRET_KEY:-}
+      PULSE_PUBLIC_VIEW: ${PULSE_PUBLIC_VIEW:-true}
+      PULSE_COOKIE_SECURE: ${PULSE_COOKIE_SECURE:-false}
+      PULSE_ALLOW_PRIVATE_TARGETS: ${PULSE_ALLOW_PRIVATE_TARGETS:-false}
+      PULSE_HOST_LOCATION: ${PULSE_HOST_LOCATION:-}
+      PULSE_DATABASE_URL: ${PULSE_DATABASE_URL:-}
+      PULSE_MQTT_URL: ${PULSE_MQTT_URL:-}
+      PULSE_MQTT_USERNAME: ${PULSE_MQTT_USERNAME:-}
+      PULSE_MQTT_PASSWORD: ${PULSE_MQTT_PASSWORD:-}
+      PULSE_METRICS_TOKEN: ${PULSE_METRICS_TOKEN:-}
+      PULSE_TRUSTED_AUTH_HEADER: ${PULSE_TRUSTED_AUTH_HEADER:-}
+      PULSE_DEMO: ${PULSE_DEMO:-false}
+      TZ: ${TZ:-UTC}
+    volumes:
+      - pulse-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: ${PULSE_MEM_LIMIT:-512m}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=4).status == 200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  pulse-data:

@@ -1,0 +1,163 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: pulse
+          POSTGRES_PASSWORD: pulse
+          POSTGRES_DB: pulse
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U pulse" --health-interval 5s --health-retries 10
+      mosquitto:
+        # 1.6 accepts anonymous connections on 1883 without a config file.
+        image: eclipse-mosquitto:1.6
+        ports: ["1883:1883"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        working-directory: backend
+        run: uv sync --extra dev --frozen
+      - name: Ruff
+        working-directory: backend
+        run: uv run ruff check . && uv run ruff format --check .
+      - name: Mypy
+        working-directory: backend
+        run: uv run mypy pulse
+      - name: Tests (SQLite, with a live MQTT broker)
+        working-directory: backend
+        env:
+          PULSE_TEST_MQTT_URL: mqtt://localhost:1883
+        run: uv run pytest -q
+      - name: Tests (Postgres)
+        working-directory: backend
+        env:
+          PULSE_TEST_DATABASE_URL: postgresql://pulse:pulse@localhost:5432/pulse
+        run: uv run pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: npx eslint . && npx tsc -b --noEmit
+        working-directory: frontend
+      - run: npm test
+        working-directory: frontend
+      - run: npm run build
+        working-directory: frontend
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - name: Python dependencies (pip-audit)
+        working-directory: backend
+        run: |
+          uv export --frozen --no-dev --extra postgres --no-hashes --no-emit-project > /tmp/req.txt
+          uvx pip-audit -r /tmp/req.txt --strict
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: JS dependencies (npm audit, runtime only)
+        working-directory: frontend
+        run: npm audit --omit=dev --audit-level=high
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync --frozen
+        working-directory: backend
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci && npm run build && npx playwright install --with-deps chromium
+        working-directory: frontend
+      - run: npx playwright test
+        working-directory: frontend
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: frontend/test-results
+
+  compose-smoke:
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and start stack
+        run: docker compose -f deploy/docker-compose.yml up -d --build --wait --wait-timeout 180
+        env:
+          PULSE_IMAGE: pulse:ci
+      - name: Probe endpoints
+        run: |
+          curl -fsS http://localhost:8080/healthz
+          curl -fsS http://localhost:8080/readyz
+          curl -fsS http://localhost:8080/ | grep -q '<div id="root">'
+      - name: Scan image (Trivy)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: pulse:ci
+          severity: CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+      - name: Image size and idle memory
+        run: |
+          docker image ls pulse:ci --format 'image size: {{.Size}}' | tee -a "$GITHUB_STEP_SUMMARY"
+          sleep 30
+          docker stats --no-stream --format 'idle memory: {{.MemUsage}}' pulse | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Dockhand compose files (image-only, as Dockhand deploys them)
+        run: |
+          docker compose -f deploy/docker-compose.yml down
+          docker tag pulse:ci ghcr.io/rivarob04/outagedetector:ci
+          docker pull -q eclipse-mosquitto:2
+          PULSE_TAG=ci docker compose -f deploy/dockhand/compose.mqtt.yaml up -d --pull never --wait --wait-timeout 120
+          curl -fsS http://localhost:8080/readyz
+          sleep 10
+          docker compose -f deploy/dockhand/compose.mqtt.yaml logs pulse | grep -q "connected to MQTT" \
+            || { docker compose -f deploy/dockhand/compose.mqtt.yaml logs; exit 1; }
+          docker compose -f deploy/dockhand/compose.mqtt.yaml down
+          PULSE_TAG=ci docker compose -f deploy/dockhand/compose.yaml up -d --pull never --wait --wait-timeout 120
+          curl -fsS http://localhost:8080/readyz
+          docker compose -f deploy/dockhand/compose.yaml logs pulse | grep -q "setup code"
+      - name: Logs on failure
+        if: failure()
+        run: |
+          docker compose -f deploy/docker-compose.yml logs || true
+          docker compose -f deploy/dockhand/compose.yaml logs || true

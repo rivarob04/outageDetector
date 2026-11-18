@@ -1,0 +1,16 @@
+id: gitlab
+name: GitLab
+category: devtools
+icon: gitlab
+homepage: https://gitlab.com
+status_page: https://status.gitlab.com
+feed:
+  adapter: statusio
+  url: https://api.status.io/1.0/status/5b36dc6502d06804c08349f7
+probes:
+- kind: http
+  url: https://gitlab.com/users/sign_in
+  accept_status:
+  - 403
+- kind: dns
+  host: gitlab.com

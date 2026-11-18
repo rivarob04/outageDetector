@@ -1,0 +1,14 @@
+id: sentry
+name: Sentry
+category: devtools
+icon: sentry
+homepage: https://sentry.io
+status_page: https://status.sentry.io
+feed:
+  adapter: statuspage
+  url: https://status.sentry.io/api/v2/summary.json
+probes:
+- kind: http
+  url: https://sentry.io
+- kind: dns
+  host: sentry.io

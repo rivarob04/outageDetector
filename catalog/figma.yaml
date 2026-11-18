@@ -1,0 +1,14 @@
+id: figma
+name: Figma
+category: productivity
+icon: figma
+homepage: https://www.figma.com
+status_page: https://status.figma.com
+feed:
+  adapter: statuspage
+  url: https://status.figma.com/api/v2/summary.json
+probes:
+- kind: http
+  url: https://www.figma.com
+- kind: dns
+  host: figma.com

@@ -1,0 +1,16 @@
+id: microsoft-365
+name: Microsoft 365
+category: productivity
+icon: microsoft
+homepage: https://www.microsoft365.com
+status_page: https://status.cloud.microsoft
+probes:
+- kind: http
+  url: https://outlook.office.com
+- kind: http
+  url: https://login.microsoftonline.com/common/.well-known/openid-configuration
+- kind: http
+  url: https://teams.microsoft.com
+- kind: dns
+  host: outlook.office365.com
+notes: Microsoft 365 service health requires tenant credentials; checks only.

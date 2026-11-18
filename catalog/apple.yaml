@@ -1,0 +1,25 @@
+id: apple
+name: Apple (iCloud)
+category: productivity
+icon: apple
+homepage: https://www.icloud.com
+status_page: https://www.apple.com/support/systemstatus/
+feed:
+  adapter: apple
+  url: https://www.apple.com/support/systemstatus/data/system_status_en_US.js
+  components_include:
+  - iCloud
+  - Apple ID
+  - Account
+  - Find My
+  - Photos
+  - Mail
+  - App Store
+  - Apple Music
+  - FaceTime
+  - iMessage
+probes:
+- kind: http
+  url: https://www.icloud.com
+- kind: dns
+  host: icloud.com

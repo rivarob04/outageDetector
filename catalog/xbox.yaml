@@ -1,0 +1,14 @@
+id: xbox
+name: Xbox Live
+category: gaming
+icon: xbox
+homepage: https://www.xbox.com
+status_page: https://support.xbox.com/xbox-live-status
+probes:
+- kind: http
+  url: https://www.xbox.com
+  accept_status:
+  - 403
+- kind: dns
+  host: xboxlive.com
+notes: No public machine-readable status feed; checks only.
