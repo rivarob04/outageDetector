@@ -1,0 +1,14 @@
+id: rogers
+name: Rogers
+category: network
+homepage: https://www.rogers.com
+status_page: https://www.rogers.com/outages
+description: Cable internet, TV, home phone and wireless.
+probes:
+- kind: http
+  url: https://www.rogers.com
+  accept_status:
+  - 403
+- kind: dns
+  host: rogers.com
+notes: Rogers publishes no machine-readable status, so Pulse can only check that its servers answer.

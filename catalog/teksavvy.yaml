@@ -1,0 +1,18 @@
+id: teksavvy
+name: TekSavvy
+category: network
+homepage: https://www.teksavvy.com
+status_page: https://www.teksavvy.com/network-status/
+description: Independent ISP (Chatham, Ontario) reselling cable and DSL/fibre access.
+feed:
+  adapter: mymaps
+  # TekSavvy's "Maintenance and Outage Tracker" (Google My Maps) embedded on its network-status page.
+  url: https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1
+probes:
+- kind: http
+  url: https://www.teksavvy.com
+  accept_status:
+  - 403
+- kind: dns
+  host: teksavvy.com
+notes: Set PULSE_POSTAL_CODE to only count outages in your forward sortation area (e.g. N8W).

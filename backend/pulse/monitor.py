@@ -20,6 +20,7 @@ from pulse.catalog.schema import ServiceDef
 from pulse.config import Settings
 from pulse.db.store import FeedChange, Store
 from pulse.events import EventBus
+from pulse.feeds import effective_feed
 from pulse.http import PoliteClient
 from pulse.probes.baseline import Baseline, baseline, consecutive_slow, latency_ratio
 from pulse.probes.canary import CanaryState, canary_specs, run_canaries
@@ -358,11 +359,12 @@ class Monitor:
         if svc is None or svc.feed is None:
             return
         fi = self.feeds.setdefault(sid, FeedInfo())
+        feed = effective_feed(svc.feed, self.settings.postal_code)
         try:
-            res = await self.client.get(svc.feed.url)
+            res = await self.client.get(feed.url)
             if not res.ok:
                 raise RuntimeError(f"HTTP {res.status}")
-            snap = parse_feed(res.content, svc.feed)
+            snap = parse_feed(res.content, feed)
         except Exception as exc:
             msg = f"{type(exc).__name__}: {exc}"[:300]
             fi.error = msg

@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from pulse.config import Settings
+from pulse.feeds import normalize_postal_code
 
 # key -> (type, min, max)
 EDITABLE: dict[str, tuple[type, float | None, float | None]] = {
@@ -12,6 +13,7 @@ EDITABLE: dict[str, tuple[type, float | None, float | None]] = {
     "allow_private_targets": (bool, None, None),
     "canary_targets": (str, None, None),
     "dns_resolvers": (str, None, None),
+    "postal_code": (str, None, None),
     "feed_interval_s": (int, 30, 3600),
     "probe_interval_s": (int, 15, 3600),
     "fail_threshold": (int, 1, 10),
@@ -33,6 +35,8 @@ def coerce(key: str, value: Any) -> Any:
     if typ is str:
         if not isinstance(value, str):
             raise ValueError(f"{key} must be a string")
+        if key == "postal_code":
+            return normalize_postal_code(value)
         return value.strip()
     v = typ(value)
     if lo is not None and v < lo:

@@ -1,0 +1,21 @@
+id: cogeco
+name: Cogeco
+category: network
+homepage: https://www.cogeco.ca
+status_page: https://www.cogeco.ca/en/support/outages/
+description: Cable internet, TV and home phone in Ontario and Quebec.
+feed:
+  adapter: cogeco
+  # Province-wide outage banner; with PULSE_POSTAL_CODE set, Pulse asks for your area instead.
+  url: https://www.cogeco.ca/en/api/on/global-outages/residential
+  options:
+    postal_url: https://www.cogeco.ca/en/api/outages/residential/{postal_code}
+probes:
+- kind: http
+  url: https://www.cogeco.ca
+  accept_status:
+  - 403
+- kind: dns
+  host: cogeco.ca
+notes: Outage data comes from the same API as cogeco.ca's outage checker. Set PULSE_POSTAL_CODE
+  (Settings → Monitoring) to follow outages at your address.
