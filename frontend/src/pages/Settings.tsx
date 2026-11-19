@@ -28,7 +28,7 @@ export function Card({ title, intro, children }: { title: string; intro?: string
 const FIELDS: { key: string; label: string; help: string; type: "bool" | "text" | "number" }[] = [
   { key: "public_view", label: "Anyone can view the dashboard", help: "When off, viewing requires signing in.", type: "bool" },
   { key: "allow_private_targets", label: "Allow checks of local network addresses", help: "Needed for homelab services such as 192.168.x.x.", type: "bool" },
-  { key: "postal_code", label: "Postal code for local ISP outages", help: "Canadian postal code, e.g. N8W 1H4. Cogeco, TekSavvy and Bell then report outages in your area only.", type: "text" },
+  { key: "postal_code", label: "Postal code for local ISP outages", help: "Canadian postal code, e.g. N8W 1H4. TekSavvy and Bell then only count outages in your area.", type: "text" },
   { key: "canary_targets", label: "Connectivity test sites", help: "Comma-separated URLs. When most fail, Pulse decides you're offline.", type: "text" },
   { key: "dns_resolvers", label: "Public DNS resolvers", help: "Compared with your own resolver when a DNS check fails.", type: "text" },
   { key: "feed_interval_s", label: "Status feed interval (seconds)", help: "How often provider status pages are fetched.", type: "number" },
