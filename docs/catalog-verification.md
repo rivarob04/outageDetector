@@ -16,8 +16,8 @@ may differ by region; some sites block requests from cloud IP ranges.
 | Microsoft Azure | feed+checks | rss | [200](https://azure.status.microsoft/en-us/status/feed/) | yes | 200, 200 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=0 |
 | Bell | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=0 |
 | Bitbucket | feed+checks | statuspage | [200](https://bitbucket.status.atlassian.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=13, incidents=0 |
-| Cloudflare | feed+checks | statuspage | [200](https://www.cloudflarestatus.com/api/v2/summary.json) | yes | 200, 200 | ✅ | 2026-11-19 | indicator=minor, components=477, incidents=26 |
-| Cogeco | checks | — | — | — | 403 | ✅ | 2026-11-19 |  |
+| Cloudflare | feed+checks | statuspage | [200](https://www.cloudflarestatus.com/api/v2/summary.json) | yes | 200, 200 | ✅ | 2026-11-19 | indicator=minor, components=477, incidents=27 |
+| Cogeco | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 403 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=0 |
 | DigitalOcean | feed+checks | statuspage | [200](https://status.digitalocean.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=257, incidents=1 |
 | Discord | feed+checks | statuspage | [200](https://discordstatus.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=30, incidents=0 |
 | Docker Hub | feed+checks | statuspage | [200](https://www.dockerstatus.com/api/v2/summary.json) | yes | 200, 401 | ✅ | 2026-11-19 | indicator=none, components=21, incidents=0 |
@@ -41,7 +41,7 @@ may differ by region; some sites block requests from cloud IP ranges.
 | Netlify | feed+checks | statuspage | [200](https://www.netlifystatus.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=42, incidents=0 |
 | Notion | feed+checks | statuspage | [200](https://www.notion-status.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=19, incidents=0 |
 | npm | feed+checks | statuspage | [200](https://status.npmjs.org/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=6, incidents=0 |
-| OpenAI (ChatGPT) | feed+checks | statuspage | [200](https://status.openai.com/api/v2/summary.json) | yes | 200, 401 | ✅ | 2026-11-19 | indicator=none, components=25, incidents=0 |
+| OpenAI (ChatGPT) | feed+checks | statuspage | [200](https://status.openai.com/api/v2/summary.json) | yes | 200, 401 | ✅ | 2026-11-19 | indicator=minor, components=25, incidents=1 |
 | PayPal | feed+checks | rss | [200](https://www.paypal-status.com/feed/rss) | yes | 403 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=20 |
 | PlayStation Network | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |
 | Plex | feed+checks | statuspage | [200](https://status.plex.tv/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=25, incidents=0 |
@@ -58,8 +58,8 @@ may differ by region; some sites block requests from cloud IP ranges.
 | Stripe | checks | — | — | — | 401, 200 | ✅ | 2026-11-19 |  |
 | Supabase | feed+checks | statuspage | [200](https://status.supabase.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=1, incidents=1 |
 | Tailscale | feed+checks | statuspage | [200](https://status.tailscale.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=18, incidents=0 |
-| TekSavvy | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 200 | ✅ | 2026-11-19 | indicator=minor, components=0, incidents=1 |
-| Twilio | feed+checks | statuspage | [200](https://status.twilio.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=minor, components=172, incidents=33 |
+| TekSavvy | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 200 | ✅ | 2026-11-19 | indicator=minor, components=0, incidents=2 |
+| Twilio | feed+checks | statuspage | [200](https://status.twilio.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=minor, components=172, incidents=37 |
 | Twitch | feed+checks | statuspage | [200](https://status.twitch.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=7, incidents=0 |
 | Vercel | feed+checks | statuspage | [200](https://www.vercel-status.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=59, incidents=0 |
 | Xbox Live | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |

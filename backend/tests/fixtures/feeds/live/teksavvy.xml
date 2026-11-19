@@ -60,6 +60,27 @@
           </coordinates>
         </Point>
       </Placemark>
+      <Placemark>
+        <name>CABLE OUTAGE - OTTAWA - K1N***</name>
+        <description><![CDATA[Location: K1N 6G1, K1N 7W1, K1N 6K2, K1N 6M4<br>Date Reported: Nov 19, 2026, 7:31:00 AM PST<br>Estimated Time of Repair: NO ETR]]></description>
+        <styleUrl>#icon-1725-A52714</styleUrl>
+        <ExtendedData>
+          <Data name="Location">
+            <value>K1N 6G1, K1N 7W1, K1N 6K2, K1N 6M4</value>
+          </Data>
+          <Data name="Date Reported">
+            <value>1795102260000000</value>
+          </Data>
+          <Data name="Estimated Time of Repair">
+            <value>NO ETR</value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            -75.6825741,45.428678,0
+          </coordinates>
+        </Point>
+      </Placemark>
     </Folder>
     <Folder>
       <name>DSL/Bell Fibre Outage</name>
