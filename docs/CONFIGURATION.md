@@ -38,7 +38,7 @@ Settings marked **UI** can also be changed in **Settings → Monitoring** or in 
 | `PULSE_CANARY_TARGETS` | `https://1.1.1.1,https://dns.google,https://www.msftconnecttest.com/connecttest.txt` | **UI.** When most of these fail, Pulse decides it's offline. |
 | `PULSE_DNS_RESOLVERS` | `1.1.1.1,8.8.8.8,9.9.9.9` | **UI.** Public resolvers that a failed DNS check is compared against. |
 | `PULSE_ALLOW_PRIVATE_TARGETS` | `false` | **UI.** Allow your own checks to private/LAN addresses (homelab). |
-| `PULSE_POSTAL_CODE` | | **UI.** One or more Canadian postal codes, separated by commas or spaces (e.g. `N8W 1H4, N8N 2L9, N9J 1A1`; a three-character area such as `N8W` also works). TekSavvy and Bell (via TekSavvy's outage tracker) then only count outages in those areas (the first three characters of each code) instead of anywhere. The codes never leave Pulse. |
+| `PULSE_POSTAL_CODE` | | **UI.** One or more Canadian postal codes, separated by commas or spaces (e.g. `N8W 1H4, N8N 2L9, N9J 1A1`; a three-character area such as `N8W` also works). TekSavvy, and Bell and Cogeco (both via TekSavvy's outage tracker), then only count outages in those areas (the first three characters of each code), and **Local ISPs** charts each area separately. Cogeco reports nothing until this is set. The codes never leave Pulse. |
 | `PULSE_MAX_CONCURRENCY` | `20` | Maximum checks running at once. |
 | `PULSE_HTTP_TIMEOUT_S` | `10` | Default request timeout. |
 | `PULSE_USER_AGENT` | `Pulse/<version> (+repo URL)` | User-Agent sent to providers. |

@@ -7,6 +7,7 @@ import { isProblem } from "./lib/status";
 import Catalog from "./pages/Catalog";
 import Dashboard from "./pages/Dashboard";
 import Incidents from "./pages/Incidents";
+import IspAreas from "./pages/IspAreas";
 import ServiceDetail from "./pages/ServiceDetail";
 import Settings from "./pages/Settings";
 
@@ -75,6 +76,7 @@ function Routed() {
         <Route path="/service/:id" element={<ServiceDetail />} />
         <Route path="/map" element={<LazyMap />} />
         <Route path="/incidents" element={<Incidents />} />
+        <Route path="/isp" element={<IspAreas />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<p>This page doesn't exist.</p>} />

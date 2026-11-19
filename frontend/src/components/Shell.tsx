@@ -7,6 +7,7 @@ const NAV = [
   { to: "/", label: "Status", key: "d" },
   { to: "/map", label: "Map", key: "m" },
   { to: "/incidents", label: "Incidents", key: "i" },
+  { to: "/isp", label: "Local ISPs", key: "l" },
   { to: "/catalog", label: "Add services", key: "c" },
   { to: "/settings", label: "Settings", key: "s" },
 ];
@@ -198,6 +199,7 @@ function HelpDialog({ onClose }: { onClose: () => void }) {
     ["g d", "Status"],
     ["g m", "Map"],
     ["g i", "Incidents"],
+    ["g l", "Local ISPs"],
     ["g c", "Add services"],
     ["g s", "Settings"],
     ["?", "Show this help"],

@@ -5,8 +5,9 @@ All notable changes to this project are documented here. Format: [Keep a Changel
 ## [Unreleased]
 
 ### Added
+- **Local ISPs** page (`g l`): one chart per postal code area with a row per provider showing its outages there over 24 hours, 7 or 30 days, plus total downtime. API: `GET /api/v1/isp-areas?days=7`. Outages from area-aware feeds are tagged `area:<FSA>`.
 - `PULSE_POSTAL_CODE` accepts several postal codes (or three-character areas), separated by commas or spaces, e.g. home, work and family in different towns.
-- Canadian ISPs in the catalog (Network): **TekSavvy** (its Google My Maps outage tracker), **Bell** (Bell has no feed; follows the DSL/Bell Fibre outages TekSavvy maps), plus checks-only **Cogeco** (its outage API sits behind a Cloudflare bot challenge), **MNSi Telecom** and **Rogers** (no public status data).
+- Canadian ISPs in the catalog (Network): **TekSavvy** (its Google My Maps outage tracker), **Bell** (Bell has no feed; follows the DSL/Bell Fibre outages TekSavvy maps), **Cogeco** (its own outage API sits behind a Cloudflare bot challenge; follows TekSavvy's "Cable Outage" reports in your postal code areas, where cable means Cogeco, and stays quiet until postal codes are set), plus checks-only **MNSi Telecom** and **Rogers** (no public status data).
 - `PULSE_POSTAL_CODE` (also in Settings → Monitoring): TekSavvy/Bell only count outages in your forward sortation area (e.g. N8W).
 - Adapter `mymaps` for outage trackers published as Google My Maps.
 

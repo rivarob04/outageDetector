@@ -12,6 +12,12 @@ Options:
   only placemarks listing one of their forward sortation areas (first three characters) are
   reported, as ``major``; without it every open placemark is reported as ``minor``
   (somewhere, not necessarily near you).
+- ``require_areas``: ``"true"`` to report nothing until postal codes are set (for feeds that
+  only mean something locally, e.g. Cogeco via the "Cable Outage" folder: cable is Cogeco's
+  network in Windsor but Rogers' in Ottawa).
+
+Every incident carries its areas as regions ``area:<FSA>`` (only your areas when postal codes
+are set), which the per-area ISP view groups by.
 """
 
 from __future__ import annotations
@@ -57,6 +63,11 @@ def parse(content: bytes, feed: FeedConfig) -> FeedSnapshot:
         for code in feed.options.get("postal_codes", "").split(",")
         if code.strip()
     )
+
+    if not areas and feed.options.get("require_areas", "").lower() == "true":
+        return FeedSnapshot(
+            indicator="none", description="Set your postal codes to follow outages in your area"
+        )
 
     incidents: list[Incident] = []
     for folder in doc.iter(f"{_NS}Folder"):
@@ -111,6 +122,7 @@ def _incident(pm: Element, folder: str, resolved: bool, mine: frozenset[str]) ->
     areas = {m.group(1) for m in _FSA.finditer(f"{name} {location}".upper())}
     if mine and not (mine & areas):
         return None  # an outage somewhere else
+    tagged = sorted(mine & areas) if mine else sorted(areas)
 
     maint = bool(_MAINT.search(folder) or _MAINT.search(name))
     impact: Impact = "maintenance" if maint else ("major" if mine else "minor")
@@ -120,7 +132,8 @@ def _incident(pm: Element, folder: str, resolved: bool, mine: frozenset[str]) ->
         status = "resolved" if resolved else "investigating"
     reported = _when(data.get("Date Reported", ""))
     when = reported or _EPOCH
-    ext = f"{folder}|{name}|{data.get('Date Reported', '')}"
+    # No folder in the id: TekSavvy may move a placemark to "Resolved Issues" when it's fixed.
+    ext = f"{name}|{data.get('Date Reported', '')}"
     title = name.title() if name.isupper() else name
     return Incident(
         ext_id=ext,
@@ -130,5 +143,6 @@ def _incident(pm: Element, folder: str, resolved: bool, mine: frozenset[str]) ->
         kind="maintenance" if maint else "incident",
         started_at=reported,
         resolved_at=when if resolved else None,
+        regions=[f"area:{a}" for a in tagged],
         updates=[IncidentUpdate(f"{ext}#0", status, body or name, when)],
     )

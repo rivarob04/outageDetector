@@ -4,6 +4,16 @@ category: network
 homepage: https://www.cogeco.ca
 status_page: https://www.cogeco.ca/en/support/outages/
 description: Cable internet, TV and home phone in Ontario and Quebec.
+feed:
+  adapter: mymaps
+  # Cogeco's own outage checker answers non-browser clients with a Cloudflare challenge, so
+  # Pulse follows the cable outages TekSavvy (which resells Cogeco cable) maps instead. Cable
+  # means Cogeco only in Cogeco territory (Windsor-Essex, Hamilton, Kingston…) and Rogers in
+  # e.g. Ottawa, so this feed stays quiet until PULSE_POSTAL_CODE names your areas.
+  url: https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1
+  options:
+    folders: Cable
+    require_areas: "true"
 probes:
 - kind: http
   url: https://www.cogeco.ca
@@ -11,5 +21,6 @@ probes:
   - 403
 - kind: dns
   host: cogeco.ca
-notes: Cogeco's outage checker answers non-browser clients with a Cloudflare challenge (HTTP 403,
-  from both datacenter and home connections), so Pulse can only check that its servers answer.
+notes: Feed is indirect, from cable outages TekSavvy reports in the postal code areas you set
+  (TekSavvy resells Cogeco's network in Cogeco territory). Outages only Cogeco knows about
+  won't show.
