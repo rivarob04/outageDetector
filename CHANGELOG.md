@@ -5,9 +5,9 @@ All notable changes to this project are documented here. Format: [Keep a Changel
 ## [Unreleased]
 
 ### Added
-- Canadian ISPs in the catalog (Network): **Cogeco** (outage API), **TekSavvy** (its Google My Maps outage tracker), **Bell** (Bell has no feed; follows the DSL/Bell Fibre outages TekSavvy maps), plus checks-only **MNSi Telecom** and **Rogers** (no public status data).
-- `PULSE_POSTAL_CODE` (also in Settings → Monitoring): report ISP outages at your address. Cogeco is asked for that postal code; TekSavvy/Bell only count outages in the same forward sortation area.
-- Adapters `cogeco` and `mymaps`, and `options.postal_url` for feeds that are only published per postal code.
+- Canadian ISPs in the catalog (Network): **TekSavvy** (its Google My Maps outage tracker), **Bell** (Bell has no feed; follows the DSL/Bell Fibre outages TekSavvy maps), plus checks-only **Cogeco** (its outage API sits behind a Cloudflare bot challenge), **MNSi Telecom** and **Rogers** (no public status data).
+- `PULSE_POSTAL_CODE` (also in Settings → Monitoring): TekSavvy/Bell only count outages in your forward sortation area (e.g. N8W).
+- Adapter `mymaps` for outage trackers published as Google My Maps.
 
 ### Fixed
 - Link-styled primary buttons (e.g. "Add services" on the empty Status page) had invisible text: the global link colour rule was unlayered and overrode `.btn-primary`. It now lives in `@layer base`.

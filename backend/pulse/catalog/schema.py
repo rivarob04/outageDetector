@@ -49,7 +49,6 @@ AdapterKind = Literal[
     "apple",
     "heroku",
     "rss",
-    "cogeco",
     "mymaps",
 ]
 

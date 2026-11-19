@@ -4,9 +4,9 @@
    - Atlassian Statuspage and many look-alikes (including incident.io pages): `https://<page>/api/v2/summary.json`. Use `adapter: statuspage`.
    - Status.io: `https://api.status.io/1.0/status/<page id>` (the page id is in the page's HTML). Use `adapter: statusio`.
    - Better Stack and others: they usually have an RSS feed (`/feed.rss`). Use `adapter: rss`.
-   - Bespoke APIs (AWS, Google Cloud, Google Workspace, Slack, Apple, Heroku, Cogeco) have their own adapters.
+   - Bespoke APIs (AWS, Google Cloud, Google Workspace, Slack, Apple, Heroku) have their own adapters.
    - Outage trackers published as a Google My Maps map (TekSavvy): `https://www.google.com/maps/d/kml?mid=<map id>&forcekml=1`. Use `adapter: mymaps` (options: `folders` regex).
-   - Outages only listed per postal code: put the province/area-wide URL in `url` and the per-area URL in `options.postal_url` with a `{postal_code}` placeholder. Pulse uses it when `PULSE_POSTAL_CODE` is set.
+   - Check the feed answers a plain HTTP client (`curl`): bot-protected APIs (e.g. Cloudflare's "Just a moment…" challenge) can't be used; make those services checks-only.
    - No feed at all: leave `feed` out. The service becomes **checks only**.
 2. **Create `catalog/<id>.yaml`.** The file name must equal the `id`:
 
