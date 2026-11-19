@@ -17,7 +17,7 @@ may differ by region; some sites block requests from cloud IP ranges.
 | Bell | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=0 |
 | Bitbucket | feed+checks | statuspage | [200](https://bitbucket.status.atlassian.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=13, incidents=0 |
 | Cloudflare | feed+checks | statuspage | [200](https://www.cloudflarestatus.com/api/v2/summary.json) | yes | 200, 200 | ✅ | 2026-11-19 | indicator=minor, components=477, incidents=26 |
-| Cogeco | feed+checks | cogeco | [403](https://www.cogeco.ca/en/api/on/global-outages/residential) | — | 403 | ❌ | 2026-11-19 | HTTP 403 |
+| Cogeco | checks | — | — | — | 403 | ✅ | 2026-11-19 |  |
 | DigitalOcean | feed+checks | statuspage | [200](https://status.digitalocean.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=257, incidents=1 |
 | Discord | feed+checks | statuspage | [200](https://discordstatus.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=30, incidents=0 |
 | Docker Hub | feed+checks | statuspage | [200](https://www.dockerstatus.com/api/v2/summary.json) | yes | 200, 401 | ✅ | 2026-11-19 | indicator=none, components=21, incidents=0 |
