@@ -1,0 +1,14 @@
+id: mnsi
+name: MNSi Telecom
+category: network
+homepage: https://www.mnsi.net
+description: Windsor-Essex fibre/DSL internet and phone.
+probes:
+- kind: http
+  url: https://www.mnsi.net
+  accept_status:
+  - 403
+- kind: dns
+  host: mnsi.net
+notes: MNSi publishes no status page or feed (outages are posted on its social media), so
+  Pulse can only check that its servers answer.

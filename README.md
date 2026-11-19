@@ -1,8 +1,8 @@
 # Pulse: is it down, or is it me?
 
-**Pulse** is a self-hosted outage map and down detector. It watches the services you depend on (GitHub, AWS, Cloudflare, Google, Anthropic, OpenAI, Slack, Discord and ~50 more, plus your own URLs) using three independent signals:
+**Pulse** is a self-hosted outage map and down detector. It watches the services you depend on (GitHub, AWS, Cloudflare, Google, Anthropic, OpenAI, Slack, Discord and ~50 more, including Canadian ISPs such as Cogeco, Bell and TekSavvy, plus your own URLs) using three independent signals:
 
-1. **The provider's official status feed.** Statuspage, AWS Health, Google Cloud, Slack, Apple, status.io, RSS… all verified live.
+1. **The provider's official status feed.** Statuspage, AWS Health, Google Cloud, Slack, Apple, status.io, RSS, ISP outage maps… all verified live.
 2. **Checks from your network:** HTTP with a DNS/connect/TLS/server timing breakdown, DNS compared against public resolvers, TCP and TLS certificates.
 3. **Checks from other places:** optional vantage agents on a VPS or a friend's Raspberry Pi.
 

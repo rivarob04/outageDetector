@@ -1,0 +1,21 @@
+id: bell
+name: Bell
+category: network
+homepage: https://www.bell.ca
+status_page: https://support.bell.ca/outage-check
+description: Fibe/DSL internet, TV and home phone.
+feed:
+  adapter: mymaps
+  # Bell publishes no machine-readable status (its outage check sits behind reCAPTCHA).
+  # TekSavvy resells Bell's DSL/fibre access and maps confirmed outages on that network.
+  url: https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1
+  options:
+    folders: DSL|Bell
+probes:
+- kind: http
+  url: https://www.bell.ca
+  accept_status:
+  - 403
+- kind: dns
+  host: bell.ca
+notes: Feed is indirect, from outages TekSavvy reports on Bell's wholesale DSL/fibre network.

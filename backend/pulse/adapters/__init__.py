@@ -17,6 +17,8 @@ _MODULES = {
     "apple": "pulse.adapters.apple",
     "heroku": "pulse.adapters.heroku",
     "rss": "pulse.adapters.rss",
+    "cogeco": "pulse.adapters.cogeco",
+    "mymaps": "pulse.adapters.mymaps",
 }
 _FUNC = {"gworkspace": "parse_workspace"}
 
