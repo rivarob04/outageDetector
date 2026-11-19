@@ -8,9 +8,10 @@ is one outage with the affected postal codes in ``ExtendedData``.
 Options:
 - ``folders``: regex; only folders whose name matches count (default: all).
 - ``resolved_folders``: regex for folders that hold resolved items (default ``resolved``).
-- ``postal_code`` (set by Pulse from ``PULSE_POSTAL_CODE``): when present, only placemarks
-  listing the same forward sortation area (first three characters) are reported, as
-  ``major``; without it every open placemark is reported as ``minor`` (somewhere, not you).
+- ``postal_codes`` (set by Pulse from ``PULSE_POSTAL_CODE``, comma-separated): when present,
+  only placemarks listing one of their forward sortation areas (first three characters) are
+  reported, as ``major``; without it every open placemark is reported as ``minor``
+  (somewhere, not necessarily near you).
 """
 
 from __future__ import annotations
@@ -51,8 +52,11 @@ def parse(content: bytes, feed: FeedConfig) -> FeedSnapshot:
 
     include = re.compile(feed.options.get("folders", ".*"), re.I)
     resolved_re = re.compile(feed.options.get("resolved_folders", "resolved"), re.I)
-    postal = feed.options.get("postal_code", "").upper()
-    fsa = postal[:3]
+    areas = frozenset(
+        code.strip().upper()[:3]
+        for code in feed.options.get("postal_codes", "").split(",")
+        if code.strip()
+    )
 
     incidents: list[Incident] = []
     for folder in doc.iter(f"{_NS}Folder"):
@@ -61,7 +65,7 @@ def parse(content: bytes, feed: FeedConfig) -> FeedSnapshot:
         if not resolved and not include.search(fname):
             continue
         for pm in folder.findall(f"{_NS}Placemark"):
-            inc = _incident(pm, fname, resolved, fsa)
+            inc = _incident(pm, fname, resolved, areas)
             if inc is not None:
                 incidents.append(inc)
 
@@ -99,17 +103,17 @@ def _when(value: str) -> datetime | None:
     return None
 
 
-def _incident(pm: Element, folder: str, resolved: bool, fsa: str) -> Incident | None:
+def _incident(pm: Element, folder: str, resolved: bool, mine: frozenset[str]) -> Incident | None:
     name = _text(pm, "name")
     body = strip_html(_text(pm, "description"))
     data = _data(pm)
     location = data.get("Location", "") or body
     areas = {m.group(1) for m in _FSA.finditer(f"{name} {location}".upper())}
-    if fsa and fsa not in areas:
+    if mine and not (mine & areas):
         return None  # an outage somewhere else
 
     maint = bool(_MAINT.search(folder) or _MAINT.search(name))
-    impact: Impact = "maintenance" if maint else ("major" if fsa else "minor")
+    impact: Impact = "maintenance" if maint else ("major" if mine else "minor")
     if maint:
         status = "completed" if resolved else "in_progress"
     else:

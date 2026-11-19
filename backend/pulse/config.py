@@ -83,7 +83,8 @@ class Settings(BaseSettings):
     mqtt_base_topic: str = "pulse"
     map_style_url: str = ""
     host_location: str = ""  # "lat,lon" of this hub for the map (optional)
-    # Canadian postal code (e.g. "N8W 1H4") for local ISP outage lookups (TekSavvy, Bell).
+    # Canadian postal code(s) for local ISP outage lookups (TekSavvy, Bell), separated by commas
+    # or spaces, e.g. "N8W 1H4, N8N 2L9, N9J" (a three-character area also works).
     # Optional: without it those feeds report outages in every area.
     postal_code: str = ""
     # Agent mode (`pulse agent`)
