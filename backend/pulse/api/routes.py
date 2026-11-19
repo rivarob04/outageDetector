@@ -24,6 +24,8 @@ from pulse.api.auth import (
     verify_password,
 )
 from pulse.catalog.schema import CATEGORY_LABELS, Category, FeedConfig, ProbeConfig, ServiceDef
+from pulse.feeds import parse_postal_codes
+from pulse.isp_areas import areas_of, build
 from pulse.runtime_settings import EDITABLE, apply_overrides
 from pulse.services import slugify
 
@@ -270,6 +272,39 @@ async def incidents(
     return {
         "total": total,
         "items": [views.incident_dict(r, updates.get(r["id"], [])) for r in rows],
+    }
+
+
+@public.get("/isp-areas")
+async def isp_areas(request: Request, days: int = Query(7, ge=1, le=90)) -> dict[str, Any]:
+    """Outage history per area (from PULSE_POSTAL_CODE) for ISPs whose feeds know areas."""
+    rt = rt_of(request)
+    now = datetime.now(UTC)
+    since = now - timedelta(days=days)
+    try:
+        codes = parse_postal_codes(rt.settings.postal_code)
+    except ValueError:
+        codes = []
+    services = rt.monitor.services
+    area_isps = sorted(
+        ((sid, s.name) for sid, s in services.items() if s.feed and s.feed.adapter == "mymaps"),
+        key=lambda x: x[1].lower(),
+    )
+    other = sorted(
+        (
+            {"service_id": sid, "name": s.name}
+            for sid, s in services.items()
+            if s.category == "network" and not (s.feed and s.feed.adapter == "mymaps")
+        ),
+        key=lambda x: x["name"].lower(),
+    )
+    rows = await rt.store.incidents_since([sid for sid, _ in area_isps], since)
+    return {
+        "from": views.iso(since),
+        "to": views.iso(now),
+        "postal_codes": codes,
+        "areas": build(areas_of(codes), area_isps, rows, since, now),
+        "other_isps": other,
     }
 
 

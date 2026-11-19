@@ -41,6 +41,7 @@ Requirements: Docker with Compose v2. Images are multi-arch (amd64, arm64), so a
 - **A tile per service**: a shape-coded state (●▲◆■◐○, never color alone), scope badge, latency trace and 90-day bar.
 - **A service page**: a timing-breakdown chart, components, provider incident timeline, results from each vantage point and state history.
 - **An outage map**: AWS, Google Cloud and Cloudflare regions colored by their status, your agents, and a 24-hour replay. It works offline.
+- **Local ISPs by area**: one chart per postal code area (e.g. N8W, N8N, N9J) with a row per provider (Bell, Cogeco, TekSavvy) showing when each had an outage there, over 24 hours, 7 or 30 days.
 - **Incident history**: time-to-recover per provider and the **lead time** between Pulse spotting a widespread failure and the provider's post.
 - **Alerts**: by severity and scope, with quiet hours, cooldown, recovery messages and a daily digest. Alerts pause while you're offline, and you get one summary afterwards.
 - **Integrations**: Home Assistant (MQTT discovery), Prometheus `/metrics` + a Grafana dashboard, Atom incident feed, iCal maintenance calendar, SVG badges, and a public `/status` page for family or your team.

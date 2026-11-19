@@ -190,3 +190,27 @@ export interface ProviderStats {
   median_s: number | null;
   lead?: { count: number; median_lead_s: number | null; confirmed: number; unconfirmed: number };
 }
+
+export interface AreaOutage {
+  id: number;
+  title: string;
+  impact: string;
+  started_at: string | null;
+  resolved_at: string | null;
+}
+
+export interface AreaIsp {
+  service_id: string;
+  name: string;
+  state: State;
+  down_s: number;
+  outages: AreaOutage[];
+}
+
+export interface IspAreasResp {
+  from: string;
+  to: string;
+  postal_codes: string[];
+  areas: { area: string; isps: AreaIsp[] }[];
+  other_isps: { service_id: string; name: string }[];
+}

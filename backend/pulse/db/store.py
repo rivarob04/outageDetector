@@ -460,6 +460,20 @@ class Store:
         async with self.engine.connect() as c:
             return [dict(r._mapping) for r in await c.execute(q)]
 
+    async def incidents_since(
+        self, service_ids: Iterable[str], since: datetime
+    ) -> list[dict[str, Any]]:
+        """Incidents of these services that were open at any point since ``since``."""
+        ids = list(service_ids)
+        if not ids:
+            return []
+        q = select(incidents_t).where(
+            incidents_t.c.service_id.in_(ids),
+            or_(incidents_t.c.resolved_at.is_(None), incidents_t.c.resolved_at >= since),
+        )
+        async with self.engine.connect() as c:
+            return [dict(r._mapping) for r in await c.execute(q)]
+
     async def list_incidents(
         self,
         service_id: str | None = None,

@@ -361,3 +361,45 @@ async def test_sse_stream_emits_events(client: httpx.AsyncClient) -> None:
 @pytest.mark.parametrize("path", ["/api/v1/services/nope", "/api/v1/services/nope/latency"])
 async def test_404s(client: httpx.AsyncClient, path: str) -> None:
     assert (await client.get(path)).status_code == 404
+
+
+async def test_isp_areas_view(client: httpx.AsyncClient) -> None:
+    from pulse.feeds import effective_feed
+
+    csrf = await setup_admin(client)
+    h = {"x-csrf-token": csrf}
+    for sid in ("teksavvy", "cogeco", "mnsi"):
+        await client.post(f"/api/v1/services/{sid}/track", headers=h)
+    empty = (await client.get("/api/v1/isp-areas")).json()
+    assert empty["areas"] == [] and empty["postal_codes"] == []
+    assert [i["service_id"] for i in empty["other_isps"]] == ["mnsi"]
+
+    r = await client.put(
+        "/api/v1/settings", headers=h, json={"postal_code": "n8w 1h4 l3k 5v5, N8W 2A2"}
+    )
+    assert r.status_code == 200, r.text
+    rt = rt_of(client)
+    kml = (Path(__file__).parent / "fixtures" / "feeds" / "teksavvy" / "outages.kml").read_bytes()
+    reported = int((datetime.now(UTC) - timedelta(hours=2)).timestamp() * 1_000_000)
+    kml = kml.replace(b"1795093500000000", str(reported).encode())  # keep it inside the window
+    for sid in ("teksavvy", "cogeco"):
+        feed = effective_feed(rt.catalog.services[sid].feed, rt.settings.postal_code)
+        await rt.monitor.apply_snapshot(sid, parse_feed(kml, feed))
+
+    view = (await client.get("/api/v1/isp-areas?days=7")).json()
+    assert view["postal_codes"] == ["N8W1H4", "L3K5V5", "N8W2A2"]
+    assert [a["area"] for a in view["areas"]] == ["N8W", "L3K"]
+    n8w, l3k = view["areas"]
+    assert [i["name"] for i in l3k["isps"]] == ["Cogeco", "TekSavvy"]
+    assert all(i["state"] == "operational" and not i["outages"] for i in n8w["isps"])
+    assert all(i["state"] == "major_outage" and len(i["outages"]) == 1 for i in l3k["isps"])
+    assert l3k["isps"][0]["outages"][0]["resolved_at"] is None
+
+    # TekSavvy takes it off the map -> closed, with a real end time
+    for sid in ("teksavvy", "cogeco"):
+        snap = parse_feed(kml, effective_feed(rt.catalog.services[sid].feed, "N8W1H4"))
+        await rt.monitor.apply_snapshot(sid, snap)
+    l3k = (await client.get("/api/v1/isp-areas")).json()["areas"][1]
+    assert all(i["state"] == "operational" for i in l3k["isps"])
+    assert all(i["outages"][0]["resolved_at"] for i in l3k["isps"])
+    assert all(i["down_s"] > 0 for i in l3k["isps"])
