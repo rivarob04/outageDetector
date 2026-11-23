@@ -7,61 +7,61 @@ may differ by region; some sites block requests from cloud IP ranges.
 
 | Service | Signal | Adapter | Feed | Parsed | Probes | Verified | Checked | Notes |
 |---|---|---|---|---|---|---|---|---|
-| 1Password | feed+checks | statuspage | [200](https://status.1password.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=84, incidents=0 |
-| Akamai | feed+checks | statuspage | [200](https://www.akamaistatus.com/api/v2/summary.json) | yes | 403 | ✅ | 2026-11-19 | indicator=none, components=46, incidents=3 |
-| Anthropic (Claude) | feed+checks | statuspage | [200](https://status.claude.com/api/v2/summary.json) | yes | 403, 404 | ✅ | 2026-11-19 | indicator=none, components=9, incidents=0 |
-| Apple (iCloud) | feed+checks | apple | [200](https://www.apple.com/support/systemstatus/data/system_status_en_US.js) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=28, incidents=3 |
-| Atlassian (Jira) | feed+checks | statuspage | [200](https://jira-software.status.atlassian.com/api/v2/summary.json) | yes | 202 | ✅ | 2026-11-19 | indicator=none, components=12, incidents=0 |
-| Amazon Web Services | feed+checks | aws | [200](https://health.aws.amazon.com/public/currentevents) | yes | 200, 200 | ✅ | 2026-11-19 | indicator=critical, components=0, incidents=2 |
-| Microsoft Azure | feed+checks | rss | [200](https://azure.status.microsoft/en-us/status/feed/) | yes | 200, 200 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=0 |
-| Bell | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=0 |
-| Bitbucket | feed+checks | statuspage | [200](https://bitbucket.status.atlassian.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=13, incidents=0 |
-| Cloudflare | feed+checks | statuspage | [200](https://www.cloudflarestatus.com/api/v2/summary.json) | yes | 200, 200 | ✅ | 2026-11-19 | indicator=minor, components=477, incidents=26 |
-| Cogeco | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 403 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=0 |
-| DigitalOcean | feed+checks | statuspage | [200](https://status.digitalocean.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=257, incidents=1 |
-| Discord | feed+checks | statuspage | [200](https://discordstatus.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=30, incidents=0 |
-| Docker Hub | feed+checks | statuspage | [200](https://www.dockerstatus.com/api/v2/summary.json) | yes | 200, 401 | ✅ | 2026-11-19 | indicator=none, components=21, incidents=0 |
-| Dropbox | feed+checks | statuspage | [200](https://status.dropbox.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=12, incidents=0 |
-| ecobee | feed+checks | statuspage | [200](https://status.ecobee.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=11, incidents=1 |
-| Epic Games | feed+checks | statuspage | [200](https://status.epicgames.com/api/v2/summary.json) | yes | 403 | ✅ | 2026-11-19 | indicator=none, components=79, incidents=0 |
-| Fastly | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |
-| Figma | feed+checks | statuspage | [200](https://status.figma.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=17, incidents=0 |
-| GitHub | feed+checks | statuspage | [200](https://www.githubstatus.com/api/v2/summary.json) | yes | 200, 200 | ✅ | 2026-11-19 | indicator=none, components=12, incidents=0 |
-| GitLab | feed+checks | statusio | [200](https://api.status.io/1.0/status/5b36dc6502d06804c08349f7) | yes | 403 | ✅ | 2026-11-19 | indicator=none, components=24, incidents=0 |
-| Google (Search & Workspace) | feed+checks | gworkspace | [200](https://www.google.com/appsstatus/dashboard/incidents.json) | yes | 204, 200 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=31 |
-| Google Cloud | feed+checks | gcp | [200](https://status.cloud.google.com/incidents.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=8 |
-| Heroku | feed+checks | heroku | [200](https://status.heroku.com/api/v4/current-status) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=3, incidents=3 |
-| Home Assistant Cloud | feed+checks | statuspage | [200](https://status.home-assistant.io/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=28, incidents=0 |
-| Hugging Face | feed+checks | rss | [200](https://status.huggingface.co/feed.rss) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=25 |
-| Let's Encrypt | feed+checks | statusio | [200](https://api.status.io/1.0/status/55957a99e800baa4470002da) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=12, incidents=0 |
-| Akamai Cloud (Linode) | feed+checks | statuspage | [200](https://status.linode.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=243, incidents=2 |
-| Microsoft 365 | checks | — | — | — | 200, 200, 200 | ✅ | 2026-11-19 |  |
-| MNSi Telecom | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |
-| Netflix | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |
-| Netlify | feed+checks | statuspage | [200](https://www.netlifystatus.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=42, incidents=0 |
-| Notion | feed+checks | statuspage | [200](https://www.notion-status.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=19, incidents=0 |
-| npm | feed+checks | statuspage | [200](https://status.npmjs.org/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=6, incidents=0 |
-| OpenAI (ChatGPT) | feed+checks | statuspage | [200](https://status.openai.com/api/v2/summary.json) | yes | 200, 401 | ✅ | 2026-11-19 | indicator=none, components=25, incidents=0 |
-| PayPal | feed+checks | rss | [200](https://www.paypal-status.com/feed/rss) | yes | 403 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=20 |
-| PlayStation Network | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |
-| Plex | feed+checks | statuspage | [200](https://status.plex.tv/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=25, incidents=0 |
-| PyPI | feed+checks | statuspage | [200](https://status.python.org/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=122, incidents=0 |
-| Reddit | feed+checks | statuspage | [200](https://www.redditstatus.com/api/v2/summary.json) | yes | 403 | ✅ | 2026-11-19 | indicator=none, components=9, incidents=0 |
-| Ring | feed+checks | statuspage | [200](https://status.ring.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=17, incidents=0 |
-| Rogers | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |
-| Sentry | feed+checks | statuspage | [200](https://status.sentry.io/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=41, incidents=0 |
-| Slack | feed+checks | slack | [200](https://slack-status.com/api/v2.0.0/current) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=0, incidents=0 |
-| SmartThings | feed+checks | statuspage | [200](https://status.smartthings.com/api/v2/summary.json) | yes | 404 | ✅ | 2026-11-19 | indicator=none, components=15, incidents=0 |
-| Sonos | feed+checks | statuspage | [200](https://status.sonos.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=128, incidents=0 |
-| Spotify | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |
-| Steam | checks | — | — | — | 200, 200 | ✅ | 2026-11-19 |  |
-| Stripe | checks | — | — | — | 401, 200 | ✅ | 2026-11-19 |  |
-| Supabase | feed+checks | statuspage | [200](https://status.supabase.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=1, incidents=1 |
-| Tailscale | feed+checks | statuspage | [200](https://status.tailscale.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=18, incidents=0 |
-| TekSavvy | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 200 | ✅ | 2026-11-19 | indicator=minor, components=0, incidents=1 |
-| Twilio | feed+checks | statuspage | [200](https://status.twilio.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=minor, components=172, incidents=33 |
-| Twitch | feed+checks | statuspage | [200](https://status.twitch.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=7, incidents=0 |
-| Vercel | feed+checks | statuspage | [200](https://www.vercel-status.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=59, incidents=0 |
-| Xbox Live | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |
-| YouTube | checks | — | — | — | 200 | ✅ | 2026-11-19 |  |
-| Zoom | feed+checks | statuspage | [200](https://status.zoom.us/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-19 | indicator=none, components=306, incidents=9 |
+| 1Password | feed+checks | statuspage | [200](https://status.1password.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=84, incidents=0 |
+| Akamai | feed+checks | statuspage | [200](https://www.akamaistatus.com/api/v2/summary.json) | yes | 403 | ✅ | 2026-11-23 | indicator=none, components=46, incidents=2 |
+| Anthropic (Claude) | feed+checks | statuspage | [200](https://status.claude.com/api/v2/summary.json) | yes | 403, 404 | ✅ | 2026-11-23 | indicator=none, components=9, incidents=0 |
+| Apple (iCloud) | feed+checks | apple | [200](https://www.apple.com/support/systemstatus/data/system_status_en_US.js) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=28, incidents=0 |
+| Atlassian (Jira) | feed+checks | statuspage | [200](https://jira-software.status.atlassian.com/api/v2/summary.json) | yes | 202 | ✅ | 2026-11-23 | indicator=minor, components=12, incidents=1 |
+| Amazon Web Services | feed+checks | aws | [200](https://health.aws.amazon.com/public/currentevents) | yes | 200, 200 | ✅ | 2026-11-23 | indicator=critical, components=0, incidents=2 |
+| Microsoft Azure | feed+checks | rss | [200](https://azure.status.microsoft/en-us/status/feed/) | yes | 200, 200 | ✅ | 2026-11-23 | indicator=none, components=0, incidents=0 |
+| Bell | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=0, incidents=4 |
+| Bitbucket | feed+checks | statuspage | [200](https://bitbucket.status.atlassian.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=minor, components=13, incidents=1 |
+| Cloudflare | feed+checks | statuspage | [200](https://www.cloudflarestatus.com/api/v2/summary.json) | yes | 200, 200 | ✅ | 2026-11-23 | indicator=minor, components=477, incidents=27 |
+| Cogeco | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 403 | ✅ | 2026-11-23 | indicator=none, components=0, incidents=0 |
+| DigitalOcean | feed+checks | statuspage | [200](https://status.digitalocean.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=257, incidents=0 |
+| Discord | feed+checks | statuspage | [200](https://discordstatus.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=30, incidents=0 |
+| Docker Hub | feed+checks | statuspage | [200](https://www.dockerstatus.com/api/v2/summary.json) | yes | 200, 401 | ✅ | 2026-11-23 | indicator=none, components=21, incidents=0 |
+| Dropbox | feed+checks | statuspage | [200](https://status.dropbox.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=12, incidents=0 |
+| ecobee | feed+checks | statuspage | [200](https://status.ecobee.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=11, incidents=1 |
+| Epic Games | feed+checks | statuspage | [200](https://status.epicgames.com/api/v2/summary.json) | yes | 403 | ✅ | 2026-11-23 | indicator=none, components=79, incidents=0 |
+| Fastly | checks | — | — | — | 200 | ✅ | 2026-11-23 |  |
+| Figma | feed+checks | statuspage | [200](https://status.figma.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=17, incidents=0 |
+| GitHub | feed+checks | statuspage | [200](https://www.githubstatus.com/api/v2/summary.json) | yes | 200, 200 | ✅ | 2026-11-23 | indicator=none, components=12, incidents=0 |
+| GitLab | feed+checks | statusio | [200](https://api.status.io/1.0/status/5b36dc6502d06804c08349f7) | yes | 403 | ✅ | 2026-11-23 | indicator=none, components=24, incidents=0 |
+| Google (Search & Workspace) | feed+checks | gworkspace | [200](https://www.google.com/appsstatus/dashboard/incidents.json) | yes | 204, 200 | ✅ | 2026-11-23 | indicator=none, components=0, incidents=31 |
+| Google Cloud | feed+checks | gcp | [200](https://status.cloud.google.com/incidents.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=0, incidents=8 |
+| Heroku | feed+checks | heroku | [200](https://status.heroku.com/api/v4/current-status) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=3, incidents=3 |
+| Home Assistant Cloud | feed+checks | statuspage | [200](https://status.home-assistant.io/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=28, incidents=0 |
+| Hugging Face | feed+checks | rss | [200](https://status.huggingface.co/feed.rss) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=0, incidents=25 |
+| Let's Encrypt | feed+checks | statusio | [200](https://api.status.io/1.0/status/55957a99e800baa4470002da) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=12, incidents=0 |
+| Akamai Cloud (Linode) | feed+checks | statuspage | [200](https://status.linode.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=243, incidents=2 |
+| Microsoft 365 | checks | — | — | — | 200, 200, 200 | ✅ | 2026-11-23 |  |
+| MNSi Telecom | checks | — | — | — | 200 | ✅ | 2026-11-23 |  |
+| Netflix | checks | — | — | — | 200 | ✅ | 2026-11-23 |  |
+| Netlify | feed+checks | statuspage | [200](https://www.netlifystatus.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=42, incidents=0 |
+| Notion | feed+checks | statuspage | [200](https://www.notion-status.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=19, incidents=0 |
+| npm | feed+checks | statuspage | [200](https://status.npmjs.org/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=6, incidents=0 |
+| OpenAI (ChatGPT) | feed+checks | statuspage | [200](https://status.openai.com/api/v2/summary.json) | yes | 200, 401 | ✅ | 2026-11-23 | indicator=none, components=25, incidents=0 |
+| PayPal | feed+checks | rss | [200](https://www.paypal-status.com/feed/rss) | yes | 403 | ✅ | 2026-11-23 | indicator=none, components=0, incidents=12 |
+| PlayStation Network | checks | — | — | — | 200 | ✅ | 2026-11-23 |  |
+| Plex | feed+checks | statuspage | [200](https://status.plex.tv/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=25, incidents=0 |
+| PyPI | feed+checks | statuspage | [200](https://status.python.org/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=122, incidents=0 |
+| Reddit | feed+checks | statuspage | [200](https://www.redditstatus.com/api/v2/summary.json) | yes | 403 | ✅ | 2026-11-23 | indicator=none, components=9, incidents=0 |
+| Ring | feed+checks | statuspage | [200](https://status.ring.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=17, incidents=0 |
+| Rogers | checks | — | — | — | 200 | ✅ | 2026-11-23 |  |
+| Sentry | feed+checks | statuspage | [200](https://status.sentry.io/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=41, incidents=0 |
+| Slack | feed+checks | slack | [200](https://slack-status.com/api/v2.0.0/current) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=0, incidents=0 |
+| SmartThings | feed+checks | statuspage | [200](https://status.smartthings.com/api/v2/summary.json) | yes | 404 | ✅ | 2026-11-23 | indicator=none, components=15, incidents=0 |
+| Sonos | feed+checks | statuspage | [200](https://status.sonos.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=128, incidents=0 |
+| Spotify | checks | — | — | — | 200 | ✅ | 2026-11-23 |  |
+| Steam | checks | — | — | — | 200, 200 | ✅ | 2026-11-23 |  |
+| Stripe | checks | — | — | — | 401, 200 | ✅ | 2026-11-23 |  |
+| Supabase | feed+checks | statuspage | [200](https://status.supabase.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=1, incidents=1 |
+| Tailscale | feed+checks | statuspage | [200](https://status.tailscale.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=18, incidents=0 |
+| TekSavvy | feed+checks | mymaps | [200](https://www.google.com/maps/d/kml?mid=1XU_xQ56c8N9a0DAW4PKBkns4de4&forcekml=1) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=0, incidents=4 |
+| Twilio | feed+checks | statuspage | [200](https://status.twilio.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=minor, components=172, incidents=36 |
+| Twitch | feed+checks | statuspage | [200](https://status.twitch.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=7, incidents=0 |
+| Vercel | feed+checks | statuspage | [200](https://www.vercel-status.com/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=59, incidents=0 |
+| Xbox Live | checks | — | — | — | 200 | ✅ | 2026-11-23 |  |
+| YouTube | checks | — | — | — | 200 | ✅ | 2026-11-23 |  |
+| Zoom | feed+checks | statuspage | [200](https://status.zoom.us/api/v2/summary.json) | yes | 200 | ✅ | 2026-11-23 | indicator=none, components=307, incidents=6 |

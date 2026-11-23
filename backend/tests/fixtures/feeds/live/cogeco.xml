@@ -3,9 +3,9 @@
   <Document>
     <name>TekSavvy Maintenance and Outage Tracker</name>
     <description><![CDATA[Areas identified as having future maintenance and current outages.<br><br>Please note that as TekSavvy deals with multiple vendors and has limited visibility into their networks. As such, we are not always able to provide an ETR (estimated time of repair) and may not have much detail on the specifics of these outages and maintenance events. Any information we do receive will be posted here.<br><br>Still experiencing issues after an outage has been confirmed as being resolved?<br><br>If you are still experiencing issues after a previously reported outage has been resolved, please unplug your equipment for 15 minutes and then plug it back in.<br><br>If your area is not listed or powering your modem and router off and on does not fix your issue, we will need to troubleshoot with you to fix any problems. Please feel free to call in 24/7 at 1-877-779-1575.]]></description>
-    <Style id="icon-1725-A52714-normal">
+    <Style id="icon-1700-7CB342-normal">
       <IconStyle>
-        <color>ff1427a5</color>
+        <color>ff42b37c</color>
         <scale>1</scale>
         <Icon>
           <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
@@ -15,9 +15,9 @@
         <scale>0</scale>
       </LabelStyle>
     </Style>
-    <Style id="icon-1725-A52714-highlight">
+    <Style id="icon-1700-7CB342-highlight">
       <IconStyle>
-        <color>ff1427a5</color>
+        <color>ff42b37c</color>
         <scale>1</scale>
         <Icon>
           <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
@@ -27,60 +27,18 @@
         <scale>1</scale>
       </LabelStyle>
     </Style>
-    <StyleMap id="icon-1725-A52714">
+    <StyleMap id="icon-1700-7CB342">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-1725-A52714-normal</styleUrl>
+        <styleUrl>#icon-1700-7CB342-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-1725-A52714-highlight</styleUrl>
+        <styleUrl>#icon-1700-7CB342-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Folder>
       <name>Cable Outage</name>
-      <Placemark>
-        <name>CABLE OUTAGE - COLBORNE - L3K***</name>
-        <description><![CDATA[Location: L3K2T4, L3K 1J2, L3K 2G3<br>Date Reported: Nov 19, 2026, 5:05:00 AM PST<br>Estimated Time of Repair: NO ETR]]></description>
-        <styleUrl>#icon-1725-A52714</styleUrl>
-        <ExtendedData>
-          <Data name="Location">
-            <value>L3K2T4, L3K 1J2, L3K 2G3</value>
-          </Data>
-          <Data name="Date Reported">
-            <value>1795093500000000</value>
-          </Data>
-          <Data name="Estimated Time of Repair">
-            <value>NO ETR</value>
-          </Data>
-        </ExtendedData>
-        <Point>
-          <coordinates>
-            -79.2748893,42.871391,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>CABLE OUTAGE - OTTAWA - K1N***</name>
-        <description><![CDATA[Location: K1N 6G1, K1N 7W1, K1N 6K2, K1N 6M4<br>Date Reported: Nov 19, 2026, 7:31:00 AM PST<br>Estimated Time of Repair: NO ETR]]></description>
-        <styleUrl>#icon-1725-A52714</styleUrl>
-        <ExtendedData>
-          <Data name="Location">
-            <value>K1N 6G1, K1N 7W1, K1N 6K2, K1N 6M4</value>
-          </Data>
-          <Data name="Date Reported">
-            <value>1795102260000000</value>
-          </Data>
-          <Data name="Estimated Time of Repair">
-            <value>NO ETR</value>
-          </Data>
-        </ExtendedData>
-        <Point>
-          <coordinates>
-            -75.6825741,45.428678,0
-          </coordinates>
-        </Point>
-      </Placemark>
     </Folder>
     <Folder>
       <name>DSL/Bell Fibre Outage</name>
@@ -90,6 +48,90 @@
     </Folder>
     <Folder>
       <name>Resolved Issues</name>
+      <Placemark>
+        <name>Resolved - Cable Outage - Ottawa, ON</name>
+        <description><![CDATA[Location: K1N 6G1, K1N 7W1, K1N 6K2, K1N 6M4<br>Confirmed Resolution Time: Nov 20, 2026, 4:10:00 AM PST<br>Please Power Cycle for 15 minutes if No Service: ]]></description>
+        <styleUrl>#icon-1700-7CB342</styleUrl>
+        <ExtendedData>
+          <Data name="Location">
+            <value>K1N 6G1, K1N 7W1, K1N 6K2, K1N 6M4</value>
+          </Data>
+          <Data name="Confirmed Resolution Time">
+            <value>1795176600000000</value>
+          </Data>
+          <Data name="Please Power Cycle for 15 minutes if No Service">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            -75.6825741,45.428678,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Resolved - Cable Outage - Ottawa, ON</name>
+        <description><![CDATA[Location: Richmond Rd.<br>Confirmed Resolution Time: Nov 20, 2026, 9:30:00 AM PST<br>Please Power Cycle for 15 minutes if No Service: ]]></description>
+        <styleUrl>#icon-1700-7CB342</styleUrl>
+        <ExtendedData>
+          <Data name="Location">
+            <value>Richmond Rd.</value>
+          </Data>
+          <Data name="Confirmed Resolution Time">
+            <value>1795195800000000</value>
+          </Data>
+          <Data name="Please Power Cycle for 15 minutes if No Service">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            -75.7851004,45.36879,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Resolved - Cable Outage - London, ON</name>
+        <description><![CDATA[Location: Milan Place<br>Confirmed Resolution Time: Nov 20, 2026, 12:00:00 PM PST<br>Please Power Cycle for 15 minutes if No Service: ]]></description>
+        <styleUrl>#icon-1700-7CB342</styleUrl>
+        <ExtendedData>
+          <Data name="Location">
+            <value>Milan Place</value>
+          </Data>
+          <Data name="Confirmed Resolution Time">
+            <value>1795204800000000</value>
+          </Data>
+          <Data name="Please Power Cycle for 15 minutes if No Service">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            -81.1878404,42.9495715,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Resolved - Cable Outage - Toronto, ON</name>
+        <description><![CDATA[Location: Ontario St (M5A2V6)<br>Confirmed Resolution Time: Nov 21, 2026, 12:00:00 PM PST<br>Please Power Cycle for 15 minutes if No Service: ]]></description>
+        <styleUrl>#icon-1700-7CB342</styleUrl>
+        <ExtendedData>
+          <Data name="Location">
+            <value>Ontario St (M5A2V6)</value>
+          </Data>
+          <Data name="Confirmed Resolution Time">
+            <value>1795291200000000</value>
+          </Data>
+          <Data name="Please Power Cycle for 15 minutes if No Service">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            -79.367741,43.6572384,0
+          </coordinates>
+        </Point>
+      </Placemark>
     </Folder>
     <Folder>
       <name>Telephone Outage</name>
